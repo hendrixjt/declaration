@@ -6,6 +6,7 @@
 * License: https://bootstrapmade.com/license/
 */
 
+
 @charset "UTF-8";
 
 /*--------------------------------------------------------------
@@ -24,7 +25,7 @@
   --background-color: #0f172a; /* Background color for the entire website, including individual sections */
   --default-color: #f5f5f5; /* Default color used for the majority of the text content across the entire website */
   --heading-color: #fafafa; /* Color for headings, subheadings and title throughout the website */
-  --accent-color: #22d3ee; /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
+  --accent-color: rgb(56, 196, 229); /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
   --surface-color: #1f283d; /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
   --contrast-color: #0f172a; /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
 }
@@ -223,10 +224,9 @@ h6 {
   }
 }
 
-/* Global Header on Scroll
-------------------------------*/
+/* Global Header on Scroll - keep transparent (no dark container) */
 .scrolled .header {
-  --background-color: rgba(34, 18, 2, 0.9);
+  --background-color: rgba(255, 255, 255, 0);
 }
 
 /*--------------------------------------------------------------
