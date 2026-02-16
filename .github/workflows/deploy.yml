@@ -30,6 +30,9 @@ jobs:
             --exclude='assets/scss/' \
             --exclude='.gitignore' \
             --exclude='README.md' \
+            --exclude='includes/config.php' \
+            --exclude='includes/config.example.php' \
+            --exclude='cache/' \
             -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.SSH_PORT }}" \
             ./ ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:${{ secrets.DEPLOY_PATH }}
 

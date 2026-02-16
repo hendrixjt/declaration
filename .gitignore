@@ -1,0 +1,5 @@
+# API credentials
+includes/config.php
+
+# Cache files
+cache/*.json

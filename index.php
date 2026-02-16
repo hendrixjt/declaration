@@ -4,6 +4,8 @@ $body_class = 'index-page';
 $current_page = 'index';
 $base_url = '/';
 include 'includes/header.php';
+require_once 'includes/planning-center.php';
+$upcoming_events = pc_get_upcoming_events(6);
 ?>
 
     <!-- Hero Section -->
@@ -225,223 +227,63 @@ include 'includes/header.php';
 
     </section><!-- /Intro Section -->
 
-    <!-- Featured Speakers Section -->
-    <section id="featured-speakers" class="featured-speakers section">
+    <!-- Upcoming Events Section -->
+    <section id="upcoming-events" class="featured-speakers section">
 
       <!-- Section Title -->
       <div class="container section-title">
-        <span class="subtitle">Featured Speakers</span>
-        <h2>Featured Speakers</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium totam rem aperiam</p>
+        <span class="subtitle">Upcoming Events</span>
+        <h2>Upcoming Events</h2>
+        <p>See what's coming up at Declaration Church and register today</p>
       </div><!-- End Section Title -->
 
       <div class="container">
 
         <div class="row g-5">
 
+<?php if (!empty($upcoming_events)): ?>
+  <?php foreach ($upcoming_events as $event): ?>
           <div class="col-lg-6">
             <div class="speaker-item">
               <div class="row g-0">
                 <div class="col-md-5">
                   <div class="speaker-photo">
-                    <img src="assets/img/events/speaker-8.webp" alt="Speaker" class="img-fluid" loading="lazy">
-                    <div class="speaker-overlay">
-                      <div class="social-links">
-                        <a href="#"><i class="bi bi-linkedin"></i></a>
-                        <a href="#"><i class="bi bi-twitter-x"></i></a>
-                        <a href="#"><i class="bi bi-globe"></i></a>
+                    <?php if (!empty($event['logo_url'])): ?>
+                      <img src="<?= htmlspecialchars($event['logo_url']) ?>" alt="<?= htmlspecialchars($event['name']) ?>" class="img-fluid" loading="lazy">
+                    <?php else: ?>
+                      <div style="height:100%;display:flex;align-items:center;justify-content:center;background:#f0f0f0;min-height:200px;">
+                        <i class="bi bi-calendar-event" style="font-size:3rem;color:#ccc;"></i>
                       </div>
-                    </div>
+                    <?php endif; ?>
                   </div>
                 </div>
                 <div class="col-md-7">
                   <div class="speaker-info">
-                    <div class="session-type">Keynote Speaker</div>
-                    <h4>Victoria Henderson</h4>
-                    <div class="position">Chief Innovation Officer</div>
-                    <div class="organization">TechForward Labs</div>
-                    <div class="talk-title">
-                      <i class="bi bi-mic-fill"></i>
-                      <span>The Future of Digital Transformation</span>
-                    </div>
-                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium totam rem.</p>
-                    <a href="#" class="profile-btn">Full Bio <i class="bi bi-arrow-right-short"></i></a>
+                    <div class="session-type"><?= htmlspecialchars(pc_date_range($event['starts_at'], $event['ends_at'])) ?></div>
+                    <h4><?= htmlspecialchars($event['name']) ?></h4>
+                    <?php if (!empty($event['description'])): ?>
+                      <p><?= htmlspecialchars(mb_strimwidth(strip_tags($event['description']), 0, 150, '...')) ?></p>
+                    <?php endif; ?>
+                    <?php if (!empty($event['registration_url'])): ?>
+                      <a href="<?= htmlspecialchars($event['registration_url']) ?>" class="profile-btn" target="_blank" rel="noopener">Register <i class="bi bi-arrow-right-short"></i></a>
+                    <?php endif; ?>
                   </div>
                 </div>
               </div>
             </div>
-          </div><!-- End Speaker Item -->
-
-          <div class="col-lg-6">
-            <div class="speaker-item">
-              <div class="row g-0">
-                <div class="col-md-5">
-                  <div class="speaker-photo">
-                    <img src="assets/img/events/speaker-12.webp" alt="Speaker" class="img-fluid" loading="lazy">
-                    <div class="speaker-overlay">
-                      <div class="social-links">
-                        <a href="#"><i class="bi bi-linkedin"></i></a>
-                        <a href="#"><i class="bi bi-twitter-x"></i></a>
-                        <a href="#"><i class="bi bi-globe"></i></a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-7">
-                  <div class="speaker-info">
-                    <div class="session-type">Technical Workshop</div>
-                    <h4>Marcus Sullivan</h4>
-                    <div class="position">Principal Engineer</div>
-                    <div class="organization">CloudNative Systems</div>
-                    <div class="talk-title">
-                      <i class="bi bi-mic-fill"></i>
-                      <span>Kubernetes at Scale: Best Practices</span>
-                    </div>
-                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti.</p>
-                    <a href="#" class="profile-btn">Full Bio <i class="bi bi-arrow-right-short"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div><!-- End Speaker Item -->
-
-          <div class="col-lg-6">
-            <div class="speaker-item">
-              <div class="row g-0">
-                <div class="col-md-5">
-                  <div class="speaker-photo">
-                    <img src="assets/img/events/speaker-5.webp" alt="Speaker" class="img-fluid" loading="lazy">
-                    <div class="speaker-overlay">
-                      <div class="social-links">
-                        <a href="#"><i class="bi bi-linkedin"></i></a>
-                        <a href="#"><i class="bi bi-twitter-x"></i></a>
-                        <a href="#"><i class="bi bi-globe"></i></a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-7">
-                  <div class="speaker-info">
-                    <div class="session-type">Panel Discussion</div>
-                    <h4>Isabella Martinez</h4>
-                    <div class="position">Head of Analytics</div>
-                    <div class="organization">DataVision Intelligence</div>
-                    <div class="talk-title">
-                      <i class="bi bi-mic-fill"></i>
-                      <span>Machine Learning in Enterprise Solutions</span>
-                    </div>
-                    <p>Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim laborum.</p>
-                    <a href="#" class="profile-btn">Full Bio <i class="bi bi-arrow-right-short"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div><!-- End Speaker Item -->
-
-          <div class="col-lg-6">
-            <div class="speaker-item">
-              <div class="row g-0">
-                <div class="col-md-5">
-                  <div class="speaker-photo">
-                    <img src="assets/img/events/speaker-14.webp" alt="Speaker" class="img-fluid" loading="lazy">
-                    <div class="speaker-overlay">
-                      <div class="social-links">
-                        <a href="#"><i class="bi bi-linkedin"></i></a>
-                        <a href="#"><i class="bi bi-twitter-x"></i></a>
-                        <a href="#"><i class="bi bi-globe"></i></a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-7">
-                  <div class="speaker-info">
-                    <div class="session-type">Fireside Chat</div>
-                    <h4>Robert Lawson</h4>
-                    <div class="position">Co-Founder</div>
-                    <div class="organization">NextGen Startups</div>
-                    <div class="talk-title">
-                      <i class="bi bi-mic-fill"></i>
-                      <span>Building Products Users Actually Love</span>
-                    </div>
-                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore fugiat nulla pariatur magna.</p>
-                    <a href="#" class="profile-btn">Full Bio <i class="bi bi-arrow-right-short"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div><!-- End Speaker Item -->
-
-          <div class="col-lg-6">
-            <div class="speaker-item">
-              <div class="row g-0">
-                <div class="col-md-5">
-                  <div class="speaker-photo">
-                    <img src="assets/img/events/speaker-4.webp" alt="Speaker" class="img-fluid" loading="lazy">
-                    <div class="speaker-overlay">
-                      <div class="social-links">
-                        <a href="#"><i class="bi bi-linkedin"></i></a>
-                        <a href="#"><i class="bi bi-twitter-x"></i></a>
-                        <a href="#"><i class="bi bi-globe"></i></a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-7">
-                  <div class="speaker-info">
-                    <div class="session-type">Interactive Session</div>
-                    <h4>Sophia Anderson</h4>
-                    <div class="position">Creative Director</div>
-                    <div class="organization">BrandCraft Agency</div>
-                    <div class="talk-title">
-                      <i class="bi bi-mic-fill"></i>
-                      <span>Design Thinking for Digital Products</span>
-                    </div>
-                    <p>Consequatur aut perferendis doloribus asperiores repellat optio molestiae expedita distinctio eaque ipsam.</p>
-                    <a href="#" class="profile-btn">Full Bio <i class="bi bi-arrow-right-short"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div><!-- End Speaker Item -->
-
-          <div class="col-lg-6">
-            <div class="speaker-item">
-              <div class="row g-0">
-                <div class="col-md-5">
-                  <div class="speaker-photo">
-                    <img src="assets/img/events/speaker-10.webp" alt="Speaker" class="img-fluid" loading="lazy">
-                    <div class="speaker-overlay">
-                      <div class="social-links">
-                        <a href="#"><i class="bi bi-linkedin"></i></a>
-                        <a href="#"><i class="bi bi-twitter-x"></i></a>
-                        <a href="#"><i class="bi bi-globe"></i></a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-7">
-                  <div class="speaker-info">
-                    <div class="session-type">Live Demo</div>
-                    <h4>Christopher Park</h4>
-                    <div class="position">VP of Engineering</div>
-                    <div class="organization">SecureNet Technologies</div>
-                    <div class="talk-title">
-                      <i class="bi bi-mic-fill"></i>
-                      <span>Modern Application Security Strategies</span>
-                    </div>
-                    <p>Neque porro quisquam est qui dolorem ipsum quia dolor sit amet consectetur adipisci velit aliquam quaerat.</p>
-                    <a href="#" class="profile-btn">Full Bio <i class="bi bi-arrow-right-short"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div><!-- End Speaker Item -->
+          </div><!-- End Event Item -->
+  <?php endforeach; ?>
+<?php else: ?>
+          <div class="col-12 text-center">
+            <p>No upcoming events at this time. Check back soon!</p>
+          </div>
+<?php endif; ?>
 
         </div>
 
       </div>
 
-    </section><!-- /Featured Speakers Section -->
+    </section><!-- /Upcoming Events Section -->
 
     <!-- Schedule Section -->
     <section id="schedule" class="schedule section">
