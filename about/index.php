@@ -9,7 +9,7 @@ include __DIR__ . '/../includes/header.php';
     <!-- Page Title -->
     <div class="page-title dark-background" style="background-image: url(assets/img/events/showcase-5.webp);">
       <div class="container position-relative">
-        <h1>About</h1>
+        <h1>About Us</h1>
         <p>Esse dolorum voluptatum ullam est sint nemo et est ipsa porro placeat quibusdam quia assumenda numquam molestias.</p>
         <nav class="breadcrumbs">
           <ol>
