@@ -1,0 +1,14 @@
+.DS_Store
+
+# Archived/raw hosting export
+_archive/
+
+# Runtime/generated files
+cache/
+
+# Local secrets
+includes/config.php
+
+# Common local env files
+.env
+.env.*
