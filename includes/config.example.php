@@ -1,8 +1,9 @@
 <?php
 /**
- * Local example configuration.
+ * Planning Center API credentials.
  *
- * Create a local config file with real credentials when needed.
+ * Copy this file to config.php and fill in your real credentials.
+ * Generate a token at: https://api.planningcenteronline.com/oauth/applications
  */
 
 define('PC_APP_ID', 'your-planning-center-app-id');

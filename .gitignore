@@ -4,7 +4,7 @@
 _archive/
 
 # Runtime/generated files
-cache/
+cache/*.json
 
 # Local secrets
 includes/config.php

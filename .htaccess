@@ -1,0 +1,37 @@
+# Prefer index.php for directory index
+DirectoryIndex index.php index.html
+
+# Disable caching during development (remove or comment out when site is live)
+<IfModule mod_headers.c>
+  <FilesMatch "\.(php|html?|css|js|jpg|jpeg|png|gif|webp|ico|svg|woff2?)$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate, max-age=0"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+  </FilesMatch>
+</IfModule>
+
+# Custom 404 page
+ErrorDocument 404 /404/
+
+# Redirect old .php URLs to new folder structure (301)
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  # contact.php -> contact/
+  RewriteRule ^contact\.php$ contact/ [R=301,L]
+  RewriteRule ^about\.php$ about/ [R=301,L]
+  RewriteRule ^schedule\.php$ schedule/ [R=301,L]
+  RewriteRule ^speakers\.php$ speakers/ [R=301,L]
+  RewriteRule ^venue\.php$ venue/ [R=301,L]
+  RewriteRule ^gallery\.php$ gallery/ [R=301,L]
+  RewriteRule ^tickets\.php$ tickets/ [R=301,L]
+  RewriteRule ^buy-tickets\.php$ buy-tickets/ [R=301,L]
+  RewriteRule ^speaker-details\.php$ speaker-details/ [R=301,L]
+  RewriteRule ^terms\.php$ terms/ [R=301,L]
+  RewriteRule ^privacy\.php$ privacy/ [R=301,L]
+  RewriteRule ^sponsors\.php$ sponsors/ [R=301,L]
+  RewriteRule ^starter-page\.php$ starter-page/ [R=301,L]
+  RewriteRule ^404\.php$ 404/ [R=301,L]
+  # .html -> .php (legacy)
+  RewriteRule ^(.+)\.html$ $1.php [R=301,L,QSA]
+</IfModule>
