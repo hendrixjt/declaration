@@ -28,7 +28,7 @@ $upcoming_events = pc_get_upcoming_events(6);
 
               <div class="main-content">
 
-                <span class="event-badge">Annual Conference 2026</span>
+                <span class="event-badge">Annual Conference 2027</span>
 
                 <h1 class="main-title">Innovators &amp; Visionaries<br>Global Forum</h1>
 
