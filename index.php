@@ -263,7 +263,7 @@ include __DIR__ . '/includes/header.php';
                       <span>YTH</span>
                     </a>
                     <a href="index.php#next-steps" class="hero-quick-link">
-                      <i class="bi bi-123"></i>
+                      <span class="hero-link-mark" aria-hidden="true">56</span>
                       <span>56</span>
                     </a>
                     <a href="https://www.declaration.org/groups" class="hero-quick-link" target="_blank" rel="noopener">

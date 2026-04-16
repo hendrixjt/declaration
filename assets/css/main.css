@@ -159,21 +159,21 @@ h6 {
 .header .header-container {
   background: var(--surface-color);
   border-radius: 50px;
-  padding: 8px 24px;
+  padding: 11px 28px;
   box-shadow: 0px 10px 35px rgba(0, 0, 0, 0.22);
 }
 
 .header .logo {
   line-height: 1;
   flex-shrink: 0;
-  padding: 0 24px 0 0;
-  margin-right: 6px;
+  padding: 0 28px 0 0;
+  margin-right: 10px;
   border-right: 1px solid color-mix(in srgb, var(--default-color), transparent 86%);
 }
 
 .header .logo img {
   display: block;
-  max-height: 54px;
+  max-height: 62px;
   width: auto;
   margin-right: 0;
 }
@@ -189,15 +189,15 @@ h6 {
 .header .header-actions {
   display: flex;
   align-items: center;
-  margin-left: 18px;
+  margin-left: 22px;
 }
 
 .header .header-cta {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 46px;
-  padding: 0 22px;
+  min-height: 50px;
+  padding: 0 24px;
   border-radius: 14px;
   background: var(--accent-color);
   color: #ffffff;
@@ -222,17 +222,17 @@ h6 {
   .header .header-container {
     margin-left: 10px;
     margin-right: 10px;
-    padding: 10px 5px 10px 15px;
+    padding: 10px 8px 10px 16px;
   }
 
   .header .logo {
     order: 1;
-    padding: 0 12px 0 0;
-    margin-right: 4px;
+    padding: 0 14px 0 0;
+    margin-right: 6px;
   }
 
   .header .logo img {
-    max-height: 34px;
+    max-height: 38px;
   }
 
   .header .header-actions {
@@ -246,8 +246,8 @@ h6 {
   }
 
   .header .header-cta {
-    min-height: 40px;
-    padding: 0 16px;
+    min-height: 42px;
+    padding: 0 17px;
     border-radius: 12px;
     font-size: 14px;
   }
@@ -265,7 +265,7 @@ h6 {
 @media (min-width: 1200px) {
   .navmenu {
     padding: 0;
-    margin-left: 14px;
+    margin-left: 18px;
   }
 
   .navmenu ul {
@@ -283,10 +283,10 @@ h6 {
   .navmenu a,
   .navmenu a:focus {
     color: color-mix(in srgb, var(--nav-color), transparent 10%);
-    padding: 18px 12px;
-    font-size: 15px;
+    padding: 20px 14px;
+    font-size: 16px;
     font-family: var(--nav-font);
-    font-weight: 500;
+    font-weight: 600;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -1348,6 +1348,21 @@ section,
 .hero .hero-quick-link i {
   color: var(--accent-color);
   font-size: 1rem;
+}
+
+.hero .hero-quick-link .hero-link-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  height: 24px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent-color), transparent 82%);
+  color: var(--accent-color);
+  font-size: 0.72rem;
+  font-weight: 800;
+  line-height: 1;
 }
 
 .hero .hero-quick-link:hover {
