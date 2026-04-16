@@ -28,7 +28,7 @@ $base_url = $base_url ?? '/';
   <!-- Open Graph Meta Tags -->
   <meta property="og:title" content="<?php echo htmlspecialchars($page_title ?? 'Declaration Church'); ?>">
   <meta property="og:description" content="<?php echo htmlspecialchars($meta_description ?? 'Join Declaration Church for inspiring worship, biblical teaching, and community fellowship.'); ?>">
-  <meta property="og:image" content="<?php echo htmlspecialchars($og_image ?? $base_url . 'assets/img/og-image.jpg'); ?>">
+  <meta property="og:image" content="<?php echo htmlspecialchars($og_image ?? $base_url . 'assets/img/declaration/Declaration-Church_website.png'); ?>">
   <meta property="og:url" content="<?php echo htmlspecialchars($canonical_url ?? 'https://declarationchurch.com' . $_SERVER['REQUEST_URI']); ?>">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Declaration Church">
@@ -37,7 +37,7 @@ $base_url = $base_url ?? '/';
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="<?php echo htmlspecialchars($page_title ?? 'Declaration Church'); ?>">
   <meta name="twitter:description" content="<?php echo htmlspecialchars($meta_description ?? 'Join Declaration Church for inspiring worship, biblical teaching, and community fellowship.'); ?>">
-  <meta name="twitter:image" content="<?php echo htmlspecialchars($og_image ?? $base_url . 'assets/img/og-image.jpg'); ?>">
+  <meta name="twitter:image" content="<?php echo htmlspecialchars($og_image ?? $base_url . 'assets/img/declaration/Declaration-Church_website.png'); ?>">
 
   <!-- Geo Tags for Local SEO (update with actual location) -->
   <meta name="geo.region" content="<?php echo htmlspecialchars($geo_region ?? 'US'); ?>">
@@ -47,8 +47,8 @@ $base_url = $base_url ?? '/';
   <?php endif; ?>
 
   <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="assets/img/declaration/Declaration-Church_website.png" rel="icon" type="image/png">
+  <link href="assets/img/declaration/Declaration-Church_website.png" rel="apple-touch-icon">
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -79,8 +79,8 @@ $base_url = $base_url ?? '/';
     "@type": "Church",
     "name": "Declaration Church",
     "url": "<?php echo htmlspecialchars($base_url); ?>",
-    "logo": "<?php echo htmlspecialchars($base_url . 'assets/img/logo.webp'); ?>",
-    "image": "<?php echo htmlspecialchars($og_image ?? $base_url . 'assets/img/og-image.jpg'); ?>",
+    "logo": "<?php echo htmlspecialchars($base_url . 'assets/img/declaration/Declaration-Logo-1080.png'); ?>",
+    "image": "<?php echo htmlspecialchars($og_image ?? $base_url . 'assets/img/declaration/Declaration-Church_website.png'); ?>",
     "description": "<?php echo htmlspecialchars($meta_description ?? 'Join Declaration Church for inspiring worship, biblical teaching, and community fellowship.'); ?>"<?php if (!empty($church_address)): ?>,
     "address": {
       "@type": "PostalAddress",
@@ -112,9 +112,8 @@ $base_url = $base_url ?? '/';
     <div class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
       <a href="index.php" class="logo d-flex align-items-center me-auto me-xl-0">
-        <!-- Uncomment the line below if you also wish to use an image logo -->
-        <!-- <img src="assets/img/logo.webp" alt="Declaration Church Logo"> -->
-        <h1 class="sitename">Declaration Church</h1>
+        <img src="assets/img/declaration/Declaration-Logo-1080.png" alt="Declaration Church Logo">
+        <span class="sitename visually-hidden">Declaration Church</span>
       </a>
 
       <nav id="navmenu" class="navmenu" aria-label="Main navigation">

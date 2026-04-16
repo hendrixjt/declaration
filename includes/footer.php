@@ -6,7 +6,7 @@
       <div class="container">
         <div class="row gy-4">
           <div class="col-lg-4 col-md-6 footer-info">
-            <h2>Eventia</h2>
+            <h2>Declaration Church</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras fringilla ante eget feugiat commodo. Nulla et justo vitae nisl euismod fermentum in vel magna.</p>
             <div class="social-links">
               <a href="#"><i class="bi bi-twitter-x"></i></a>
@@ -66,7 +66,7 @@
     </div>
 
     <div class="container copyright text-center">
-      <p>© <span>Copyright</span> <strong class="px-1 sitename">Eventia</strong> <span>All Rights Reserved</span></p>
+      <p>© <span>Copyright</span> <strong class="px-1 sitename">Declaration Church</strong> <span>All Rights Reserved</span></p>
     </div>
 
   </footer>
