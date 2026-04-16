@@ -20,6 +20,7 @@ require_once __DIR__ . '/includes/planning-center.php';
 $homepage_upcoming_events = pc_get_upcoming_events(3);
 $upcoming_events = $homepage_upcoming_events;
 $has_live_events = !empty($upcoming_events);
+$homepage_events_column_class = count($upcoming_events) >= 3 ? 'col-lg-4' : 'col-lg-6';
 $next_sunday_countdown = date('Y/m/d 09:00:00', strtotime('next sunday'));
 
 $fallback_events = [
@@ -398,7 +399,7 @@ include __DIR__ . '/includes/header.php';
         <div class="row g-5">
 <?php if ($has_live_events): ?>
   <?php foreach ($upcoming_events as $event): ?>
-          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="80">
+          <div class="<?= htmlspecialchars($homepage_events_column_class) ?>" data-aos="fade-up" data-aos-delay="80">
             <div class="speaker-item">
               <div class="row g-0">
                 <div class="col-md-5">
@@ -414,6 +415,11 @@ include __DIR__ . '/includes/header.php';
                   <div class="speaker-info">
                     <div class="session-type"><?= htmlspecialchars(pc_date_range($event['starts_at'], $event['ends_at'])) ?></div>
                     <h4><?= htmlspecialchars($event['name']) ?></h4>
+<?php if (!empty($event['starts_at'])): ?>
+                    <div class="event-meta-row">
+                      <span><i class="bi bi-clock"></i> <?= htmlspecialchars(pc_format_time($event['starts_at'])) ?></span>
+                    </div>
+<?php endif; ?>
 <?php if (!empty($event['description'])): ?>
                     <p><?= htmlspecialchars(function_exists('mb_strimwidth') ? mb_strimwidth(strip_tags($event['description']), 0, 170, '...') : substr(strip_tags($event['description']), 0, 170) . '...') ?></p>
 <?php else: ?>

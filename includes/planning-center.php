@@ -6,6 +6,7 @@
  */
 
 $GLOBALS['pc_last_error'] = $GLOBALS['pc_last_error'] ?? '';
+$GLOBALS['pc_cache_version'] = 2;
 
 if (!defined('PC_APP_ID') || !defined('PC_SECRET')) {
     $config_path = __DIR__ . '/config.php';
@@ -45,6 +46,7 @@ function pc_get_upcoming_events(int $limit = 6): array
     }
     if (!empty($events)) {
         @file_put_contents($cache_file, json_encode([
+            'version' => $GLOBALS['pc_cache_version'],
             'fetched_at' => gmdate(DATE_ATOM),
             'events' => $events,
         ], JSON_PRETTY_PRINT));
@@ -69,8 +71,9 @@ function pc_fetch_events_from_api(): array
 
     $events = [];
     $page_count = 0;
+    $max_pages = 12;
 
-    while (!empty($url) && $page_count < 4) {
+    while (!empty($url) && $page_count < $max_pages) {
         $response = pc_request_json($url);
         if (!$response['ok']) {
             return [];
@@ -137,6 +140,12 @@ function pc_read_cached_events(string $cache_file, int $limit, bool $require_fre
     }
 
     $cached = json_decode((string) file_get_contents($cache_file), true);
+    $expected_version = (int) ($GLOBALS['pc_cache_version'] ?? 1);
+    $cached_version = (int) ($cached['version'] ?? 1);
+    if ($cached_version !== $expected_version) {
+        return [];
+    }
+
     $events = pc_extract_cached_events($cached);
 
     return array_slice($events, 0, $limit);
@@ -360,6 +369,27 @@ function pc_format_date(string $iso_date): string
         return '';
     }
     return date('M j, Y', $ts);
+}
+
+/**
+ * Format an ISO 8601 date string for display in the church timezone.
+ *
+ * @param string $iso_date
+ * @return string e.g. "6:30 PM"
+ */
+function pc_format_time(string $iso_date): string
+{
+    if (empty($iso_date)) {
+        return '';
+    }
+
+    try {
+        $dt = new DateTime($iso_date);
+        $dt->setTimezone(new DateTimeZone('America/Chicago'));
+        return $dt->format('g:i A');
+    } catch (Exception $e) {
+        return '';
+    }
 }
 
 /**

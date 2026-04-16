@@ -2026,7 +2026,7 @@ section,
   height: 100%;
 }
 
-.featured-speakers.events-listing .event-meta-row {
+.featured-speakers .event-meta-row {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -2036,7 +2036,7 @@ section,
   font-weight: 600;
 }
 
-.featured-speakers.events-listing .event-meta-row i {
+.featured-speakers .event-meta-row i {
   color: var(--accent-color);
 }
 
