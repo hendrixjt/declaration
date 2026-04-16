@@ -225,6 +225,10 @@ body.nav-hidden .header {
   box-shadow: 0 10px 24px color-mix(in srgb, var(--accent-color), transparent 72%);
 }
 
+.header .header-cta .cta-label-mobile {
+  display: none;
+}
+
 .header .header-cta:hover {
   background: color-mix(in srgb, var(--accent-color), white 8%);
   color: #ffffff;
@@ -296,6 +300,14 @@ body.nav-hidden .header {
     font-size: 12.5px;
     font-weight: 700;
     box-shadow: 0 8px 18px color-mix(in srgb, var(--accent-color), transparent 76%);
+  }
+
+  .header .header-cta .cta-label-desktop {
+    display: none;
+  }
+
+  .header .header-cta .cta-label-mobile {
+    display: inline;
   }
 }
 
@@ -1287,12 +1299,12 @@ section,
 }
 
 .hero .countdown-card {
-  background: color-mix(in srgb, var(--surface-color), transparent 15%);
-  border: 1px solid color-mix(in srgb, var(--default-color), transparent 85%);
+  background: color-mix(in srgb, #2f3c56, transparent 8%);
+  border: 1px solid color-mix(in srgb, var(--default-color), transparent 78%);
   border-radius: 20px;
   padding: 40px 32px;
   backdrop-filter: blur(20px);
-  box-shadow: 0 20px 50px color-mix(in srgb, var(--default-color), transparent 90%);
+  box-shadow: 0 22px 56px color-mix(in srgb, #0f172a, transparent 72%);
 }
 
 @media (max-width: 768px) {
@@ -1320,7 +1332,8 @@ section,
 
 .hero .countdown .time-block {
   text-align: center;
-  background: color-mix(in srgb, var(--accent-color), transparent 92%);
+  background: color-mix(in srgb, var(--accent-color), transparent 88%);
+  border: 1px solid color-mix(in srgb, var(--default-color), transparent 92%);
   border-radius: 12px;
   padding: 20px 8px;
   transition: all 0.3s ease;
@@ -1354,7 +1367,8 @@ section,
 }
 
 .hero .ticket-info {
-  background: color-mix(in srgb, var(--default-color), transparent 95%);
+  background: color-mix(in srgb, var(--default-color), transparent 93%);
+  border: 1px solid color-mix(in srgb, var(--default-color), transparent 92%);
   border-radius: 12px;
   padding: 20px;
   margin-bottom: 24px;

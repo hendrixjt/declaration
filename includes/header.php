@@ -130,7 +130,10 @@ $base_url = $base_url ?? '/';
       </nav>
 
       <div class="header-actions">
-        <a href="index.php#visit" class="header-cta">Plan Your Visit</a>
+        <a href="index.php#visit" class="header-cta">
+          <span class="cta-label-desktop">Plan Your Visit</span>
+          <span class="cta-label-mobile">Plan Visit</span>
+        </a>
       </div>
 
     </div>
