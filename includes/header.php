@@ -119,47 +119,17 @@ $base_url = $base_url ?? '/';
       <nav id="navmenu" class="navmenu" aria-label="Main navigation">
         <ul>
           <li><a href="index.php"<?php if (($current_page ?? '') === 'index') echo ' class="active"'; ?>>Home</a></li>
-          <li><a href="about/"<?php if (($current_page ?? '') === 'about') echo ' class="active"'; ?>>About</a></li>
-          <li><a href="schedule/"<?php if (($current_page ?? '') === 'schedule') echo ' class="active"'; ?>>Schedule</a></li>
-          <li><a href="speakers/"<?php if (($current_page ?? '') === 'speakers') echo ' class="active"'; ?>>Speakers</a></li>
-          <li><a href="venue/"<?php if (($current_page ?? '') === 'venue') echo ' class="active"'; ?>>Venue</a></li>
-          <li><a href="gallery/"<?php if (($current_page ?? '') === 'gallery') echo ' class="active"'; ?>>Gallery</a></li>
-          <li><a href="tickets/"<?php if (($current_page ?? '') === 'tickets') echo ' class="active"'; ?>>Tickets</a></li>
-          <!-- <li class="dropdown"><a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-            <ul>
-              <li><a href="#">Dropdown 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-                <ul>
-                  <li><a href="#">Deep Dropdown 1</a></li>
-                  <li><a href="#">Deep Dropdown 2</a></li>
-                  <li><a href="#">Deep Dropdown 3</a></li>
-                  <li><a href="#">Deep Dropdown 4</a></li>
-                  <li><a href="#">Deep Dropdown 5</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Dropdown 2</a></li>
-              <li><a href="#">Dropdown 3</a></li>
-              <li><a href="#">Dropdown 4</a></li>
-            </ul>
-          </li> -->
-          <li><a href="contact/"<?php if (($current_page ?? '') === 'contact') echo ' class="active"'; ?>>Contact</a></li>
+          <li><a href="index.php#visit">Visit</a></li>
+          <li><a href="index.php#upcoming-events">Events</a></li>
+          <li><a href="index.php#rhythms">Life at Declaration</a></li>
+          <li><a href="index.php#next-steps">Next Steps</a></li>
+          <li><a href="index.php#contact">Contact</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
 
-      <div class="header-social-links">
-        <?php if (!empty($twitter_url)): ?>
-        <a href="<?php echo htmlspecialchars($twitter_url); ?>" class="twitter" aria-label="Visit our Twitter" target="_blank" rel="noopener noreferrer"><i class="bi bi-twitter-x"></i></a>
-        <?php endif; ?>
-        <?php if (!empty($facebook_url)): ?>
-        <a href="<?php echo htmlspecialchars($facebook_url); ?>" class="facebook" aria-label="Visit our Facebook" target="_blank" rel="noopener noreferrer"><i class="bi bi-facebook"></i></a>
-        <?php endif; ?>
-        <?php if (!empty($instagram_url)): ?>
-        <a href="<?php echo htmlspecialchars($instagram_url); ?>" class="instagram" aria-label="Visit our Instagram" target="_blank" rel="noopener noreferrer"><i class="bi bi-instagram"></i></a>
-        <?php endif; ?>
-        <?php if (!empty($linkedin_url)): ?>
-        <a href="<?php echo htmlspecialchars($linkedin_url); ?>" class="linkedin" aria-label="Visit our LinkedIn" target="_blank" rel="noopener noreferrer"><i class="bi bi-linkedin"></i></a>
-        <?php endif; ?>
+      <div class="header-actions">
+        <a href="index.php#visit" class="header-cta">Plan Your Visit</a>
       </div>
 
     </div>

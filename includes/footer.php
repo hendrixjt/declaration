@@ -7,58 +7,39 @@
         <div class="row gy-4">
           <div class="col-lg-4 col-md-6 footer-info">
             <h2>Declaration Church</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras fringilla ante eget feugiat commodo. Nulla et justo vitae nisl euismod fermentum in vel magna.</p>
-            <div class="social-links">
-              <a href="#"><i class="bi bi-twitter-x"></i></a>
-              <a href="#"><i class="bi bi-facebook"></i></a>
-              <a href="#"><i class="bi bi-instagram"></i></a>
-              <a href="#"><i class="bi bi-linkedin"></i></a>
-              <a href="#"><i class="bi bi-youtube"></i></a>
-            </div>
+            <p>A church family in Spring, Texas helping people encounter and follow Jesus through worship, prayer, community, discipleship, and real next steps.</p>
           </div>
 
-          <div class="col-lg-2 col-md-6 footer-links">
-            <h4>Useful Links</h4>
+          <div class="col-lg-4 col-md-6 footer-links">
+            <h4>Start Here</h4>
             <ul>
               <li><i class="bi bi-chevron-right"></i> <a href="index.php">Home</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="about/">About</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Services</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Portfolio</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="contact/">Contact</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="index.php#visit">Plan Your Visit</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="index.php#upcoming-events">Upcoming Events</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="index.php#next-steps">Next Steps</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="index.php#contact">Contact</a></li>
             </ul>
           </div>
 
-          <div class="col-lg-3 col-md-6 footer-contact">
+          <div class="col-lg-4 col-md-12 footer-contact">
             <h4>Contact Us</h4>
             <div class="contact-info">
               <div class="contact-item">
                 <i class="bi bi-geo-alt"></i>
-                <p>123 Main Street<br>New York, NY 10001</p>
+                <p>Snyder Elementary<br>28601 Birnham Woods Drive<br>Spring, TX 77386</p>
               </div>
               <div class="contact-item">
                 <i class="bi bi-telephone"></i>
-                <p>+1 (555) 987-6543</p>
+                <p>(281) 661-4279</p>
               </div>
               <div class="contact-item">
                 <i class="bi bi-envelope"></i>
-                <p>contact@example.com</p>
+                <p>hello@declaration.org</p>
               </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6 footer-newsletter">
-            <h4>Our Newsletter</h4>
-            <p>Subscribe to our newsletter to receive updates and news.</p>
-            <form action="forms/newsletter.php" class="php-email-form">
-              <input type="email" name="email" placeholder="Your Email" required="">
-              <div class="loading">Loading</div>
-              <div class="error-message"></div>
-              <div class="sent-message">Your subscription request has been sent. Thank you!</div>
-              <button type="submit">Subscribe</button>
-            </form>
-            <div class="opening-hours">
-              <h5><i class="bi bi-clock"></i> Opening Hours</h5>
-              <p>Monday-Saturday: 9AM - 10PM<br>Sunday: Closed</p>
+              <div class="contact-item">
+                <i class="bi bi-clock"></i>
+                <p>Sundays at 9:00am &amp; 11:00am<br>First Tuesday Prayer &amp; Worship at 7:00pm</p>
+              </div>
             </div>
           </div>
         </div>
