@@ -396,11 +396,11 @@ include __DIR__ . '/includes/header.php';
       </div>
 
       <div class="container">
-        <div class="row g-5">
+        <div class="row g-5 homepage-events-grid">
 <?php if ($has_live_events): ?>
   <?php foreach ($upcoming_events as $event): ?>
           <div class="<?= htmlspecialchars($homepage_events_column_class) ?>" data-aos="fade-up" data-aos-delay="80">
-            <div class="speaker-item">
+            <div class="speaker-item event-preview-card">
               <div class="row g-0">
                 <div class="col-md-5">
                   <div class="speaker-photo">

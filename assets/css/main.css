@@ -2022,8 +2022,62 @@ section,
   color: var(--accent-color);
 }
 
+.homepage-events-grid .event-preview-card .row {
+  flex-direction: column;
+  height: 100%;
+}
+
+.homepage-events-grid .event-preview-card .col-md-5,
+.homepage-events-grid .event-preview-card .col-md-7 {
+  width: 100%;
+}
+
+.homepage-events-grid .event-preview-card .speaker-photo {
+  min-height: auto;
+  aspect-ratio: 16 / 11;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 22px;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--background-color), #ffffff 22%) 0%, color-mix(in srgb, var(--surface-color), #ffffff 45%) 100%);
+}
+
+.homepage-events-grid .event-preview-card .speaker-photo img {
+  object-fit: contain;
+}
+
+.homepage-events-grid .event-preview-card .speaker-info {
+  padding: 24px 24px 28px;
+}
+
+.homepage-events-grid .event-preview-card .speaker-info h4 {
+  font-size: 1.95rem;
+  line-height: 1.12;
+}
+
+.homepage-events-grid .event-preview-card .speaker-info p {
+  margin-bottom: 14px;
+}
+
 .featured-speakers.events-listing .event-card {
   height: 100%;
+}
+
+.featured-speakers.events-listing .speaker-item .row {
+  align-items: stretch;
+}
+
+.featured-speakers.events-listing .speaker-photo {
+  min-height: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--background-color), #ffffff 28%) 0%, color-mix(in srgb, var(--surface-color), #ffffff 42%) 100%);
+}
+
+.featured-speakers.events-listing .speaker-photo img {
+  object-fit: contain;
 }
 
 .featured-speakers .event-meta-row {
@@ -2041,6 +2095,10 @@ section,
 }
 
 @media (max-width: 992px) {
+  .homepage-events-grid .event-preview-card .speaker-info h4 {
+    font-size: 1.75rem;
+  }
+
   .featured-speakers .speaker-photo {
     min-height: 240px;
   }
@@ -2055,6 +2113,10 @@ section,
 }
 
 @media (max-width: 768px) {
+  .homepage-events-grid .event-preview-card .speaker-info h4 {
+    font-size: 1.5rem;
+  }
+
   .featured-speakers .speaker-item {
     max-width: 500px;
     margin: 0 auto;
