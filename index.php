@@ -1,5 +1,5 @@
 <?php
-$page_title = 'Spring, TX Church';
+$page_title = 'Declaration Church';
 $body_class = 'index-page';
 $current_page = 'index';
 $base_url = '/';
