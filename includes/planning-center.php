@@ -5,6 +5,8 @@
  * Fetches upcoming events and caches them locally to avoid rate limits.
  */
 
+$GLOBALS['pc_last_error'] = $GLOBALS['pc_last_error'] ?? '';
+
 if (!defined('PC_APP_ID') || !defined('PC_SECRET')) {
     $config_path = __DIR__ . '/config.php';
     if (file_exists($config_path)) {
@@ -20,22 +22,18 @@ if (!defined('PC_APP_ID') || !defined('PC_SECRET')) {
  */
 function pc_get_upcoming_events(int $limit = 6): array
 {
+    $cache_file = __DIR__ . '/../cache/events.json';
+    $cache_ttl = defined('PC_CACHE_TTL') ? (int) PC_CACHE_TTL : 1800;
+
     if (!defined('PC_APP_ID') || !defined('PC_SECRET')) {
-        return [];
+        pc_set_last_error('Planning Center credentials are not configured.');
+        return pc_read_cached_events($cache_file, $limit, false, $cache_ttl);
     }
 
-    $cache_file = __DIR__ . '/../cache/events.json';
-    $cache_ttl = 1800; // 30 minutes
-
     // Return cached data if still fresh
-    if (file_exists($cache_file)) {
-        $cache_age = time() - filemtime($cache_file);
-        if ($cache_age < $cache_ttl) {
-            $cached = json_decode(file_get_contents($cache_file), true);
-            if (is_array($cached)) {
-                return array_slice($cached, 0, $limit);
-            }
-        }
+    $cached_events = pc_read_cached_events($cache_file, $limit, true, $cache_ttl);
+    if (!empty($cached_events)) {
+        return $cached_events;
     }
 
     $events = pc_fetch_events_from_api();
@@ -45,7 +43,16 @@ function pc_get_upcoming_events(int $limit = 6): array
     if (!is_dir($cache_dir)) {
         @mkdir($cache_dir, 0755, true);
     }
-    @file_put_contents($cache_file, json_encode($events, JSON_PRETTY_PRINT));
+    if (!empty($events)) {
+        @file_put_contents($cache_file, json_encode([
+            'fetched_at' => gmdate(DATE_ATOM),
+            'events' => $events,
+        ], JSON_PRETTY_PRINT));
+    }
+
+    if (empty($events)) {
+        return pc_read_cached_events($cache_file, $limit, false, $cache_ttl);
+    }
 
     return array_slice($events, 0, $limit);
 }
@@ -58,45 +65,214 @@ function pc_get_upcoming_events(int $limit = 6): array
 function pc_fetch_events_from_api(): array
 {
     $url = 'https://api.planningcenteronline.com/registrations/v2/events'
-         . '?filter=unarchived,published&order=starts_at&per_page=20';
+         . '?filter=unarchived,published&order=starts_at&per_page=25';
 
+    $events = [];
+    $page_count = 0;
+
+    while (!empty($url) && $page_count < 4) {
+        $response = pc_request_json($url);
+        if (!$response['ok']) {
+            return [];
+        }
+
+        $data = $response['data'];
+        if (!isset($data['data']) || !is_array($data['data'])) {
+            pc_set_last_error('Planning Center returned an unexpected response.');
+            return [];
+        }
+
+        foreach ($data['data'] as $item) {
+            $attrs = $item['attributes'] ?? [];
+            $event = [
+                'id'               => $item['id'] ?? '',
+                'name'             => trim((string) ($attrs['name'] ?? '')),
+                'description'      => trim((string) ($attrs['description'] ?? '')),
+                'starts_at'        => (string) ($attrs['starts_at'] ?? ''),
+                'ends_at'          => (string) ($attrs['ends_at'] ?? ''),
+                'logo_url'         => (string) ($attrs['logo_url'] ?? ''),
+                'registration_url' => (string) ($attrs['registration_url'] ?? ''),
+            ];
+
+            if (pc_event_is_upcoming($event)) {
+                $events[] = $event;
+            }
+        }
+
+        $url = isset($data['links']['next']) && is_string($data['links']['next']) ? $data['links']['next'] : '';
+        $page_count++;
+    }
+
+    usort($events, static function (array $a, array $b): int {
+        return strtotime($a['starts_at'] ?? '') <=> strtotime($b['starts_at'] ?? '');
+    });
+
+    return $events;
+}
+
+/**
+ * Read cached events when available.
+ */
+function pc_read_cached_events(string $cache_file, int $limit, bool $require_fresh, int $cache_ttl): array
+{
+    if (!file_exists($cache_file)) {
+        return [];
+    }
+
+    $cache_age = time() - (filemtime($cache_file) ?: time());
+    if ($require_fresh && $cache_age >= $cache_ttl) {
+        return [];
+    }
+
+    $cached = json_decode((string) file_get_contents($cache_file), true);
+    $events = pc_extract_cached_events($cached);
+
+    return array_slice($events, 0, $limit);
+}
+
+/**
+ * Support both legacy cache payloads and versioned cache objects.
+ */
+function pc_extract_cached_events($cached): array
+{
+    if (!is_array($cached)) {
+        return [];
+    }
+
+    if (isset($cached['events']) && is_array($cached['events'])) {
+        return $cached['events'];
+    }
+
+    return pc_is_list_array($cached) ? $cached : [];
+}
+
+/**
+ * Determine whether an event is still upcoming/current.
+ */
+function pc_event_is_upcoming(array $event): bool
+{
+    $starts_at = $event['starts_at'] ?? '';
+    $ends_at = $event['ends_at'] ?? '';
+
+    $start_ts = $starts_at ? strtotime($starts_at) : false;
+    $end_ts = $ends_at ? strtotime($ends_at) : false;
+    $now = time();
+
+    if ($end_ts !== false) {
+        return $end_ts >= $now;
+    }
+
+    if ($start_ts !== false) {
+        return $start_ts >= $now;
+    }
+
+    return false;
+}
+
+/**
+ * Issue a JSON request to the Planning Center API.
+ *
+ * @return array{ok: bool, status: int, data: array|null}
+ */
+function pc_request_json(string $url): array
+{
     $auth = base64_encode(PC_APP_ID . ':' . PC_SECRET);
+    $headers = [
+        'Authorization: Basic ' . $auth,
+        'Accept: application/json',
+        'User-Agent: DeclarationChurchPrototype/1.0',
+    ];
+
+    if (function_exists('curl_init')) {
+        $ch = curl_init($url);
+        curl_setopt_array($ch, [
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_TIMEOUT => 12,
+            CURLOPT_HTTPHEADER => $headers,
+            CURLOPT_FAILONERROR => false,
+        ]);
+
+        $body = curl_exec($ch);
+        $status = (int) curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
+        $curl_error = curl_error($ch);
+        curl_close($ch);
+
+        if ($body === false) {
+            pc_set_last_error('Planning Center request failed: ' . $curl_error);
+            return ['ok' => false, 'status' => $status, 'data' => null];
+        }
+
+        $data = json_decode($body, true);
+        if ($status < 200 || $status >= 300) {
+            pc_set_last_error(pc_extract_api_error_message($data, $status));
+            return ['ok' => false, 'status' => $status, 'data' => is_array($data) ? $data : null];
+        }
+
+        return ['ok' => is_array($data), 'status' => $status, 'data' => is_array($data) ? $data : null];
+    }
 
     $context = stream_context_create([
         'http' => [
             'method' => 'GET',
-            'header' => "Authorization: Basic {$auth}\r\n"
-                      . "Accept: application/json\r\n",
-            'timeout' => 10,
+            'header' => implode("\r\n", $headers) . "\r\n",
+            'timeout' => 12,
             'ignore_errors' => true,
         ],
     ]);
 
-    $response = @file_get_contents($url, false, $context);
-    if ($response === false) {
-        return [];
+    $body = @file_get_contents($url, false, $context);
+    if ($body === false) {
+        pc_set_last_error('Planning Center request failed.');
+        return ['ok' => false, 'status' => 0, 'data' => null];
     }
 
-    $data = json_decode($response, true);
-    if (!isset($data['data']) || !is_array($data['data'])) {
-        return [];
+    $status = 0;
+    foreach (($http_response_header ?? []) as $header_line) {
+        if (preg_match('/^HTTP\/\S+\s+(\d{3})/', $header_line, $matches)) {
+            $status = (int) $matches[1];
+            break;
+        }
     }
 
-    $events = [];
-    foreach ($data['data'] as $item) {
-        $attrs = $item['attributes'] ?? [];
-        $events[] = [
-            'id'               => $item['id'] ?? '',
-            'name'             => $attrs['name'] ?? '',
-            'description'      => $attrs['description'] ?? '',
-            'starts_at'        => $attrs['starts_at'] ?? '',
-            'ends_at'          => $attrs['ends_at'] ?? '',
-            'logo_url'         => $attrs['logo_url'] ?? '',
-            'registration_url' => $attrs['registration_url'] ?? '',
-        ];
+    $data = json_decode($body, true);
+    if ($status < 200 || $status >= 300) {
+        pc_set_last_error(pc_extract_api_error_message($data, $status));
+        return ['ok' => false, 'status' => $status, 'data' => is_array($data) ? $data : null];
     }
 
-    return $events;
+    return ['ok' => is_array($data), 'status' => $status, 'data' => is_array($data) ? $data : null];
+}
+
+function pc_extract_api_error_message($data, int $status): string
+{
+    if (is_array($data) && !empty($data['errors'][0]['detail'])) {
+        return 'Planning Center API error (' . $status . '): ' . $data['errors'][0]['detail'];
+    }
+
+    return 'Planning Center API returned status ' . $status . '.';
+}
+
+function pc_set_last_error(string $message): void
+{
+    $GLOBALS['pc_last_error'] = $message;
+}
+
+function pc_get_last_error(): string
+{
+    return (string) ($GLOBALS['pc_last_error'] ?? '');
+}
+
+function pc_is_list_array(array $value): bool
+{
+    $expected_key = 0;
+    foreach ($value as $key => $_) {
+        if ($key !== $expected_key) {
+            return false;
+        }
+        $expected_key++;
+    }
+
+    return true;
 }
 
 /**

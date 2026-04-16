@@ -25,3 +25,5 @@ If this becomes the main `declaration.org` site later, the code can stay the sam
 
 - Do not commit `includes/config.php`
 - Use `includes/config.example.php` as the template for local secrets
+- The homepage event area reads from Planning Center Registrations when `PC_APP_ID` and `PC_SECRET` are set in `includes/config.php`
+- Event data is cached in `/cache/events.json` for 30 minutes by default, and stale cache will be reused if the API has a temporary failure
