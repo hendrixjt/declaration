@@ -1,719 +1,619 @@
 <?php
-$page_title = 'Index - Eventia Bootstrap Template';
+$page_title = 'Spring, TX Church';
 $body_class = 'index-page';
 $current_page = 'index';
 $base_url = '/';
-include 'includes/header.php';
-require_once 'includes/planning-center.php';
+$meta_description = 'Declaration Church gathers in Spring, Texas on Sundays at 9:00am and 11:00am. Find service times, next steps, ministries, and upcoming events.';
+$canonical_url = 'https://www.declaration.org/';
+$geo_region = 'US-TX';
+$geo_placename = 'Spring, Texas';
+$church_phone = '+1-281-661-4279';
+$church_address = [
+    'street' => '28601 Birnham Woods Drive',
+    'city' => 'Spring',
+    'state' => 'TX',
+    'zip' => '77386',
+    'country' => 'US',
+];
+
+require_once __DIR__ . '/includes/planning-center.php';
 $upcoming_events = pc_get_upcoming_events(6);
+$has_live_events = !empty($upcoming_events);
+$next_sunday_countdown = date('Y/m/d 09:00:00', strtotime('next sunday'));
+
+$fallback_events = [
+    [
+        'name' => 'First Tuesday Prayer & Worship',
+        'date_label' => 'Monthly rhythm',
+        'description' => 'A night to seek the Lord together in prayer and worship at 7:00pm in various locations.',
+        'image' => 'assets/img/events/gallery-4.webp',
+        'url' => 'https://www.declaration.org/',
+        'cta_label' => 'Learn More',
+    ],
+    [
+        'name' => 'DNA',
+        'date_label' => 'Next step',
+        'description' => 'Learn the heart and vision of Declaration, discover purpose, and find your place to serve.',
+        'image' => 'assets/img/events/showcase-5.webp',
+        'url' => 'https://www.declaration.org/dna',
+        'cta_label' => 'Explore DNA',
+    ],
+    [
+        'name' => 'Groups',
+        'date_label' => 'Year-round community',
+        'description' => 'Find real community through groups for men, women, students, families, freedom, and more.',
+        'image' => 'assets/img/events/gallery-8.webp',
+        'url' => 'https://www.declaration.org/groups',
+        'cta_label' => 'Find a Group',
+    ],
+];
+
+$rhythm_tabs = [
+    [
+        'id' => 'sundays',
+        'label' => 'Weekly',
+        'title' => 'Sundays',
+        'date' => '9:00am & 11:00am',
+        'items' => [
+            [
+                'time' => '09:00 AM',
+                'duration' => 'In person',
+                'title' => 'Sunday gathering',
+                'location' => 'Snyder Elementary',
+                'description' => 'Join us for worship, biblical teaching, prayer, and a welcoming church family every Sunday morning.',
+                'image' => 'assets/img/events/speaker-1.webp',
+                'name' => 'Declaration Church',
+                'role' => 'Spring, Texas',
+            ],
+            [
+                'time' => '11:00 AM',
+                'duration' => 'In person',
+                'title' => 'Second Sunday gathering',
+                'location' => 'Snyder Elementary',
+                'description' => 'The 11:00am service carries the same teaching and worship with space to connect and pray.',
+                'image' => 'assets/img/events/speaker-3.webp',
+                'name' => 'Declaration Kids',
+                'role' => 'Available during services',
+            ],
+            [
+                'time' => '05:00 PM',
+                'duration' => 'Online stream',
+                'title' => 'Watch online',
+                'location' => 'Online',
+                'description' => 'If you cannot join in person, the Sunday message is available online later in the day.',
+                'image' => 'assets/img/events/speaker-5.webp',
+                'name' => 'Stay Connected',
+                'role' => 'Worship from wherever you are',
+            ],
+        ],
+    ],
+    [
+        'id' => 'generations',
+        'label' => 'For Families',
+        'title' => 'Kids + YTH',
+        'date' => 'Birth through 12th grade',
+        'items' => [
+            [
+                'time' => '09:00 AM',
+                'duration' => 'Sunday ministry',
+                'title' => 'Declaration Kids',
+                'location' => 'Snyder Elementary',
+                'description' => 'Kids from birth through 4th grade are invited into a safe, joyful environment to encounter and follow Jesus.',
+                'image' => 'assets/img/events/speaker-7.webp',
+                'name' => 'Birth through 4th grade',
+                'role' => 'Biblical teaching and worship',
+            ],
+            [
+                'time' => '11:00 AM',
+                'duration' => 'Sunday ministry',
+                'title' => 'Thrive support',
+                'location' => 'Snyder Elementary',
+                'description' => 'Families with special needs can find practical support and a caring ministry environment through Thrive.',
+                'image' => 'assets/img/events/speaker-9.webp',
+                'name' => 'Support for families',
+                'role' => 'Accessible ministry care',
+            ],
+            [
+                'time' => '05:00 PM',
+                'duration' => 'Sunday evening',
+                'title' => 'YTH',
+                'location' => 'The Warehouse',
+                'description' => 'Students in 7th through 12th grade have a place to belong, grow, and encounter and follow Jesus.',
+                'image' => 'assets/img/events/speaker-11.webp',
+                'name' => '7th through 12th grade',
+                'role' => 'yth@declaration.org',
+            ],
+        ],
+    ],
+    [
+        'id' => 'next-steps',
+        'label' => 'Grow Here',
+        'title' => 'Next Steps',
+        'date' => 'Groups, DNA, Serve',
+        'items' => [
+            [
+                'time' => 'Anytime',
+                'duration' => 'Year-round',
+                'title' => 'Groups',
+                'location' => 'Across the church family',
+                'description' => 'Groups help people find freedom, grow in faith, and build real community in every season of life.',
+                'image' => 'assets/img/events/speaker-13.webp',
+                'name' => 'Community',
+                'role' => 'Men, women, families, students, freedom',
+            ],
+            [
+                'time' => 'Quarterly',
+                'duration' => 'Purpose pathway',
+                'title' => 'DNA',
+                'location' => 'Declaration Church',
+                'description' => 'DNA introduces the vision, culture, and calling of Declaration and helps people find where they can serve.',
+                'image' => 'assets/img/events/speaker-15.webp',
+                'name' => 'Purpose',
+                'role' => 'Discover the heart of Declaration',
+            ],
+            [
+                'time' => 'Ongoing',
+                'duration' => 'Serve teams',
+                'title' => 'Serve',
+                'location' => 'Sunday, events, missions, and more',
+                'description' => 'Serve teams create space for people to encounter Jesus through hospitality, ministry, operations, generations, and outreach.',
+                'image' => 'assets/img/events/speaker-2.webp',
+                'name' => 'Make a difference',
+                'role' => 'Use your gifts in community',
+            ],
+        ],
+    ],
+];
+
+$pathway_cards = [
+    ['icon' => 'bi-heart', 'title' => 'Plan Your Visit', 'description' => 'Start with service times, directions, and what to expect on a Sunday.'],
+    ['icon' => 'bi-people', 'title' => 'Groups', 'description' => 'Find your people through year-round community and discipleship.'],
+    ['icon' => 'bi-stars', 'title' => 'DNA', 'description' => 'Learn the culture, purpose, and next steps of Declaration.'],
+    ['icon' => 'bi-hand-index-thumb', 'title' => 'Serve', 'description' => 'Jump into a team where your gifts can strengthen the church family.'],
+    ['icon' => 'bi-balloon-heart', 'title' => 'Kids + YTH', 'description' => 'Help every generation encounter and follow Jesus.'],
+    ['icon' => 'bi-globe2', 'title' => 'Missions', 'description' => 'Join local and global outreach partnerships that serve people in Jesus’ name.'],
+];
+
+include __DIR__ . '/includes/header.php';
 ?>
 
-    <!-- Hero Section -->
     <section id="hero" class="hero section dark-background">
 
       <div class="video-background">
-        <video autoplay="" muted="" loop="" playsinline="">
+        <video autoplay muted loop playsinline>
           <source src="assets/img/events/video-3.mp4" type="video/mp4">
         </video>
         <div class="overlay"></div>
       </div>
 
       <div class="content-wrapper">
-
         <div class="container">
-
           <div class="row align-items-center">
-
             <div class="col-lg-7">
-
               <div class="main-content">
-
-                <span class="event-badge">Annual Conference 2027</span>
-
-                <h1 class="main-title">Innovators &amp; Visionaries<br>Global Forum</h1>
-
-                <p class="main-description">Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Nullam quis risus eget urna mollis ornare vel eu leo. Maecenas faucibus mollis interdum.</p>
+                <span class="event-badge">For Jesus &amp; For People</span>
+                <h1 class="main-title">A church family in Spring, Texas helping people encounter and follow Jesus.</h1>
+                <p class="main-description">Declaration is a welcoming church for people who are exploring faith, planting roots, raising families, and looking for a place to belong. Join us this Sunday and take your next step with confidence.</p>
 
                 <div class="info-badges">
                   <div class="info-badge">
                     <div class="info-text">
-                      <span class="label">Date</span>
-                      <span class="value">April 22-24, 2026</span>
+                      <span class="label">Sundays</span>
+                      <span class="value">9:00am &amp; 11:00am</span>
                     </div>
                   </div>
                   <div class="info-badge">
                     <div class="info-text">
-                      <span class="label">Venue</span>
-                      <span class="value">Metropolitan Center, Chicago</span>
+                      <span class="label">Location</span>
+                      <span class="value">Snyder Elementary, Spring, TX</span>
                     </div>
                   </div>
                 </div>
 
                 <div class="action-area">
-                  <a href="register.php" class="btn-register">Reserve Your Spot</a>
-                  <a href="agenda.php" class="btn-agenda">View Agenda</a>
+                  <a href="#visit" class="btn-register">Plan Your Visit</a>
+                  <a href="#upcoming-events" class="btn-agenda">See What&rsquo;s Coming Up</a>
                 </div>
-
               </div>
-
-            </div><!-- End col-lg-7 -->
+            </div>
 
             <div class="col-lg-5">
-
               <div class="countdown-card">
+                <h4 class="card-title">This Week at Declaration</h4>
 
-                <h4 class="card-title">Countdown to Launch</h4>
-
-                <div class="countdown" data-count="2026/04/22">
+                <div class="countdown" data-count="<?= htmlspecialchars($next_sunday_countdown) ?>">
                   <div class="time-block">
-                    <h3 class="count-days">101</h3>
+                    <h3 class="count-days">0</h3>
                     <span>Days</span>
                   </div>
                   <div class="time-block">
-                    <h3 class="count-hours">9</h3>
+                    <h3 class="count-hours">0</h3>
                     <span>Hours</span>
                   </div>
                   <div class="time-block">
-                    <h3 class="count-minutes">1</h3>
+                    <h3 class="count-minutes">0</h3>
                     <span>Minutes</span>
                   </div>
                   <div class="time-block">
-                    <h3 class="count-seconds">31</h3>
+                    <h3 class="count-seconds">0</h3>
                     <span>Seconds</span>
                   </div>
                 </div>
 
                 <div class="ticket-info">
                   <div class="ticket-row">
-                    <span class="ticket-label">Available Seats</span>
-                    <span class="ticket-value">156 remaining</span>
+                    <span class="ticket-label">In Person</span>
+                    <span class="ticket-value">Sundays at 9:00am &amp; 11:00am</span>
                   </div>
                   <div class="ticket-row">
-                    <span class="ticket-label">Early Access</span>
-                    <span class="ticket-value highlight">Ends Feb 28th</span>
+                    <span class="ticket-label">Prayer &amp; Worship</span>
+                    <span class="ticket-value highlight">First Tuesday at 7:00pm</span>
                   </div>
                 </div>
 
                 <div class="featured-speakers">
-                  <span class="speakers-label">Featured Presenters</span>
+                  <span class="speakers-label">Next steps for every season</span>
                   <div class="speaker-avatars">
-                    <img src="assets/img/events/speaker-3.webp" alt="Speaker" class="speaker-avatar">
-                    <img src="assets/img/events/speaker-7.webp" alt="Speaker" class="speaker-avatar">
-                    <img src="assets/img/events/speaker-11.webp" alt="Speaker" class="speaker-avatar">
-                    <img src="assets/img/events/speaker-5.webp" alt="Speaker" class="speaker-avatar">
-                    <span class="more-speakers">+18</span>
+                    <img src="assets/img/person/person-f-4.webp" alt="Declaration Kids" class="speaker-avatar">
+                    <img src="assets/img/person/person-m-6.webp" alt="YTH" class="speaker-avatar">
+                    <img src="assets/img/person/person-f-5.webp" alt="Groups" class="speaker-avatar">
+                    <img src="assets/img/person/person-m-7.webp" alt="Serve" class="speaker-avatar">
+                    <span class="more-speakers">Kids + YTH + Groups</span>
                   </div>
                 </div>
-
               </div>
-
-            </div><!-- End col-lg-5 -->
-
-          </div><!-- End row -->
-
-        </div><!-- End container -->
-
+            </div>
+          </div>
+        </div>
       </div>
 
-    </section><!-- /Hero Section -->
+    </section>
 
-    <!-- Intro Section -->
-    <section id="intro" class="intro section">
+    <section id="visit" class="intro section">
 
       <div class="container">
-
         <div class="about-wrapper">
-
           <div class="image-showcase">
             <div class="main-image">
-              <img src="assets/img/events/showcase-8.webp" alt="Conference Hall" class="img-fluid">
+              <img src="assets/img/events/showcase-8.webp" alt="Declaration Church gathering" class="img-fluid">
               <div class="experience-badge">
-                <span class="years">12+</span>
-                <span class="label">Years of Excellence</span>
+                <span class="years">9 + 11</span>
+                <span class="label">Sunday Service Times</span>
               </div>
             </div>
             <div class="floating-card">
               <div class="card-icon">
-                <i class="bi bi-trophy"></i>
+                <i class="bi bi-heart-pulse"></i>
               </div>
               <div class="card-content">
-                <strong>Award Winning</strong>
-                <span>Best Conference Organizer 2025</span>
+                <strong>Prayer &amp; His Presence</strong>
+                <span>First Tuesday at 7:00pm</span>
               </div>
             </div>
           </div>
 
           <div class="content-block">
-            <span class="section-tag">Discover Our Story</span>
-            <h2>Crafting Memorable Conference Experiences Since 2014</h2>
-            <p class="intro-text">Nulla porttitor accumsan tincidunt vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Vivamus suscipit tortor eget felis porttitor volutpat.</p>
+            <span class="section-tag">Who We Are</span>
+            <h2>A church in Spring with a heart for Jesus, people, prayer, and community.</h2>
+            <p class="intro-text">Declaration exists to help people encounter and follow Jesus. The heart of the church is shaped by Scripture and the Holy Spirit, prayer and His presence, communion and community, and generosity and grace.</p>
 
             <div class="feature-list">
               <div class="feature-item">
                 <div class="feature-icon">
-                  <i class="bi bi-people"></i>
+                  <i class="bi bi-signpost-split"></i>
                 </div>
                 <div class="feature-content">
-                  <h4>Expert Network</h4>
-                  <p>Curabitur arcu erat accumsan id imperdiet et porttitor at sem proin eget tortor risus.</p>
+                  <h4>Plan Your Visit</h4>
+                  <p>Join us at Snyder Elementary and know exactly where to go, what time to arrive, and what to expect when you walk in.</p>
                 </div>
               </div>
               <div class="feature-item">
                 <div class="feature-icon">
-                  <i class="bi bi-lightbulb"></i>
+                  <i class="bi bi-people-fill"></i>
                 </div>
                 <div class="feature-content">
-                  <h4>Innovative Sessions</h4>
-                  <p>Praesent sapien massa convallis a pellentesque nec egestas non nisi cras ultricies ligula.</p>
+                  <h4>Find Community</h4>
+                  <p>Groups are available year-round and help people build meaningful relationships while growing in faith.</p>
                 </div>
               </div>
               <div class="feature-item">
                 <div class="feature-icon">
-                  <i class="bi bi-globe2"></i>
+                  <i class="bi bi-stars"></i>
                 </div>
                 <div class="feature-content">
-                  <h4>Global Reach</h4>
-                  <p>Donec sollicitudin molestie malesuada vivamus magna justo lacinia eget consectetur sed.</p>
+                  <h4>Take Your Next Step</h4>
+                  <p>DNA and serve teams help people discover purpose, understand the vision of Declaration, and get connected.</p>
                 </div>
               </div>
             </div>
 
             <div class="action-area">
-              <a href="#" class="btn-primary-action">Learn More About Us</a>
+              <a href="#next-steps" class="btn-primary-action">Explore Next Steps</a>
               <div class="contact-info">
                 <i class="bi bi-telephone"></i>
                 <div class="info-text">
-                  <span>Need Help?</span>
-                  <strong>+1 (555) 847-2931</strong>
+                  <span>Questions before Sunday?</span>
+                  <strong>(281) 661-4279</strong>
                 </div>
               </div>
             </div>
           </div>
-
         </div>
 
         <div class="stats-banner">
           <div class="stat-item">
-            <i class="bi bi-calendar-check"></i>
+            <i class="bi bi-clock-history"></i>
             <div class="stat-content">
-              <span class="stat-number" data-purecounter-start="0" data-purecounter-end="280" data-purecounter-duration="1">280</span>
-              <span class="stat-text">Events Organized</span>
+              <span class="stat-number">9:00</span>
+              <span class="stat-text">Sunday Gathering</span>
             </div>
           </div>
           <div class="stat-item">
-            <i class="bi bi-mic"></i>
+            <i class="bi bi-clock-history"></i>
             <div class="stat-content">
-              <span class="stat-number" data-purecounter-start="0" data-purecounter-end="520" data-purecounter-duration="1">520</span>
-              <span class="stat-text">Guest Speakers</span>
+              <span class="stat-number">11:00</span>
+              <span class="stat-text">Sunday Gathering</span>
             </div>
           </div>
           <div class="stat-item">
-            <i class="bi bi-person-check"></i>
+            <i class="bi bi-balloon-heart"></i>
             <div class="stat-content">
-              <span class="stat-number" data-purecounter-start="0" data-purecounter-end="45" data-purecounter-duration="1">45</span><span class="stat-suffix">K</span>
-              <span class="stat-text">Total Attendees</span>
+              <span class="stat-number">5:00</span>
+              <span class="stat-text">YTH on Sundays</span>
             </div>
           </div>
           <div class="stat-item">
-            <i class="bi bi-geo-alt"></i>
+            <i class="bi bi-music-note-beamed"></i>
             <div class="stat-content">
-              <span class="stat-number" data-purecounter-start="0" data-purecounter-end="35" data-purecounter-duration="1">35</span>
-              <span class="stat-text">Venue Partners</span>
+              <span class="stat-number">7:00</span>
+              <span class="stat-text">First Tuesday Prayer</span>
             </div>
           </div>
         </div>
-
       </div>
 
-    </section><!-- /Intro Section -->
+    </section>
 
-    <!-- Upcoming Events Section -->
     <section id="upcoming-events" class="featured-speakers section">
 
-      <!-- Section Title -->
       <div class="container section-title">
-        <span class="subtitle">Upcoming Events</span>
-        <h2>Upcoming Events</h2>
-        <p>See what's coming up at Declaration Church and register today</p>
-      </div><!-- End Section Title -->
+        <span class="subtitle"><?= $has_live_events ? 'Upcoming Events' : 'Featured Rhythms' ?></span>
+        <h2><?= $has_live_events ? 'Upcoming at Declaration' : 'What to Know Right Now' ?></h2>
+        <p><?= $has_live_events ? 'Current events and registrations pulled from Planning Center will appear here.' : 'While the live event feed is being connected, these are a few important rhythms and next steps to know.' ?></p>
+      </div>
 
       <div class="container">
-
         <div class="row g-5">
-
-<?php if (!empty($upcoming_events)): ?>
+<?php if ($has_live_events): ?>
   <?php foreach ($upcoming_events as $event): ?>
           <div class="col-lg-6">
             <div class="speaker-item">
               <div class="row g-0">
                 <div class="col-md-5">
                   <div class="speaker-photo">
-                    <?php if (!empty($event['logo_url'])): ?>
-                      <img src="<?= htmlspecialchars($event['logo_url']) ?>" alt="<?= htmlspecialchars($event['name']) ?>" class="img-fluid" loading="lazy">
-                    <?php else: ?>
-                      <div style="height:100%;display:flex;align-items:center;justify-content:center;background:#f0f0f0;min-height:200px;">
-                        <i class="bi bi-calendar-event" style="font-size:3rem;color:#ccc;"></i>
-                      </div>
-                    <?php endif; ?>
+<?php if (!empty($event['logo_url'])): ?>
+                    <img src="<?= htmlspecialchars($event['logo_url']) ?>" alt="<?= htmlspecialchars($event['name']) ?>" class="img-fluid" loading="lazy">
+<?php else: ?>
+                    <img src="assets/img/events/gallery-6.webp" alt="Declaration event" class="img-fluid" loading="lazy">
+<?php endif; ?>
                   </div>
                 </div>
                 <div class="col-md-7">
                   <div class="speaker-info">
                     <div class="session-type"><?= htmlspecialchars(pc_date_range($event['starts_at'], $event['ends_at'])) ?></div>
                     <h4><?= htmlspecialchars($event['name']) ?></h4>
-                    <?php if (!empty($event['description'])): ?>
-                      <p><?= htmlspecialchars(mb_strimwidth(strip_tags($event['description']), 0, 150, '...')) ?></p>
-                    <?php endif; ?>
-                    <?php if (!empty($event['registration_url'])): ?>
-                      <a href="<?= htmlspecialchars($event['registration_url']) ?>" class="profile-btn" target="_blank" rel="noopener">Register <i class="bi bi-arrow-right-short"></i></a>
-                    <?php endif; ?>
+<?php if (!empty($event['description'])): ?>
+                    <p><?= htmlspecialchars(function_exists('mb_strimwidth') ? mb_strimwidth(strip_tags($event['description']), 0, 170, '...') : substr(strip_tags($event['description']), 0, 170) . '...') ?></p>
+<?php else: ?>
+                    <p>Join the Declaration family for this upcoming event and use the link below to see details or register.</p>
+<?php endif; ?>
+                    <a href="<?= htmlspecialchars($event['registration_url'] ?: 'https://www.declaration.org/') ?>" class="profile-btn" target="_blank" rel="noopener">Learn More <i class="bi bi-arrow-right-short"></i></a>
                   </div>
                 </div>
               </div>
             </div>
-          </div><!-- End Event Item -->
+          </div>
   <?php endforeach; ?>
 <?php else: ?>
-          <div class="col-12 text-center">
-            <p>No upcoming events at this time. Check back soon!</p>
+  <?php foreach ($fallback_events as $event): ?>
+          <div class="col-lg-4">
+            <div class="speaker-item">
+              <div class="row g-0">
+                <div class="col-md-5">
+                  <div class="speaker-photo">
+                    <img src="<?= htmlspecialchars($event['image']) ?>" alt="<?= htmlspecialchars($event['name']) ?>" class="img-fluid" loading="lazy">
+                  </div>
+                </div>
+                <div class="col-md-7">
+                  <div class="speaker-info">
+                    <div class="session-type"><?= htmlspecialchars($event['date_label']) ?></div>
+                    <h4><?= htmlspecialchars($event['name']) ?></h4>
+                    <p><?= htmlspecialchars($event['description']) ?></p>
+                    <a href="<?= htmlspecialchars($event['url']) ?>" class="profile-btn" target="_blank" rel="noopener"><?= htmlspecialchars($event['cta_label']) ?> <i class="bi bi-arrow-right-short"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
+  <?php endforeach; ?>
 <?php endif; ?>
-
         </div>
-
       </div>
 
-    </section><!-- /Upcoming Events Section -->
+    </section>
 
-    <!-- Schedule Section -->
-    <section id="schedule" class="schedule section">
-      <!-- Section Title -->
+    <section id="rhythms" class="schedule-2 section">
+
       <div class="container section-title">
-        <span class="subtitle">Schedule</span>
-        <h2>Schedule</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-      </div><!-- End Section Title -->
+        <span class="subtitle">Life at Declaration</span>
+        <h2>Rhythms for the whole church family</h2>
+        <p>From Sundays to student ministry to next steps, these are some of the most important rhythms that help people belong, grow, and serve.</p>
+      </div>
 
       <div class="container">
+        <ul class="schedule-tabs nav nav-tabs" role="tablist">
+<?php foreach ($rhythm_tabs as $index => $tab): ?>
+          <li class="nav-item" role="presentation">
+            <button class="tab-btn nav-link<?= $index === 0 ? ' active' : '' ?>" data-bs-toggle="tab" data-bs-target="#<?= htmlspecialchars($tab['id']) ?>" type="button" role="tab" aria-selected="<?= $index === 0 ? 'true' : 'false' ?>">
+              <span class="day-label"><?= htmlspecialchars($tab['label']) ?></span>
+              <?= htmlspecialchars($tab['title']) ?>
+              <span class="day-date"><?= htmlspecialchars($tab['date']) ?></span>
+            </button>
+          </li>
+<?php endforeach; ?>
+        </ul>
 
-        <div class="schedule-header">
-          <ul class="nav nav-tabs" id="schedule-tabs" role="tablist">
-            <li class="nav-item" role="presentation">
-              <button class="nav-link active" id="schedule-tab-1" data-bs-toggle="tab" data-bs-target="#schedule-tab-pane-1" type="button" role="tab" aria-controls="schedule-tab-pane-1" aria-selected="true">Oct 15<br>Monday</button>
-            </li>
-            <li class="nav-item" role="presentation">
-              <button class="nav-link" id="schedule-tab-2" data-bs-toggle="tab" data-bs-target="#schedule-tab-pane-2" type="button" role="tab" aria-controls="schedule-tab-pane-2" aria-selected="false">Oct 16<br>Tuesday</button>
-            </li>
-            <li class="nav-item" role="presentation">
-              <button class="nav-link" id="schedule-tab-3" data-bs-toggle="tab" data-bs-target="#schedule-tab-pane-3" type="button" role="tab" aria-controls="schedule-tab-pane-3" aria-selected="false">Oct 17<br>Wednesday</button>
-            </li>
-          </ul>
+        <div class="tab-content">
+<?php foreach ($rhythm_tabs as $index => $tab): ?>
+          <div class="tab-pane fade<?= $index === 0 ? ' show active' : '' ?>" id="<?= htmlspecialchars($tab['id']) ?>" role="tabpanel">
+<?php foreach ($tab['items'] as $item): ?>
+            <div class="schedule-item">
+              <div class="time-slot">
+                <span class="time"><?= htmlspecialchars($item['time']) ?></span>
+                <span class="duration"><?= htmlspecialchars($item['duration']) ?></span>
+              </div>
+              <div class="item-content">
+                <h4><a href="#contact"><?= htmlspecialchars($item['title']) ?></a></h4>
+                <div class="location"><i class="bi bi-geo-alt"></i> <?= htmlspecialchars($item['location']) ?></div>
+                <p><?= htmlspecialchars($item['description']) ?></p>
+              </div>
+              <div class="speaker-info">
+                <img src="<?= htmlspecialchars($item['image']) ?>" alt="<?= htmlspecialchars($item['name']) ?>">
+                <div class="speaker-details">
+                  <span class="name"><?= htmlspecialchars($item['name']) ?></span>
+                  <span class="role"><?= htmlspecialchars($item['role']) ?></span>
+                </div>
+              </div>
+            </div>
+<?php endforeach; ?>
+          </div>
+<?php endforeach; ?>
         </div>
-
-        <div class="tab-content" id="schedule-tabContent">
-
-          <div class="tab-pane fade show active" id="schedule-tab-pane-1" role="tabpanel" aria-labelledby="schedule-tab-1" tabindex="0">
-            <div class="schedule-content">
-              <div class="session-timeline">
-
-                <div class="session-block">
-                  <div class="session-time">
-                    <span class="start">9:00</span>
-                    <span class="end">10:00</span>
-                  </div>
-                  <div class="session-card">
-                    <div class="session-info">
-                      <div class="session-meta">
-                        <span class="track keynote">Keynote</span>
-                        <span class="room">Main Stage</span>
-                      </div>
-                      <h3 class="session-title">Sed ut perspiciatis unde omnis iste natus error</h3>
-                      <p class="session-description">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                      <div class="speaker-info">
-                        <img src="assets/img/person/person-f-4.webp" alt="Speaker" class="speaker-avatar img-fluid">
-                        <div class="speaker-details">
-                          <h4 class="speaker-name">Tempor incididunt ut labore et dolore</h4>
-                          <span class="speaker-role">Consectetur adipiscing elit</span>
-                        </div>
-                      </div>
-                    </div>
-                    <button class="add-to-schedule">
-                      <i class="bi bi-calendar-plus"></i>
-                      Add to Schedule
-                    </button>
-                  </div>
-                </div><!-- End Session Block -->
-
-                <div class="session-block">
-                  <div class="session-time">
-                    <span class="start">10:30</span>
-                    <span class="end">11:15</span>
-                  </div>
-                  <div class="session-card">
-                    <div class="session-info">
-                      <div class="session-meta">
-                        <span class="track development">Development</span>
-                        <span class="room">Room A</span>
-                      </div>
-                      <h3 class="session-title">Nemo enim ipsam voluptatem quia voluptas sit</h3>
-                      <p class="session-description">Totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit.</p>
-                      <p>
-                      </p>
-                      <div class="speaker-info">
-                        <img src="assets/img/person/person-m-6.webp" alt="Speaker" class="speaker-avatar img-fluid">
-                        <div class="speaker-details">
-                          <h4 class="speaker-name">Excepteur sint occaecat cupidatat</h4>
-                          <span class="speaker-role">Non proident sunt in culpa</span>
-                        </div>
-                      </div>
-                    </div>
-                    <button class="add-to-schedule">
-                      <i class="bi bi-calendar-plus"></i>
-                      Add to Schedule
-                    </button>
-                  </div>
-                </div><!-- End Session Block -->
-
-                <div class="session-block">
-                  <div class="session-time">
-                    <span class="start">10:30</span>
-                    <span class="end">11:15</span>
-                  </div>
-                  <div class="session-card">
-                    <div class="session-info">
-                      <div class="session-meta">
-                        <span class="track design">Design</span>
-                        <span class="room">Room B</span>
-                      </div>
-                      <h3 class="session-title">Sunt in culpa qui officia deserunt mollit</h3>
-                      <p class="session-description">Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                      <div class="speaker-info">
-                        <img src="assets/img/person/person-f-5.webp" alt="Speaker" class="speaker-avatar img-fluid">
-                        <div class="speaker-details">
-                          <h4 class="speaker-name">Duis aute irure dolor</h4>
-                          <span class="speaker-role">In reprehenderit in voluptate</span>
-                        </div>
-                      </div>
-                    </div>
-                    <button class="add-to-schedule">
-                      <i class="bi bi-calendar-plus"></i>
-                      Add to Schedule
-                    </button>
-                  </div>
-                </div><!-- End Session Block -->
-
-                <div class="session-block">
-                  <div class="session-time">
-                    <span class="start">11:15</span>
-                    <span class="end">11:45</span>
-                  </div>
-                  <div class="session-card break-card">
-                    <div class="session-info">
-                      <div class="session-meta">
-                        <span class="track break">Break</span>
-                        <span class="room">Lobby</span>
-                      </div>
-                      <h3 class="session-title">Velit esse cillum dolore</h3>
-                      <p class="session-description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                    </div>
-                  </div>
-                </div><!-- End Session Block -->
-
-                <div class="session-block">
-                  <div class="session-time">
-                    <span class="start">12:00</span>
-                    <span class="end">12:45</span>
-                  </div>
-                  <div class="session-card">
-                    <div class="session-info">
-                      <div class="session-meta">
-                        <span class="track business">Business</span>
-                        <span class="room">Main Stage</span>
-                      </div>
-                      <h3 class="session-title">Eu fugiat nulla pariatur</h3>
-                      <p class="session-description">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.</p>
-                      <div class="speaker-info">
-                        <img src="assets/img/person/person-m-7.webp" alt="Speaker" class="speaker-avatar img-fluid">
-                        <div class="speaker-details">
-                          <h4 class="speaker-name">Explicabo nemo enim</h4>
-                          <span class="speaker-role">Voluptatem quia voluptas sit</span>
-                        </div>
-                      </div>
-                    </div>
-                    <button class="add-to-schedule">
-                      <i class="bi bi-calendar-plus"></i>
-                      Add to Schedule
-                    </button>
-                  </div>
-                </div><!-- End Session Block -->
-
-              </div><!-- End Session Timeline -->
-            </div><!-- End Schedule Content -->
-          </div>
-
-          <div class="tab-pane fade" id="schedule-tab-pane-2" role="tabpanel" aria-labelledby="schedule-tab-2" tabindex="0">
-            <div class="schedule-content">
-              <div class="session-timeline">
-
-                <div class="session-block">
-                  <div class="session-time">
-                    <span class="start">9:30</span>
-                    <span class="end">10:15</span>
-                  </div>
-                  <div class="session-card">
-                    <div class="session-info">
-                      <div class="session-meta">
-                        <span class="track development">Development</span>
-                        <span class="room">Room A</span>
-                      </div>
-                      <h3 class="session-title">Aperiam eaque ipsa quae</h3>
-                      <p class="session-description">Illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.</p>
-                      <div class="speaker-info">
-                        <img src="assets/img/person/person-m-8.webp" alt="Speaker" class="speaker-avatar img-fluid">
-                        <div class="speaker-details">
-                          <h4 class="speaker-name">Modi tempora incidunt</h4>
-                          <span class="speaker-role">Magnam aliquam quaerat</span>
-                        </div>
-                      </div>
-                    </div>
-                    <button class="add-to-schedule">
-                      <i class="bi bi-calendar-plus"></i>
-                      Add to Schedule
-                    </button>
-                  </div>
-                </div><!-- End Session Block -->
-
-                <div class="session-block">
-                  <div class="session-time">
-                    <span class="start">10:45</span>
-                    <span class="end">11:30</span>
-                  </div>
-                  <div class="session-card">
-                    <div class="session-info">
-                      <div class="session-meta">
-                        <span class="track design">Design</span>
-                        <span class="room">Room B</span>
-                      </div>
-                      <h3 class="session-title">Tempora incidunt ut labore</h3>
-                      <p class="session-description">Totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt. Excepteur sint occaecat cupidatat non proident.</p>
-                      <div class="speaker-info">
-                        <img src="assets/img/person/person-f-6.webp" alt="Speaker" class="speaker-avatar img-fluid">
-                        <div class="speaker-details">
-                          <h4 class="speaker-name">Corporis suscipit laboriosam</h4>
-                          <span class="speaker-role">Nisi ut aliquid ex ea commodi</span>
-                        </div>
-                      </div>
-                    </div>
-                    <button class="add-to-schedule">
-                      <i class="bi bi-calendar-plus"></i>
-                      Add to Schedule
-                    </button>
-                  </div>
-                </div><!-- End Session Block -->
-
-              </div><!-- End Session Timeline -->
-            </div><!-- End Schedule Content -->
-          </div>
-
-          <div class="tab-pane fade" id="schedule-tab-pane-3" role="tabpanel" aria-labelledby="schedule-tab-3" tabindex="0">
-            <div class="schedule-content">
-              <div class="session-timeline">
-
-                <div class="session-block">
-                  <div class="session-time">
-                    <span class="start">10:00</span>
-                    <span class="end">10:45</span>
-                  </div>
-                  <div class="session-card">
-                    <div class="session-info">
-                      <div class="session-meta">
-                        <span class="track business">Business</span>
-                        <span class="room">Main Stage</span>
-                      </div>
-                      <h3 class="session-title">Consequatur aut perferendis</h3>
-                      <p class="session-description">Dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet. Ut enim ad minima veniam.</p>
-                      <div class="speaker-info">
-                        <img src="assets/img/person/person-m-9.webp" alt="Speaker" class="speaker-avatar img-fluid">
-                        <div class="speaker-details">
-                          <h4 class="speaker-name">Accusantium doloremque</h4>
-                          <span class="speaker-role">Quia dolor sit amet</span>
-                        </div>
-                      </div>
-                    </div>
-                    <button class="add-to-schedule">
-                      <i class="bi bi-calendar-plus"></i>
-                      Add to Schedule
-                    </button>
-                  </div>
-                </div><!-- End Session Block -->
-
-              </div><!-- End Session Timeline -->
-            </div><!-- End Schedule Content -->
-          </div>
-
-        </div><!-- End Tab Content -->
-
       </div>
 
-      <div class="schedule-actions">
-        <button class="btn btn-primary">
-          <i class="bi bi-download"></i>
-          Download Full Agenda
-        </button>
-        <button class="btn btn-outline">
-          <i class="bi bi-calendar-event"></i>
-          Export to Calendar
-        </button>
-      </div>
-    </section><!-- /Schedule Section -->
+    </section>
 
-    <!-- Tickets 2 Section -->
-    <section id="tickets-2" class="tickets-2 section">
+    <section id="next-steps" class="about section">
 
       <div class="container">
-
-        <div class="row justify-content-center">
-
-          <div class="col-lg-3 col-md-6 mb-4">
-            <div class="ticket-card">
-              <div class="ticket-header">
-                <div class="ticket-icon">
-                  <i class="bi bi-calendar-event"></i>
-                </div>
-                <h4 class="ticket-title">Early Bird</h4>
-                <div class="price-section">
-                  <span class="currency">$</span>
-                  <span class="amount">75</span>
-                </div>
-                <p class="ticket-subtitle">Limited time offer</p>
+        <div class="intro-banner">
+          <div class="banner-content">
+            <span class="badge-label">Your Next Step Starts Here</span>
+            <h3>More than a Sunday service</h3>
+            <p>Declaration is building a church family where people can know God, grow in freedom, discover purpose, and make a difference. The current live site spreads that story across multiple pages, but the heart of it belongs right here on the homepage.</p>
+            <div class="banner-stats">
+              <div class="single-stat">
+                <span class="stat-number">Jesus</span>
+                <span class="stat-label">At the center</span>
               </div>
-              <div class="ticket-body">
-                <ul class="benefits-list">
-                  <li><i class="bi bi-check2"></i> Event entrance</li>
-                  <li><i class="bi bi-check2"></i> Welcome kit</li>
-                  <li><i class="bi bi-check2"></i> Light refreshments</li>
-                  <li><i class="bi bi-x"></i> Premium seating</li>
-                  <li><i class="bi bi-x"></i> Networking session</li>
-                </ul>
-                <a href="buy-tickets/" class="ticket-btn">Purchase Now</a>
+              <div class="single-stat">
+                <span class="stat-number">People</span>
+                <span class="stat-label">To belong with</span>
+              </div>
+              <div class="single-stat">
+                <span class="stat-number">Purpose</span>
+                <span class="stat-label">To walk in</span>
               </div>
             </div>
-          </div><!-- End Ticket Card -->
-
-          <div class="col-lg-3 col-md-6 mb-4">
-            <div class="ticket-card premium">
-              <div class="ticket-header">
-                <div class="ticket-icon">
-                  <i class="bi bi-star-fill"></i>
-                </div>
-                <h4 class="ticket-title">Regular</h4>
-                <div class="price-section">
-                  <span class="currency">$</span>
-                  <span class="amount">125</span>
-                </div>
-                <p class="ticket-subtitle">Best value package</p>
-              </div>
-              <div class="ticket-body">
-                <ul class="benefits-list">
-                  <li><i class="bi bi-check2"></i> Event entrance</li>
-                  <li><i class="bi bi-check2"></i> Welcome kit</li>
-                  <li><i class="bi bi-check2"></i> Light refreshments</li>
-                  <li><i class="bi bi-check2"></i> Premium seating</li>
-                  <li><i class="bi bi-x"></i> Networking session</li>
-                </ul>
-                <a href="buy-tickets/" class="ticket-btn">Purchase Now</a>
-              </div>
-            </div>
-          </div><!-- End Ticket Card -->
-
-          <div class="col-lg-3 col-md-6 mb-4">
-            <div class="ticket-card">
-              <div class="ticket-header">
-                <div class="ticket-icon">
-                  <i class="bi bi-gem"></i>
-                </div>
-                <h4 class="ticket-title">Premium</h4>
-                <div class="price-section">
-                  <span class="currency">$</span>
-                  <span class="amount">195</span>
-                </div>
-                <p class="ticket-subtitle">Full experience access</p>
-              </div>
-              <div class="ticket-body">
-                <ul class="benefits-list">
-                  <li><i class="bi bi-check2"></i> Event entrance</li>
-                  <li><i class="bi bi-check2"></i> Welcome kit</li>
-                  <li><i class="bi bi-check2"></i> Light refreshments</li>
-                  <li><i class="bi bi-check2"></i> Premium seating</li>
-                  <li><i class="bi bi-check2"></i> Networking session</li>
-                </ul>
-                <a href="buy-tickets/" class="ticket-btn">Purchase Now</a>
-              </div>
-            </div>
-          </div><!-- End Ticket Card -->
-
-          <div class="col-lg-3 col-md-6 mb-4">
-            <div class="ticket-card">
-              <div class="ticket-header">
-                <div class="ticket-icon">
-                  <i class="bi bi-bank"></i>
-                </div>
-                <h4 class="ticket-title">VIP</h4>
-                <div class="price-section">
-                  <span class="currency">$</span>
-                  <span class="amount">275</span>
-                </div>
-                <p class="ticket-subtitle">Exclusive access</p>
-              </div>
-              <div class="ticket-body">
-                <ul class="benefits-list">
-                  <li><i class="bi bi-check2"></i> All premium benefits</li>
-                  <li><i class="bi bi-check2"></i> VIP lounge access</li>
-                  <li><i class="bi bi-check2"></i> Meet &amp; greet</li>
-                  <li><i class="bi bi-check2"></i> Exclusive merchandise</li>
-                  <li><i class="bi bi-check2"></i> Priority support</li>
-                </ul>
-                <a href="buy-tickets/" class="ticket-btn">Purchase Now</a>
-              </div>
-            </div>
-          </div><!-- End Ticket Card -->
-
+          </div>
         </div>
 
+        <div class="features-row">
+          <div class="row gy-4">
+            <div class="col-lg-4">
+              <div class="feature-block">
+                <div class="feature-icon">
+                  <i class="bi bi-compass"></i>
+                </div>
+                <h4>Plan Your Visit</h4>
+                <p>For first-time guests, we want the experience to feel clear, warm, and easy from the moment you arrive.</p>
+              </div>
+            </div>
+
+            <div class="col-lg-4">
+              <div class="feature-block featured">
+                <div class="feature-icon">
+                  <i class="bi bi-book"></i>
+                </div>
+                <h4>What We Believe</h4>
+                <p>Declaration is a multi-denominational church with a strong devotion to Scripture, the Holy Spirit, prayer, community, and grace.</p>
+              </div>
+            </div>
+
+            <div class="col-lg-4">
+              <div class="feature-block">
+                <div class="feature-icon">
+                  <i class="bi bi-person-heart"></i>
+                </div>
+                <h4>Lead Pastors</h4>
+                <p>John and Kelly Sherrill lead Declaration with a desire to see people encounter Jesus and grow in purpose.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="audience-wrapper">
+          <div class="row align-items-center">
+            <div class="col-lg-5">
+              <div class="audience-intro">
+                <h3>Find where you belong</h3>
+                <p>Whether you are new to church, raising kids, looking for a group, or ready to step into serving, there is a clear pathway into the life of Declaration.</p>
+                <blockquote>
+                  <p>"For Jesus and for people" is more than a slogan. It is the kind of church experience this homepage should make visible right away.</p>
+                  <cite>— Direction for the new site</cite>
+                </blockquote>
+                <div class="action-links">
+                  <a href="https://www.declaration.org/groups" class="primary-btn" target="_blank" rel="noopener">Explore Groups</a>
+                  <a href="https://www.declaration.org/teams" class="text-link" target="_blank" rel="noopener">See Serve Teams <i class="bi bi-arrow-right"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-7">
+              <div class="audience-grid">
+<?php foreach ($pathway_cards as $card): ?>
+                <div class="audience-card">
+                  <i class="bi <?= htmlspecialchars($card['icon']) ?>"></i>
+                  <h5><?= htmlspecialchars($card['title']) ?></h5>
+                  <p><?= htmlspecialchars($card['description']) ?></p>
+                </div>
+<?php endforeach; ?>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
-    </section><!-- /Tickets 2 Section -->
+    </section>
 
-    <!-- Call To Action Section -->
     <section id="call-to-action" class="call-to-action section light-background">
 
       <div class="container">
-
         <div class="row align-items-center g-5">
           <div class="col-lg-6">
             <div class="content-block">
-              <span class="badge-label">Limited Time Offer</span>
-              <h2 class="section-heading">Elevate Your Career at the Global Summit</h2>
-              <p class="description">Consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nostrud exercitation ullamco laboris.</p>
+              <span class="badge-label">New Here?</span>
+              <h2 class="section-heading">Start your first Sunday with confidence.</h2>
+              <p class="description">We want it to be easy for first-time guests and families to know where to go, what to expect, and how to take a simple next step after the service.</p>
 
               <div class="feature-list">
                 <div class="feature-item">
                   <i class="bi bi-check-circle-fill"></i>
-                  <span>Access to 120+ workshop sessions</span>
+                  <span>Kids ministry during 9:00am and 11:00am Sunday services</span>
                 </div>
                 <div class="feature-item">
                   <i class="bi bi-check-circle-fill"></i>
-                  <span>VIP networking opportunities</span>
+                  <span>Groups, DNA, and serve pathways to help you get connected</span>
                 </div>
                 <div class="feature-item">
                   <i class="bi bi-check-circle-fill"></i>
-                  <span>Exclusive resource materials included</span>
+                  <span>A church family that wants to know you, not just host you</span>
                 </div>
               </div>
 
               <div class="action-area">
-                <a href="#" class="btn-main">Secure Your Seat</a>
-                <a href="#" class="btn-secondary">View Schedule</a>
+                <a href="https://www.declaration.org/new-here" class="btn-main" target="_blank" rel="noopener">Plan Your Visit</a>
+                <a href="#contact" class="btn-secondary">Get the Details</a>
               </div>
             </div>
           </div>
@@ -722,345 +622,111 @@ $upcoming_events = pc_get_upcoming_events(6);
             <div class="stats-grid">
               <div class="stat-card">
                 <div class="stat-icon-wrapper">
-                  <i class="bi bi-people-fill"></i>
+                  <i class="bi bi-clock-fill"></i>
                 </div>
                 <div class="stat-info">
-                  <span class="stat-value purecounter" data-purecounter-start="0" data-purecounter-end="7500" data-purecounter-duration="2">7500</span>
-                  <span class="stat-title">Global Participants</span>
+                  <span class="stat-value">9 &amp; 11</span>
+                  <span class="stat-title">Sunday Services</span>
                 </div>
               </div>
 
               <div class="stat-card">
                 <div class="stat-icon-wrapper">
-                  <i class="bi bi-mic-fill"></i>
+                  <i class="bi bi-balloon-heart-fill"></i>
                 </div>
                 <div class="stat-info">
-                  <span class="stat-value purecounter" data-purecounter-start="0" data-purecounter-end="120" data-purecounter-duration="2">120</span>
-                  <span class="stat-title">Industry Leaders</span>
+                  <span class="stat-value">5 PM</span>
+                  <span class="stat-title">YTH on Sundays</span>
                 </div>
               </div>
 
               <div class="stat-card">
                 <div class="stat-icon-wrapper">
-                  <i class="bi bi-globe-americas"></i>
+                  <i class="bi bi-music-note"></i>
                 </div>
                 <div class="stat-info">
-                  <span class="stat-value purecounter" data-purecounter-start="0" data-purecounter-end="42" data-purecounter-duration="2">42</span>
-                  <span class="stat-title">Nations Joining</span>
+                  <span class="stat-value">7 PM</span>
+                  <span class="stat-title">First Tuesday Prayer</span>
                 </div>
               </div>
 
               <div class="stat-card">
                 <div class="stat-icon-wrapper">
-                  <i class="bi bi-trophy-fill"></i>
+                  <i class="bi bi-geo-alt-fill"></i>
                 </div>
                 <div class="stat-info">
-                  <span class="stat-value purecounter" data-purecounter-start="0" data-purecounter-end="15" data-purecounter-duration="2">15</span>
-                  <span class="stat-title">Years Running</span>
+                  <span class="stat-value">Spring</span>
+                  <span class="stat-title">Snyder Elementary</span>
                 </div>
-              </div>
-            </div>
-
-            <div class="trust-badges">
-              <div class="trust-item">
-                <i class="bi bi-patch-check-fill"></i>
-                <span>Verified Event</span>
-              </div>
-              <div class="trust-item">
-                <i class="bi bi-credit-card-2-front-fill"></i>
-                <span>Secure Checkout</span>
-              </div>
-              <div class="trust-item">
-                <i class="bi bi-arrow-counterclockwise"></i>
-                <span>Easy Refunds</span>
               </div>
             </div>
           </div>
         </div>
-
       </div>
 
-    </section><!-- /Call To Action Section -->
+    </section>
 
-    <!-- Testimonials Section -->
-    <section id="testimonials" class="testimonials section">
-
-      <!-- Section Title -->
-      <div class="container section-title">
-        <span class="subtitle">Testimonials</span>
-        <h2>Testimonials</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-      </div><!-- End Section Title -->
+    <section id="contact" class="contact section">
 
       <div class="container">
-
-        <div class="testimonials-slider-wrapper">
-          <div class="testimonials-carousel">
-
-            <div class="testimonial-card">
-              <div class="rating">
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-              </div>
-              <blockquote>
-                "The platform's intuitive design has streamlined our workflow and boosted team productivity by 40%. The automation features are game-changing."
-              </blockquote>
-              <div class="user-profile">
-                <div class="avatar">
-                  <img src="assets/img/person/person-f-12.webp" alt="User" class="img-fluid">
-                </div>
-                <div class="user-info">
-                  <h4>Sarah Williams</h4>
-                  <span class="title">Product Manager</span>
-                  <div class="company">TechFlow Inc.</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="testimonial-card featured">
-              <div class="featured-badge">
-                <i class="bi bi-award-fill"></i>
-                <span>Top Review</span>
-              </div>
-              <div class="rating">
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-              </div>
-              <blockquote>
-                "Outstanding customer support and feature-rich platform. The analytics dashboard provides incredible insights that have transformed our decision-making process completely."
-              </blockquote>
-              <div class="user-profile">
-                <div class="avatar">
-                  <img src="assets/img/person/person-m-11.webp" alt="User" class="img-fluid">
-                </div>
-                <div class="user-info">
-                  <h4>Michael Chen</h4>
-                  <span class="title">CEO &amp; Founder</span>
-                  <div class="company">DataDrive Solutions</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="testimonial-card">
-              <div class="rating">
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-              </div>
-              <blockquote>
-                "Seamless integration with our existing tools made the transition effortless. The real-time collaboration features have enhanced our remote work capabilities."
-              </blockquote>
-              <div class="user-profile">
-                <div class="avatar">
-                  <img src="assets/img/person/person-f-14.webp" alt="User" class="img-fluid">
-                </div>
-                <div class="user-info">
-                  <h4>Emma Rodriguez</h4>
-                  <span class="title">Operations Director</span>
-                  <div class="company">CloudSync Corp</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="testimonial-card">
-              <div class="rating">
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-              </div>
-              <blockquote>
-                "The mobile app functionality is exceptional. Being able to manage projects on-the-go has significantly improved our client response times and overall efficiency."
-              </blockquote>
-              <div class="user-profile">
-                <div class="avatar">
-                  <img src="assets/img/person/person-m-14.webp" alt="User" class="img-fluid">
-                </div>
-                <div class="user-info">
-                  <h4>James Parker</h4>
-                  <span class="title">Team Lead</span>
-                  <div class="company">AgileWorks</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="testimonial-card">
-              <div class="rating">
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-              </div>
-              <blockquote>
-                "Advanced security features and compliance tools give us peace of mind. The customization options allow us to tailor the platform to our specific needs."
-              </blockquote>
-              <div class="user-profile">
-                <div class="avatar">
-                  <img src="assets/img/person/person-f-13.webp" alt="User" class="img-fluid">
-                </div>
-                <div class="user-info">
-                  <h4>Lisa Thompson</h4>
-                  <span class="title">Security Specialist</span>
-                  <div class="company">SecureBase</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="testimonial-card">
-              <div class="rating">
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-              </div>
-              <blockquote>
-                "Incredible value for money with comprehensive features. The learning curve was minimal thanks to the intuitive interface design and helpful documentation."
-              </blockquote>
-              <div class="user-profile">
-                <div class="avatar">
-                  <img src="assets/img/person/person-m-15.webp" alt="User" class="img-fluid">
-                </div>
-                <div class="user-info">
-                  <h4>David Kim</h4>
-                  <span class="title">Growth Manager</span>
-                  <div class="company">ScaleUp Digital</div>
-                </div>
-              </div>
-            </div>
-
+        <div class="contact-main-wrapper">
+          <div class="map-wrapper">
+            <iframe src="https://www.google.com/maps?q=28601+Birnham+Woods+Drive,+Spring,+TX+77386&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
           </div>
 
-        </div>
+          <div class="contact-content">
+            <div class="contact-cards-container">
+              <div class="contact-card">
+                <div class="icon-box">
+                  <i class="bi bi-geo-alt"></i>
+                </div>
+                <div class="contact-text">
+                  <h4>Meet At</h4>
+                  <p>Snyder Elementary<br>28601 Birnham Woods Drive<br>Spring, TX 77386</p>
+                </div>
+              </div>
 
+              <div class="contact-card">
+                <div class="icon-box">
+                  <i class="bi bi-envelope"></i>
+                </div>
+                <div class="contact-text">
+                  <h4>Email</h4>
+                  <p>hello@declaration.org</p>
+                </div>
+              </div>
+
+              <div class="contact-card">
+                <div class="icon-box">
+                  <i class="bi bi-telephone"></i>
+                </div>
+                <div class="contact-text">
+                  <h4>Call</h4>
+                  <p>(281) 661-4279</p>
+                </div>
+              </div>
+
+              <div class="contact-card">
+                <div class="icon-box">
+                  <i class="bi bi-mailbox"></i>
+                </div>
+                <div class="contact-text">
+                  <h4>Mail</h4>
+                  <p>330 Rayford Road, Ste 369<br>Spring, TX 77386</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="contact-form-container">
+              <h3>Make your first Sunday simple</h3>
+              <p>Declaration meets in Spring, Texas and has made the core first-visit details easy to find: service times, kids ministry, next steps, and practical contact info.</p>
+              <p>As we continue rebuilding this site, the goal is to make the homepage carry more of the real ministry story instead of hiding key information deep in the sitemap.</p>
+              <p><strong>Helpful starting points:</strong> visit on Sunday, explore groups, learn about DNA, or connect with a serve team when you are ready.</p>
+            </div>
+          </div>
+        </div>
       </div>
 
-    </section><!-- /Testimonials Section -->
+    </section>
 
-    <!-- Gallery Section -->
-    <section id="gallery" class="gallery section">
-
-      <!-- Section Title -->
-      <div class="container section-title">
-        <span class="subtitle">Section Title</span>
-        <h2>Gallery</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium totam rem aperiam</p>
-      </div><!-- End Section Title -->
-
-      <div class="container">
-
-        <div class="gallery-grid">
-
-          <div class="gallery-card">
-            <figure class="gallery-figure">
-              <img src="assets/img/events/gallery-3.webp" class="img-fluid" alt="" loading="lazy">
-              <figcaption class="gallery-caption">
-                <div class="gallery-actions">
-                  <a href="assets/img/events/gallery-3.webp" title="Event Showcase" class="glightbox action-btn"><i class="bi bi-fullscreen"></i></a>
-                  <a href="gallery/" class="action-btn"><i class="bi bi-arrow-right"></i></a>
-                </div>
-              </figcaption>
-            </figure>
-          </div><!-- End Gallery Card -->
-
-          <div class="gallery-card featured">
-            <figure class="gallery-figure">
-              <img src="assets/img/events/gallery-7.webp" class="img-fluid" alt="" loading="lazy">
-              <figcaption class="gallery-caption">
-                <div class="gallery-actions">
-                  <a href="assets/img/events/gallery-7.webp" title="Conference Highlights" class="glightbox action-btn"><i class="bi bi-fullscreen"></i></a>
-                  <a href="gallery/" class="action-btn"><i class="bi bi-arrow-right"></i></a>
-                </div>
-              </figcaption>
-            </figure>
-          </div><!-- End Gallery Card -->
-
-          <div class="gallery-card">
-            <figure class="gallery-figure">
-              <img src="assets/img/events/gallery-5.webp" class="img-fluid" alt="" loading="lazy">
-              <figcaption class="gallery-caption">
-                <div class="gallery-actions">
-                  <a href="assets/img/events/gallery-5.webp" title="Keynote Session" class="glightbox action-btn"><i class="bi bi-fullscreen"></i></a>
-                  <a href="gallery/" class="action-btn"><i class="bi bi-arrow-right"></i></a>
-                </div>
-              </figcaption>
-            </figure>
-          </div><!-- End Gallery Card -->
-
-          <div class="gallery-card">
-            <figure class="gallery-figure">
-              <img src="assets/img/events/gallery-1.webp" class="img-fluid" alt="" loading="lazy">
-              <figcaption class="gallery-caption">
-                <div class="gallery-actions">
-                  <a href="assets/img/events/gallery-1.webp" title="Networking Moment" class="glightbox action-btn"><i class="bi bi-fullscreen"></i></a>
-                  <a href="gallery/" class="action-btn"><i class="bi bi-arrow-right"></i></a>
-                </div>
-              </figcaption>
-            </figure>
-          </div><!-- End Gallery Card -->
-
-          <div class="gallery-card">
-            <figure class="gallery-figure">
-              <img src="assets/img/events/gallery-9.webp" class="img-fluid" alt="" loading="lazy">
-              <figcaption class="gallery-caption">
-                <div class="gallery-actions">
-                  <a href="assets/img/events/gallery-9.webp" title="Panel Discussion" class="glightbox action-btn"><i class="bi bi-fullscreen"></i></a>
-                  <a href="gallery/" class="action-btn"><i class="bi bi-arrow-right"></i></a>
-                </div>
-              </figcaption>
-            </figure>
-          </div><!-- End Gallery Card -->
-
-          <div class="gallery-card featured">
-            <figure class="gallery-figure">
-              <img src="assets/img/events/gallery-2.webp" class="img-fluid" alt="" loading="lazy">
-              <figcaption class="gallery-caption">
-                <div class="gallery-actions">
-                  <a href="assets/img/events/gallery-2.webp" title="Workshop Scene" class="glightbox action-btn"><i class="bi bi-fullscreen"></i></a>
-                  <a href="gallery/" class="action-btn"><i class="bi bi-arrow-right"></i></a>
-                </div>
-              </figcaption>
-            </figure>
-          </div><!-- End Gallery Card -->
-
-          <div class="gallery-card">
-            <figure class="gallery-figure">
-              <img src="assets/img/events/gallery-11.webp" class="img-fluid" alt="" loading="lazy">
-              <figcaption class="gallery-caption">
-                <div class="gallery-actions">
-                  <a href="assets/img/events/gallery-11.webp" title="Award Ceremony" class="glightbox action-btn"><i class="bi bi-fullscreen"></i></a>
-                  <a href="gallery/" class="action-btn"><i class="bi bi-arrow-right"></i></a>
-                </div>
-              </figcaption>
-            </figure>
-          </div><!-- End Gallery Card -->
-
-          <div class="gallery-card">
-            <figure class="gallery-figure">
-              <img src="assets/img/events/gallery-6.webp" class="img-fluid" alt="" loading="lazy">
-              <figcaption class="gallery-caption">
-                <div class="gallery-actions">
-                  <a href="assets/img/events/gallery-6.webp" title="Closing Event" class="glightbox action-btn"><i class="bi bi-fullscreen"></i></a>
-                  <a href="gallery/" class="action-btn"><i class="bi bi-arrow-right"></i></a>
-                </div>
-              </figcaption>
-            </figure>
-          </div><!-- End Gallery Card -->
-
-        </div>
-
-      </div>
-
-    </section><!-- /Gallery Section -->
-
-<?php include 'includes/footer.php'; ?>
+<?php include __DIR__ . '/includes/footer.php'; ?>

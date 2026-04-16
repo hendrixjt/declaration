@@ -27,8 +27,13 @@ jobs:
             --exclude='.git/' \
             --exclude='.github/' \
             --exclude='tests/' \
+            --exclude='_archive/' \
+            --exclude='docs/' \
             --exclude='assets/scss/' \
             --exclude='.gitignore' \
+            --exclude='AGENTS.md' \
+            --exclude='CLAUDE.md' \
+            --exclude='PROJECT_CONTEXT.md' \
             --exclude='README.md' \
             --exclude='includes/config.php' \
             --exclude='includes/config.example.php' \
