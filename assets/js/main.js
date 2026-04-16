@@ -23,6 +23,40 @@
   window.addEventListener('load', toggleScrolled);
 
   /**
+   * Hide header while scrolling down, reveal on upward intent
+   */
+  let lastScrollY = window.scrollY;
+  let ticking = false;
+
+  function updateHeaderVisibility() {
+    const body = document.body;
+    const currentScrollY = window.scrollY;
+    const hideAfter = 140;
+    const directionThreshold = 18;
+
+    if (currentScrollY <= hideAfter || body.classList.contains('mobile-nav-active')) {
+      body.classList.remove('nav-hidden');
+    } else if (currentScrollY > lastScrollY + directionThreshold) {
+      body.classList.add('nav-hidden');
+    } else if (currentScrollY < lastScrollY - directionThreshold) {
+      body.classList.remove('nav-hidden');
+    }
+
+    lastScrollY = currentScrollY;
+    ticking = false;
+  }
+
+  function handleHeaderVisibility() {
+    if (!ticking) {
+      window.requestAnimationFrame(updateHeaderVisibility);
+      ticking = true;
+    }
+  }
+
+  document.addEventListener('scroll', handleHeaderVisibility);
+  window.addEventListener('load', updateHeaderVisibility);
+
+  /**
    * Mobile nav toggle
    */
   const mobileNavToggleBtn = document.querySelector('.mobile-nav-toggle');
