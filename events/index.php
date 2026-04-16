@@ -147,7 +147,7 @@ include __DIR__ . '/../includes/header.php';
 <?php else: ?>
                     <p>See event details, timing, and registration information for this upcoming Declaration gathering.</p>
 <?php endif; ?>
-                    <a href="<?= htmlspecialchars(($event['registration_url'] ?? '') ?: 'events/') ?>" class="profile-btn" target="_blank" rel="noopener">View Event <i class="bi bi-arrow-right-short"></i></a>
+                    <a href="<?= htmlspecialchars(($event['public_url'] ?? '') ?: (($event['registration_url'] ?? '') ?: 'events/')) ?>" class="profile-btn" target="_blank" rel="noopener">View Event <i class="bi bi-arrow-right-short"></i></a>
                   </div>
                 </div>
               </div>

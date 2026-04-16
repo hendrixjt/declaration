@@ -425,7 +425,7 @@ include __DIR__ . '/includes/header.php';
 <?php else: ?>
                     <p>Join the Declaration family for this upcoming event and use the link below to see details or register.</p>
 <?php endif; ?>
-                    <a href="<?= htmlspecialchars($event['registration_url'] ?: 'https://www.declaration.org/') ?>" class="profile-btn" target="_blank" rel="noopener">Learn More <i class="bi bi-arrow-right-short"></i></a>
+                    <a href="<?= htmlspecialchars(($event['public_url'] ?? '') ?: ($event['registration_url'] ?: 'https://www.declaration.org/')) ?>" class="profile-btn" target="_blank" rel="noopener">Learn More <i class="bi bi-arrow-right-short"></i></a>
                   </div>
                 </div>
               </div>

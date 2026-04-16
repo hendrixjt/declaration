@@ -6,7 +6,7 @@
  */
 
 $GLOBALS['pc_last_error'] = $GLOBALS['pc_last_error'] ?? '';
-$GLOBALS['pc_cache_version'] = 2;
+$GLOBALS['pc_cache_version'] = 3;
 
 if (!defined('PC_APP_ID') || !defined('PC_SECRET')) {
     $config_path = __DIR__ . '/config.php';
@@ -97,6 +97,7 @@ function pc_fetch_events_from_api(): array
             $attrs = $item['attributes'] ?? [];
             $signup_time_ids = $item['relationships']['signup_times']['data'] ?? [];
             $primary_signup_time = pc_select_primary_signup_time($signup_time_ids, $signup_times_by_id);
+            $registration_url = (string) ($attrs['new_registration_url'] ?? '');
             $event = [
                 'id'               => $item['id'] ?? '',
                 'name'             => trim((string) ($attrs['name'] ?? '')),
@@ -104,7 +105,8 @@ function pc_fetch_events_from_api(): array
                 'starts_at'        => (string) ($primary_signup_time['starts_at'] ?? $attrs['open_at'] ?? ''),
                 'ends_at'          => (string) ($primary_signup_time['ends_at'] ?? $attrs['close_at'] ?? ''),
                 'logo_url'         => (string) ($attrs['logo_url'] ?? ''),
-                'registration_url' => (string) ($attrs['new_registration_url'] ?? ''),
+                'registration_url' => $registration_url,
+                'public_url'       => pc_build_public_signup_url((string) ($item['id'] ?? ''), $registration_url),
                 'open_at'          => (string) ($attrs['open_at'] ?? ''),
                 'close_at'         => (string) ($attrs['close_at'] ?? ''),
             ];
@@ -351,6 +353,19 @@ function pc_select_primary_signup_time(array $signup_time_refs, array $signup_ti
     }
 
     return [];
+}
+
+function pc_build_public_signup_url(string $event_id, string $registration_url): string
+{
+    if ($registration_url !== '') {
+        return preg_replace('#/reservations/new/?$#', '', $registration_url) ?? $registration_url;
+    }
+
+    if ($event_id === '') {
+        return '';
+    }
+
+    return 'https://declarationchurch.churchcenter.com/registrations/events/' . rawurlencode($event_id);
 }
 
 /**
