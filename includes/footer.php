@@ -15,7 +15,7 @@
             <ul>
               <li><i class="bi bi-chevron-right"></i> <a href="index.php">Home</a></li>
               <li><i class="bi bi-chevron-right"></i> <a href="index.php#visit">Plan Your Visit</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="index.php#upcoming-events">Upcoming Events</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="events/">Upcoming Events</a></li>
               <li><i class="bi bi-chevron-right"></i> <a href="index.php#next-steps">Next Steps</a></li>
               <li><i class="bi bi-chevron-right"></i> <a href="index.php#contact">Contact</a></li>
             </ul>

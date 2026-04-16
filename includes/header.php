@@ -121,7 +121,7 @@ $base_url = $base_url ?? '/';
         <ul>
           <li><a href="index.php"<?php if (($current_page ?? '') === 'index') echo ' class="active"'; ?>>Home</a></li>
           <li><a href="index.php#visit">Visit</a></li>
-          <li><a href="index.php#upcoming-events">Events</a></li>
+          <li><a href="events/"<?php if (($current_page ?? '') === 'events') echo ' class="active"'; ?>>Events</a></li>
           <li><a href="index.php#rhythms">Life at Declaration</a></li>
           <li><a href="index.php#next-steps">Next Steps</a></li>
           <li><a href="index.php#contact">Contact</a></li>

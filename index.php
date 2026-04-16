@@ -17,7 +17,8 @@ $church_address = [
 ];
 
 require_once __DIR__ . '/includes/planning-center.php';
-$upcoming_events = pc_get_upcoming_events(6);
+$homepage_upcoming_events = pc_get_upcoming_events(3);
+$upcoming_events = $homepage_upcoming_events;
 $has_live_events = !empty($upcoming_events);
 $next_sunday_countdown = date('Y/m/d 09:00:00', strtotime('next sunday'));
 
@@ -389,8 +390,8 @@ include __DIR__ . '/includes/header.php';
 
       <div class="container section-title" data-aos="fade-up">
         <span class="subtitle"><?= $has_live_events ? 'Upcoming Events' : 'Featured Rhythms' ?></span>
-        <h2><?= $has_live_events ? 'Upcoming at Declaration' : 'What to Know Right Now' ?></h2>
-        <p><?= $has_live_events ? 'Current events and registrations pulled from Planning Center will appear here.' : 'While the live event feed is being connected, these are a few important rhythms and next steps to know.' ?></p>
+        <h2><?= $has_live_events ? 'Coming Up at Declaration' : 'What to Know Right Now' ?></h2>
+        <p><?= $has_live_events ? 'Here is a quick look at upcoming events from Planning Center. Visit the Events page for the full list and event details.' : 'While the live event feed is being connected, these are a few important rhythms and next steps to know.' ?></p>
       </div>
 
       <div class="container">
@@ -449,6 +450,11 @@ include __DIR__ . '/includes/header.php';
   <?php endforeach; ?>
 <?php endif; ?>
         </div>
+<?php if ($has_live_events): ?>
+        <div class="events-preview-cta" data-aos="fade-up" data-aos-delay="120">
+          <a href="events/" class="btn-primary-action">See All Events</a>
+        </div>
+<?php endif; ?>
       </div>
 
     </section>
