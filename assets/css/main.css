@@ -15,9 +15,10 @@
 --------------------------------------------------------------*/
 /* Fonts */
 :root {
-  --default-font: "Roboto",  system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --heading-font: "Kanit",  sans-serif;
-  --nav-font: "Kanit",  sans-serif;
+  --default-font: "Manrope", system-ui, -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --heading-font: "Manrope", sans-serif;
+  --nav-font: "Manrope", sans-serif;
+  --accent-serif-font: "Cormorant Garamond", Georgia, serif;
 }
 
 /* Global Colors - The following color variables are used throughout the website. Updating them here will change the color scheme of the entire website */
@@ -88,6 +89,14 @@ h5,
 h6 {
   color: var(--heading-color);
   font-family: var(--heading-font);
+}
+
+.accent-serif {
+  display: inline-block;
+  font-family: var(--accent-serif-font);
+  font-style: italic;
+  font-weight: 600;
+  letter-spacing: -0.03em;
 }
 
 /* PHP Email Form Messages

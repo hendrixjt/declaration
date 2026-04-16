@@ -192,7 +192,7 @@ include __DIR__ . '/includes/header.php';
             <div class="col-lg-7" data-aos="fade-up" data-aos-delay="80">
               <div class="main-content">
                 <span class="event-badge">For Jesus &amp; For People</span>
-                <h1 class="main-title">Helping People Encounter and Follow Jesus in Spring, Texas.</h1>
+                <h1 class="main-title">Helping People Encounter and <span class="accent-serif">Follow Jesus</span> in Spring, Texas.</h1>
                 <p class="main-description">Declaration is a welcoming church for people who are exploring faith, planting roots, raising families, and looking for a place to belong. Join us this Sunday and take your next step with confidence.</p>
 
                 <div class="info-badges">
@@ -305,7 +305,7 @@ include __DIR__ . '/includes/header.php';
 
           <div class="content-block" data-aos="fade-up" data-aos-delay="140">
             <span class="section-tag">Who We Are</span>
-            <h2>A church in Spring with a heart for Jesus, people, prayer, and community.</h2>
+            <h2>A church in Spring with a heart for Jesus, people, prayer, and <span class="accent-serif">community</span>.</h2>
             <p class="intro-text">Declaration exists to help people encounter and follow Jesus. The heart of the church is shaped by Scripture and the Holy Spirit, prayer and His presence, communion and community, and generosity and grace.</p>
 
             <div class="feature-list">
@@ -510,7 +510,7 @@ include __DIR__ . '/includes/header.php';
         <div class="intro-banner" data-aos="fade-up">
           <div class="banner-content">
             <span class="badge-label">Your Next Step Starts Here</span>
-            <h3>More than a Sunday service</h3>
+            <h3>More than a <span class="accent-serif">Sunday service</span></h3>
             <p>Declaration is building a church family where people can know God, grow in freedom, discover purpose, and make a difference. The current live site spreads that story across multiple pages, but the heart of it belongs right here on the homepage.</p>
             <div class="banner-stats">
               <div class="single-stat">
@@ -567,7 +567,7 @@ include __DIR__ . '/includes/header.php';
           <div class="row align-items-center">
             <div class="col-lg-5" data-aos="fade-right" data-aos-delay="80">
               <div class="audience-intro">
-                <h3>Find where you belong</h3>
+                <h3>Find where you <span class="accent-serif">belong</span></h3>
                 <p>Whether you are new to church, raising kids, looking for a group, or ready to step into serving, there is a clear pathway into the life of Declaration.</p>
                 <blockquote>
                   <p>"For Jesus and for people" is more than a slogan. It is the kind of church experience this homepage should make visible right away.</p>
@@ -604,7 +604,7 @@ include __DIR__ . '/includes/header.php';
           <div class="col-lg-6" data-aos="fade-up" data-aos-delay="80">
             <div class="content-block">
               <span class="badge-label">New Here?</span>
-              <h2 class="section-heading">Start your first Sunday with confidence.</h2>
+              <h2 class="section-heading">Start your first Sunday with <span class="accent-serif">confidence</span>.</h2>
               <p class="description">We want it to be easy for first-time guests and families to know where to go, what to expect, and how to take a simple next step after the service.</p>
 
               <div class="feature-list">
