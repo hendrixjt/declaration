@@ -1206,7 +1206,10 @@ section,
   .hero .info-badges {
     flex-direction: column;
     gap: 16px;
-    align-items: center;
+    align-items: stretch;
+    width: min(100%, 320px);
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
@@ -1253,6 +1256,13 @@ section,
 }
 
 @media (max-width: 576px) {
+  .hero .info-badge {
+    width: 100%;
+    min-height: 92px;
+    justify-content: flex-start;
+    padding: 18px 20px;
+  }
+
   .hero .action-area {
     flex-direction: column;
     gap: 12px;
