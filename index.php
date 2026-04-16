@@ -374,7 +374,7 @@ include __DIR__ . '/includes/header.php';
 
     </section>
 
-    <section id="upcoming-events" class="featured-speakers section">
+    <section id="upcoming-events" class="featured-speakers section light-background section-band">
 
       <div class="container section-title">
         <span class="subtitle"><?= $has_live_events ? 'Upcoming Events' : 'Featured Rhythms' ?></span>
@@ -442,7 +442,7 @@ include __DIR__ . '/includes/header.php';
 
     </section>
 
-    <section id="rhythms" class="schedule-2 section">
+    <section id="rhythms" class="schedule-2 section section-band">
 
       <div class="container section-title">
         <span class="subtitle">Life at Declaration</span>
@@ -493,7 +493,7 @@ include __DIR__ . '/includes/header.php';
 
     </section>
 
-    <section id="next-steps" class="about section">
+    <section id="next-steps" class="about section section-band">
 
       <div class="container">
         <div class="intro-banner">
@@ -586,7 +586,7 @@ include __DIR__ . '/includes/header.php';
 
     </section>
 
-    <section id="call-to-action" class="call-to-action section light-background">
+    <section id="call-to-action" class="call-to-action section light-background section-band">
 
       <div class="container">
         <div class="row align-items-center g-5">
@@ -666,7 +666,7 @@ include __DIR__ . '/includes/header.php';
 
     </section>
 
-    <section id="contact" class="contact section">
+    <section id="contact" class="contact section light-background section-band">
 
       <div class="container">
         <div class="contact-main-wrapper">
