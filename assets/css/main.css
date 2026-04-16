@@ -22,36 +22,36 @@
 
 /* Global Colors - The following color variables are used throughout the website. Updating them here will change the color scheme of the entire website */
 :root { 
-  --background-color: #0f172a; /* Background color for the entire website, including individual sections */
-  --default-color: #f5f5f5; /* Default color used for the majority of the text content across the entire website */
-  --heading-color: #fafafa; /* Color for headings, subheadings and title throughout the website */
-  --accent-color: rgb(56, 196, 229); /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
-  --surface-color: #1f283d; /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
-  --contrast-color: #0f172a; /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
+  --background-color: #f6f3ee; /* Background color for the entire website, including individual sections */
+  --default-color: #334155; /* Default color used for the majority of the text content across the entire website */
+  --heading-color: #1f2937; /* Color for headings, subheadings and title throughout the website */
+  --accent-color: #2fafd6; /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
+  --surface-color: #ffffff; /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
+  --contrast-color: #ffffff; /* Contrast color for text, ensuring readability against accent backgrounds and dark surfaces. */
 }
 
 /* Nav Menu Colors - The following color variables are used specifically for the navigation menu. They are separate from the global colors to allow for more customization options */
 :root {
-  --nav-color: #f5f5f5;  /* The default color of the main navmenu links */
-  --nav-hover-color: #22d3ee; /* Applied to main navmenu links when they are hovered over or active */
-  --nav-mobile-background-color: #1c2c50; /* Used as the background color for mobile navigation menu */
-  --nav-dropdown-background-color: #1c2c50; /* Used as the background color for dropdown items that appear when hovering over primary navigation items */
-  --nav-dropdown-color: #f5f5f5; /* Used for navigation links of the dropdown items in the navigation menu. */
-  --nav-dropdown-hover-color: #22d3ee; /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
+  --nav-color: #f7fafc;  /* The default color of the main navmenu links */
+  --nav-hover-color: #63c7e5; /* Applied to main navmenu links when they are hovered over or active */
+  --nav-mobile-background-color: #1b2436; /* Used as the background color for mobile navigation menu */
+  --nav-dropdown-background-color: #1b2436; /* Used as the background color for dropdown items that appear when hovering over primary navigation items */
+  --nav-dropdown-color: #f7fafc; /* Used for navigation links of the dropdown items in the navigation menu. */
+  --nav-dropdown-hover-color: #63c7e5; /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
 }
 
 /* Color Presets - These classes override global colors when applied to any section or element, providing reuse of the sam color scheme. */
 
 .light-background {
-  --background-color: #1c253b;
-  --surface-color: #28334b;
+  --background-color: #eef2f3;
+  --surface-color: #ffffff;
 }
 
 .dark-background {
-  --background-color: #00040d;
+  --background-color: #1b2436;
   --default-color: #ffffff;
   --heading-color: #ffffff;
-  --surface-color: #0f172a;
+  --surface-color: #253247;
   --contrast-color: #ffffff;
 }
 
@@ -157,10 +157,12 @@ h6 {
 }
 
 .header .header-container {
-  background: var(--surface-color);
+  background: rgba(27, 36, 54, 0.92);
   border-radius: 50px;
   padding: 11px 28px;
-  box-shadow: 0px 10px 35px rgba(0, 0, 0, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0px 14px 36px rgba(15, 23, 42, 0.22);
+  backdrop-filter: blur(18px);
 }
 
 .header .logo {
@@ -934,9 +936,9 @@ section,
 
 .section-band {
   position: relative;
-  border-top: 1px solid color-mix(in srgb, var(--default-color), transparent 92%);
-  border-bottom: 1px solid color-mix(in srgb, var(--default-color), transparent 94%);
-  box-shadow: inset 0 20px 40px color-mix(in srgb, #000000, transparent 92%), inset 0 -20px 40px color-mix(in srgb, #000000, transparent 94%);
+  border-top: 1px solid color-mix(in srgb, var(--heading-color), transparent 92%);
+  border-bottom: 1px solid color-mix(in srgb, var(--heading-color), transparent 94%);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, #ffffff, transparent 15%), inset 0 -24px 40px color-mix(in srgb, #1b2436, transparent 97%);
 }
 
 @media (max-width: 1199px) {
@@ -1906,7 +1908,7 @@ section,
 
 .featured-speakers .speaker-info .session-type {
   display: inline-block;
-  background: linear-gradient(135deg, var(--accent-color), color-mix(in srgb, var(--accent-color) 75%, #7c3aed));
+  background: linear-gradient(135deg, var(--accent-color), color-mix(in srgb, var(--accent-color) 76%, #1b2436));
   color: var(--contrast-color);
   font-size: 11px;
   font-weight: 700;
@@ -3321,7 +3323,7 @@ section,
 # About Section
 --------------------------------------------------------------*/
 .about .intro-banner {
-  background: linear-gradient(135deg, var(--accent-color), color-mix(in srgb, var(--accent-color), black 25%));
+  background: linear-gradient(135deg, #223149 0%, #1b2436 100%);
   border-radius: 16px;
   padding: 48px 40px;
   margin-bottom: 56px;
@@ -3335,8 +3337,8 @@ section,
 
 .about .intro-banner .banner-content .badge-label {
   display: inline-block;
-  background-color: color-mix(in srgb, var(--contrast-color), transparent 80%);
-  color: var(--contrast-color);
+  background-color: color-mix(in srgb, var(--accent-color), transparent 78%);
+  color: #dff6ff;
   padding: 8px 20px;
   border-radius: 50px;
   font-size: 0.85rem;
