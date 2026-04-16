@@ -160,7 +160,7 @@ h6 {
   --heading-color: #ffffff;
   color: var(--default-color);
   background-color: var(--background-color);
-  padding: 20px 0;
+  padding: 24px 0;
   transition: transform 0.35s ease, opacity 0.35s ease, padding 0.35s ease;
   z-index: 997;
 }
@@ -174,7 +174,7 @@ body.nav-hidden .header {
 .header .header-container {
   background: rgba(27, 36, 54, 0.92);
   border-radius: 50px;
-  padding: 11px 28px;
+  padding: 13px 30px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0px 14px 36px rgba(15, 23, 42, 0.22);
   backdrop-filter: blur(18px);
@@ -183,14 +183,14 @@ body.nav-hidden .header {
 .header .logo {
   line-height: 1;
   flex-shrink: 0;
-  padding: 0 28px 0 0;
-  margin-right: 10px;
+  padding: 0 34px 0 0;
+  margin-right: 14px;
   border-right: 1px solid color-mix(in srgb, var(--default-color), transparent 86%);
 }
 
 .header .logo img {
   display: block;
-  max-height: 62px;
+  max-height: 74px;
   width: auto;
   margin-right: 0;
 }
@@ -249,7 +249,7 @@ body.nav-hidden .header {
   }
 
   .header .logo img {
-    max-height: 38px;
+    max-height: 42px;
   }
 
   .header .header-actions {
@@ -311,7 +311,7 @@ body.nav-hidden .header {
 @media (min-width: 1200px) {
   .navmenu {
     padding: 0;
-    margin-left: 18px;
+    margin-left: 12px;
   }
 
   .navmenu ul {
@@ -329,10 +329,10 @@ body.nav-hidden .header {
   .navmenu a,
   .navmenu a:focus {
     color: color-mix(in srgb, var(--nav-color), transparent 10%);
-    padding: 20px 14px;
-    font-size: 16px;
+    padding: 22px 12px;
+    font-size: 15px;
     font-family: var(--nav-font);
-    font-weight: 600;
+    font-weight: 550;
     display: flex;
     align-items: center;
     justify-content: space-between;
