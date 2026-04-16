@@ -92,6 +92,22 @@
   document.addEventListener('scroll', toggleScrollTop);
 
   /**
+   * Animate on scroll
+   */
+  function aosInit() {
+    if (typeof AOS === 'undefined') return;
+
+    AOS.init({
+      duration: 800,
+      easing: 'ease-out-quart',
+      once: true,
+      offset: 80,
+      disable: () => window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    });
+  }
+  window.addEventListener('load', aosInit);
+
+  /**
    * Countdown timer
    */
   function updateCountDown(countDownItem) {

@@ -189,7 +189,7 @@ include __DIR__ . '/includes/header.php';
       <div class="content-wrapper">
         <div class="container">
           <div class="row align-items-center">
-            <div class="col-lg-7">
+            <div class="col-lg-7" data-aos="fade-up" data-aos-delay="80">
               <div class="main-content">
                 <span class="event-badge">For Jesus &amp; For People</span>
                 <h1 class="main-title">A church family in Spring, Texas helping people encounter and follow Jesus.</h1>
@@ -217,7 +217,7 @@ include __DIR__ . '/includes/header.php';
               </div>
             </div>
 
-            <div class="col-lg-5">
+            <div class="col-lg-5" data-aos="fade-left" data-aos-delay="180">
               <div class="countdown-card">
                 <h4 class="card-title">This Week at Declaration</h4>
 
@@ -284,7 +284,7 @@ include __DIR__ . '/includes/header.php';
 
       <div class="container">
         <div class="about-wrapper">
-          <div class="image-showcase">
+          <div class="image-showcase" data-aos="fade-right" data-aos-delay="60">
             <div class="main-image">
               <img src="assets/img/events/showcase-8.webp" alt="Declaration Church gathering" class="img-fluid">
               <div class="experience-badge">
@@ -303,7 +303,7 @@ include __DIR__ . '/includes/header.php';
             </div>
           </div>
 
-          <div class="content-block">
+          <div class="content-block" data-aos="fade-up" data-aos-delay="140">
             <span class="section-tag">Who We Are</span>
             <h2>A church in Spring with a heart for Jesus, people, prayer, and community.</h2>
             <p class="intro-text">Declaration exists to help people encounter and follow Jesus. The heart of the church is shaped by Scripture and the Holy Spirit, prayer and His presence, communion and community, and generosity and grace.</p>
@@ -351,7 +351,7 @@ include __DIR__ . '/includes/header.php';
           </div>
         </div>
 
-        <div class="stats-banner">
+        <div class="stats-banner" data-aos="fade-up" data-aos-delay="180">
           <div class="stat-item">
             <i class="bi bi-clock-history"></i>
             <div class="stat-content">
@@ -387,7 +387,7 @@ include __DIR__ . '/includes/header.php';
 
     <section id="upcoming-events" class="featured-speakers section light-background section-band">
 
-      <div class="container section-title">
+      <div class="container section-title" data-aos="fade-up">
         <span class="subtitle"><?= $has_live_events ? 'Upcoming Events' : 'Featured Rhythms' ?></span>
         <h2><?= $has_live_events ? 'Upcoming at Declaration' : 'What to Know Right Now' ?></h2>
         <p><?= $has_live_events ? 'Current events and registrations pulled from Planning Center will appear here.' : 'While the live event feed is being connected, these are a few important rhythms and next steps to know.' ?></p>
@@ -397,7 +397,7 @@ include __DIR__ . '/includes/header.php';
         <div class="row g-5">
 <?php if ($has_live_events): ?>
   <?php foreach ($upcoming_events as $event): ?>
-          <div class="col-lg-6">
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="80">
             <div class="speaker-item">
               <div class="row g-0">
                 <div class="col-md-5">
@@ -427,7 +427,7 @@ include __DIR__ . '/includes/header.php';
   <?php endforeach; ?>
 <?php else: ?>
   <?php foreach ($fallback_events as $event): ?>
-          <div class="col-lg-4">
+          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="80">
             <div class="speaker-item">
               <div class="row g-0">
                 <div class="col-md-5">
@@ -455,13 +455,13 @@ include __DIR__ . '/includes/header.php';
 
     <section id="rhythms" class="schedule-2 section section-band">
 
-      <div class="container section-title">
+      <div class="container section-title" data-aos="fade-up">
         <span class="subtitle">Life at Declaration</span>
         <h2>Rhythms for the whole church family</h2>
         <p>From Sundays to student ministry to next steps, these are some of the most important rhythms that help people belong, grow, and serve.</p>
       </div>
 
-      <div class="container">
+      <div class="container" data-aos="fade-up" data-aos-delay="80">
         <ul class="schedule-tabs nav nav-tabs" role="tablist">
 <?php foreach ($rhythm_tabs as $index => $tab): ?>
           <li class="nav-item" role="presentation">
@@ -507,7 +507,7 @@ include __DIR__ . '/includes/header.php';
     <section id="next-steps" class="about section section-band">
 
       <div class="container">
-        <div class="intro-banner">
+        <div class="intro-banner" data-aos="fade-up">
           <div class="banner-content">
             <span class="badge-label">Your Next Step Starts Here</span>
             <h3>More than a Sunday service</h3>
@@ -531,7 +531,7 @@ include __DIR__ . '/includes/header.php';
 
         <div class="features-row">
           <div class="row gy-4">
-            <div class="col-lg-4">
+            <div class="col-lg-4" data-aos="fade-up" data-aos-delay="60">
               <div class="feature-block">
                 <div class="feature-icon">
                   <i class="bi bi-compass"></i>
@@ -541,7 +541,7 @@ include __DIR__ . '/includes/header.php';
               </div>
             </div>
 
-            <div class="col-lg-4">
+            <div class="col-lg-4" data-aos="fade-up" data-aos-delay="120">
               <div class="feature-block featured">
                 <div class="feature-icon">
                   <i class="bi bi-book"></i>
@@ -551,7 +551,7 @@ include __DIR__ . '/includes/header.php';
               </div>
             </div>
 
-            <div class="col-lg-4">
+            <div class="col-lg-4" data-aos="fade-up" data-aos-delay="180">
               <div class="feature-block">
                 <div class="feature-icon">
                   <i class="bi bi-person-heart"></i>
@@ -565,7 +565,7 @@ include __DIR__ . '/includes/header.php';
 
         <div class="audience-wrapper">
           <div class="row align-items-center">
-            <div class="col-lg-5">
+            <div class="col-lg-5" data-aos="fade-right" data-aos-delay="80">
               <div class="audience-intro">
                 <h3>Find where you belong</h3>
                 <p>Whether you are new to church, raising kids, looking for a group, or ready to step into serving, there is a clear pathway into the life of Declaration.</p>
@@ -580,7 +580,7 @@ include __DIR__ . '/includes/header.php';
               </div>
             </div>
 
-            <div class="col-lg-7">
+            <div class="col-lg-7" data-aos="fade-left" data-aos-delay="140">
               <div class="audience-grid">
 <?php foreach ($pathway_cards as $card): ?>
                 <div class="audience-card">
@@ -601,7 +601,7 @@ include __DIR__ . '/includes/header.php';
 
       <div class="container">
         <div class="row align-items-center g-5">
-          <div class="col-lg-6">
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="80">
             <div class="content-block">
               <span class="badge-label">New Here?</span>
               <h2 class="section-heading">Start your first Sunday with confidence.</h2>
@@ -629,7 +629,7 @@ include __DIR__ . '/includes/header.php';
             </div>
           </div>
 
-          <div class="col-lg-6">
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="160">
             <div class="stats-grid">
               <div class="stat-card">
                 <div class="stat-icon-wrapper">
@@ -681,11 +681,11 @@ include __DIR__ . '/includes/header.php';
 
       <div class="container">
         <div class="contact-main-wrapper">
-          <div class="map-wrapper">
+          <div class="map-wrapper" data-aos="fade-right" data-aos-delay="60">
             <iframe src="https://www.google.com/maps?q=28601+Birnham+Woods+Drive,+Spring,+TX+77386&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
           </div>
 
-          <div class="contact-content">
+          <div class="contact-content" data-aos="fade-left" data-aos-delay="140">
             <div class="contact-cards-container">
               <div class="contact-card">
                 <div class="icon-box">
