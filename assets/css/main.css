@@ -250,6 +250,35 @@ h6 {
     padding: 0 17px;
     border-radius: 12px;
     font-size: 14px;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 576px) {
+  .header .header-container {
+    padding: 9px 8px 9px 12px;
+  }
+
+  .header .logo {
+    padding: 0 10px 0 0;
+    margin-right: 4px;
+  }
+
+  .header .logo img {
+    max-height: 34px;
+  }
+
+  .header .header-actions {
+    margin-right: 6px;
+  }
+
+  .header .header-cta {
+    min-height: 36px;
+    padding: 0 12px;
+    border-radius: 10px;
+    font-size: 12.5px;
+    font-weight: 700;
+    box-shadow: 0 8px 18px color-mix(in srgb, var(--accent-color), transparent 76%);
   }
 }
 
@@ -1029,7 +1058,7 @@ section,
 
 @media (max-width: 768px) {
   .hero .content-wrapper {
-    padding-top: 80px;
+    padding-top: 92px;
     padding-bottom: 32px;
   }
 }
@@ -1077,6 +1106,27 @@ section,
 @media (max-width: 768px) {
   .hero .main-title {
     font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero .main-content {
+    margin-top: 10px;
+  }
+
+  .hero .event-badge {
+    margin-bottom: 30px;
+  }
+
+  .hero .main-title {
+    font-size: 2rem;
+  }
+
+  .hero .btn-register,
+  .hero .btn-agenda {
+    min-width: 0;
+    width: min(100%, 240px);
+    justify-content: center;
   }
 }
 

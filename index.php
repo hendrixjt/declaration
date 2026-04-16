@@ -192,7 +192,7 @@ include __DIR__ . '/includes/header.php';
             <div class="col-lg-7" data-aos="fade-up" data-aos-delay="80">
               <div class="main-content">
                 <span class="event-badge">For Jesus &amp; For People</span>
-                <h1 class="main-title">A church family in Spring, Texas helping people encounter and follow Jesus.</h1>
+                <h1 class="main-title">Helping People Encounter and Follow Jesus in Spring, Texas.</h1>
                 <p class="main-description">Declaration is a welcoming church for people who are exploring faith, planting roots, raising families, and looking for a place to belong. Join us this Sunday and take your next step with confidence.</p>
 
                 <div class="info-badges">
