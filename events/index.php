@@ -121,7 +121,7 @@ include __DIR__ . '/../includes/header.php';
         <div class="row g-5">
 <?php if ($has_live_events): ?>
   <?php foreach ($upcoming_events as $index => $event): ?>
-          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="<?= htmlspecialchars((string) (80 + (($index % 3) * 40))) ?>">
+          <div class="col-12<?= $index >= 5 ? ' event-item-hidden' : '' ?>" data-aos="fade-up" data-aos-delay="<?= htmlspecialchars((string) (80 + (($index % 3) * 40))) ?>"<?= $index >= 5 ? ' data-event-hidden="true"' : '' ?>>
             <div class="speaker-item event-card">
               <div class="row g-0">
                 <div class="col-md-5">
@@ -156,7 +156,7 @@ include __DIR__ . '/../includes/header.php';
   <?php endforeach; ?>
 <?php else: ?>
   <?php foreach ($fallback_events as $index => $event): ?>
-          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="<?= htmlspecialchars((string) (80 + ($index * 40))) ?>">
+          <div class="col-12<?= $index >= 5 ? ' event-item-hidden' : '' ?>" data-aos="fade-up" data-aos-delay="<?= htmlspecialchars((string) (80 + ($index * 40))) ?>"<?= $index >= 5 ? ' data-event-hidden="true"' : '' ?>>
             <div class="speaker-item event-card">
               <div class="row g-0">
                 <div class="col-md-5">
@@ -178,6 +178,11 @@ include __DIR__ . '/../includes/header.php';
   <?php endforeach; ?>
 <?php endif; ?>
         </div>
+<?php if ($event_count > 5): ?>
+        <div class="events-load-more" data-aos="fade-up" data-aos-delay="120">
+          <button type="button" class="btn-primary-action events-load-more-btn" data-load-more-events data-load-step="5">Show More Events</button>
+        </div>
+<?php endif; ?>
       </div>
 
     </section>

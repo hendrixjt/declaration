@@ -2065,19 +2065,48 @@ section,
 
 .featured-speakers.events-listing .speaker-item .row {
   align-items: stretch;
+  height: 100%;
+}
+
+.featured-speakers.events-listing .col-md-5 {
+  width: 34%;
+}
+
+.featured-speakers.events-listing .col-md-7 {
+  width: 66%;
 }
 
 .featured-speakers.events-listing .speaker-photo {
-  min-height: 260px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  background: linear-gradient(180deg, color-mix(in srgb, var(--background-color), #ffffff 28%) 0%, color-mix(in srgb, var(--surface-color), #ffffff 42%) 100%);
+  min-height: 320px;
+  padding: 0;
+  background: color-mix(in srgb, var(--background-color), #ffffff 12%);
 }
 
 .featured-speakers.events-listing .speaker-photo img {
-  object-fit: contain;
+  object-fit: cover;
+}
+
+.featured-speakers.events-listing .speaker-info {
+  padding: 24px 24px 28px;
+}
+
+.featured-speakers.events-listing .speaker-info h4 {
+  font-size: 1.85rem;
+  line-height: 1.12;
+}
+
+.featured-speakers.events-listing .speaker-info p {
+  margin-bottom: 14px;
+}
+
+.featured-speakers.events-listing .event-item-hidden {
+  display: none;
+}
+
+.events-load-more {
+  display: flex;
+  justify-content: center;
+  margin-top: 28px;
 }
 
 .featured-speakers .event-meta-row {
@@ -2110,6 +2139,18 @@ section,
   .featured-speakers .speaker-info h4 {
     font-size: 20px;
   }
+
+  .featured-speakers.events-listing .speaker-info h4 {
+    font-size: 1.6rem;
+  }
+
+  .featured-speakers.events-listing .col-md-5 {
+    width: 38%;
+  }
+
+  .featured-speakers.events-listing .col-md-7 {
+    width: 62%;
+  }
 }
 
 @media (max-width: 768px) {
@@ -2128,6 +2169,20 @@ section,
 
   .featured-speakers .speaker-photo {
     min-height: 320px;
+  }
+
+  .featured-speakers.events-listing .speaker-item .row {
+    flex-direction: column;
+  }
+
+  .featured-speakers.events-listing .col-md-5,
+  .featured-speakers.events-listing .col-md-7 {
+    width: 100%;
+  }
+
+  .featured-speakers.events-listing .speaker-photo {
+    min-height: auto;
+    aspect-ratio: 16 / 11;
   }
 
   .featured-speakers .speaker-photo .speaker-overlay {

@@ -126,6 +126,31 @@
   document.addEventListener('scroll', toggleScrollTop);
 
   /**
+   * Events load-more reveal
+   */
+  const loadMoreEventsBtn = document.querySelector('[data-load-more-events]');
+
+  if (loadMoreEventsBtn) {
+    loadMoreEventsBtn.addEventListener('click', () => {
+      const hiddenItems = Array.from(document.querySelectorAll('.events-listing [data-event-hidden="true"]'));
+      const loadStep = parseInt(loadMoreEventsBtn.getAttribute('data-load-step') || '5', 10);
+
+      hiddenItems.slice(0, loadStep).forEach((item) => {
+        item.classList.remove('event-item-hidden');
+        item.removeAttribute('data-event-hidden');
+      });
+
+      if (!document.querySelector('.events-listing [data-event-hidden="true"]')) {
+        loadMoreEventsBtn.remove();
+      }
+
+      if (typeof AOS !== 'undefined') {
+        AOS.refresh();
+      }
+    });
+  }
+
+  /**
    * Animate on scroll
    */
   function aosInit() {
