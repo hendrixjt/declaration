@@ -252,13 +252,24 @@ include __DIR__ . '/includes/header.php';
                 </div>
 
                 <div class="featured-speakers">
-                  <span class="speakers-label">Next steps for every season</span>
-                  <div class="speaker-avatars">
-                    <img src="assets/img/person/person-f-4.webp" alt="Declaration Kids" class="speaker-avatar">
-                    <img src="assets/img/person/person-m-6.webp" alt="YTH" class="speaker-avatar">
-                    <img src="assets/img/person/person-f-5.webp" alt="Groups" class="speaker-avatar">
-                    <img src="assets/img/person/person-m-7.webp" alt="Serve" class="speaker-avatar">
-                    <span class="more-speakers">Kids + YTH + Groups</span>
+                  <span class="speakers-label">Quick links for families and next steps</span>
+                  <div class="hero-quick-links">
+                    <a href="https://www.declaration.org/kids" class="hero-quick-link" target="_blank" rel="noopener">
+                      <i class="bi bi-balloon-heart"></i>
+                      <span>Kids</span>
+                    </a>
+                    <a href="https://www.declaration.org/youth" class="hero-quick-link" target="_blank" rel="noopener">
+                      <i class="bi bi-stars"></i>
+                      <span>YTH</span>
+                    </a>
+                    <a href="index.php#next-steps" class="hero-quick-link">
+                      <i class="bi bi-123"></i>
+                      <span>56</span>
+                    </a>
+                    <a href="https://www.declaration.org/groups" class="hero-quick-link" target="_blank" rel="noopener">
+                      <i class="bi bi-people"></i>
+                      <span>Groups</span>
+                    </a>
                   </div>
                 </div>
               </div>

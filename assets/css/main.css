@@ -200,7 +200,7 @@ h6 {
   padding: 0 22px;
   border-radius: 14px;
   background: var(--accent-color);
-  color: var(--contrast-color);
+  color: #ffffff;
   font-family: var(--nav-font);
   font-size: 15px;
   font-weight: 700;
@@ -210,7 +210,7 @@ h6 {
 
 .header .header-cta:hover {
   background: color-mix(in srgb, var(--accent-color), white 8%);
-  color: var(--contrast-color);
+  color: #ffffff;
   transform: translateY(-1px);
 }
 
@@ -1322,44 +1322,45 @@ section,
   margin-bottom: 16px;
 }
 
-.hero .speaker-avatars {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.hero .hero-quick-links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
 }
 
-.hero .speaker-avatars .speaker-avatar {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid var(--surface-color);
-  margin-left: -12px;
+.hero .hero-quick-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 46px;
+  padding: 0 14px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--accent-color), transparent 92%);
+  border: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
+  color: var(--default-color);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
   transition: all 0.3s ease;
 }
 
-.hero .speaker-avatars .speaker-avatar:first-child {
-  margin-left: 0;
+.hero .hero-quick-link i {
+  color: var(--accent-color);
+  font-size: 1rem;
 }
 
-.hero .speaker-avatars .speaker-avatar:hover {
-  transform: scale(1.15);
-  z-index: 5;
+.hero .hero-quick-link:hover {
+  transform: translateY(-2px);
+  background: color-mix(in srgb, var(--accent-color), transparent 84%);
+  color: var(--default-color);
+  border-color: color-mix(in srgb, var(--accent-color), transparent 55%);
 }
 
-.hero .speaker-avatars .more-speakers {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: var(--accent-color);
-  color: var(--contrast-color);
-  font-size: 0.85rem;
-  font-weight: 600;
-  margin-left: -12px;
-  border: 3px solid var(--surface-color);
+@media (max-width: 575px) {
+  .hero .hero-quick-links {
+    grid-template-columns: 1fr;
+  }
 }
 
 /*--------------------------------------------------------------
