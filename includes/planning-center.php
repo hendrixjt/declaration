@@ -64,8 +64,8 @@ function pc_get_upcoming_events(int $limit = 6): array
  */
 function pc_fetch_events_from_api(): array
 {
-    $url = 'https://api.planningcenteronline.com/registrations/v2/events'
-         . '?filter=unarchived,published&order=starts_at&per_page=25';
+    $url = 'https://api.planningcenteronline.com/registrations/v2/signups'
+         . '?include=signup_times&per_page=100';
 
     $events = [];
     $page_count = 0;
@@ -82,16 +82,28 @@ function pc_fetch_events_from_api(): array
             return [];
         }
 
+        $signup_times_by_id = [];
+        foreach (($data['included'] ?? []) as $included) {
+            if (($included['type'] ?? '') !== 'SignupTime') {
+                continue;
+            }
+            $signup_times_by_id[$included['id'] ?? ''] = $included['attributes'] ?? [];
+        }
+
         foreach ($data['data'] as $item) {
             $attrs = $item['attributes'] ?? [];
+            $signup_time_ids = $item['relationships']['signup_times']['data'] ?? [];
+            $primary_signup_time = pc_select_primary_signup_time($signup_time_ids, $signup_times_by_id);
             $event = [
                 'id'               => $item['id'] ?? '',
                 'name'             => trim((string) ($attrs['name'] ?? '')),
                 'description'      => trim((string) ($attrs['description'] ?? '')),
-                'starts_at'        => (string) ($attrs['starts_at'] ?? ''),
-                'ends_at'          => (string) ($attrs['ends_at'] ?? ''),
+                'starts_at'        => (string) ($primary_signup_time['starts_at'] ?? $attrs['open_at'] ?? ''),
+                'ends_at'          => (string) ($primary_signup_time['ends_at'] ?? $attrs['close_at'] ?? ''),
                 'logo_url'         => (string) ($attrs['logo_url'] ?? ''),
-                'registration_url' => (string) ($attrs['registration_url'] ?? ''),
+                'registration_url' => (string) ($attrs['new_registration_url'] ?? ''),
+                'open_at'          => (string) ($attrs['open_at'] ?? ''),
+                'close_at'         => (string) ($attrs['close_at'] ?? ''),
             ];
 
             if (pc_event_is_upcoming($event)) {
@@ -153,9 +165,13 @@ function pc_event_is_upcoming(array $event): bool
 {
     $starts_at = $event['starts_at'] ?? '';
     $ends_at = $event['ends_at'] ?? '';
+    $open_at = $event['open_at'] ?? '';
+    $close_at = $event['close_at'] ?? '';
 
     $start_ts = $starts_at ? strtotime($starts_at) : false;
     $end_ts = $ends_at ? strtotime($ends_at) : false;
+    $open_ts = $open_at ? strtotime($open_at) : false;
+    $close_ts = $close_at ? strtotime($close_at) : false;
     $now = time();
 
     if ($end_ts !== false) {
@@ -164,6 +180,14 @@ function pc_event_is_upcoming(array $event): bool
 
     if ($start_ts !== false) {
         return $start_ts >= $now;
+    }
+
+    if ($close_ts !== false) {
+        return $close_ts >= $now;
+    }
+
+    if ($open_ts !== false) {
+        return $open_ts >= $now;
     }
 
     return false;
@@ -195,7 +219,6 @@ function pc_request_json(string $url): array
         $body = curl_exec($ch);
         $status = (int) curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
         $curl_error = curl_error($ch);
-        curl_close($ch);
 
         if ($body === false) {
             pc_set_last_error('Planning Center request failed: ' . $curl_error);
@@ -273,6 +296,52 @@ function pc_is_list_array(array $value): bool
     }
 
     return true;
+}
+
+function pc_select_primary_signup_time(array $signup_time_refs, array $signup_times_by_id): array
+{
+    $future_times = [];
+    $past_times = [];
+    $now = time();
+
+    foreach ($signup_time_refs as $ref) {
+        $time_id = $ref['id'] ?? '';
+        if ($time_id === '' || !isset($signup_times_by_id[$time_id])) {
+            continue;
+        }
+
+        $signup_time = $signup_times_by_id[$time_id];
+        $start_ts = !empty($signup_time['starts_at']) ? strtotime($signup_time['starts_at']) : false;
+        $end_ts = !empty($signup_time['ends_at']) ? strtotime($signup_time['ends_at']) : false;
+
+        if ($end_ts !== false && $end_ts >= $now) {
+            $future_times[] = $signup_time;
+            continue;
+        }
+
+        if ($start_ts !== false && $start_ts >= $now) {
+            $future_times[] = $signup_time;
+            continue;
+        }
+
+        $past_times[] = $signup_time;
+    }
+
+    if (!empty($future_times)) {
+        usort($future_times, static function (array $a, array $b): int {
+            return strtotime($a['starts_at'] ?? '') <=> strtotime($b['starts_at'] ?? '');
+        });
+        return $future_times[0];
+    }
+
+    if (!empty($past_times)) {
+        usort($past_times, static function (array $a, array $b): int {
+            return strtotime($b['starts_at'] ?? '') <=> strtotime($a['starts_at'] ?? '');
+        });
+        return $past_times[0];
+    }
+
+    return [];
 }
 
 /**
