@@ -6,6 +6,8 @@ if (!headers_sent()) {
   header('Expires: 0');
 }
 $base_url = $base_url ?? '/';
+$design_css_path = __DIR__ . '/../assets/css/declaration-redesign.css';
+$design_css_version = is_file($design_css_path) ? (string) filemtime($design_css_path) : '1';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -64,7 +66,7 @@ $base_url = $base_url ?? '/';
 
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
-  <link href="assets/css/declaration-redesign.css" rel="stylesheet">
+  <link href="assets/css/declaration-redesign.css?v=<?php echo htmlspecialchars($design_css_version); ?>" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: Eventia
