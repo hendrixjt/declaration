@@ -1,6 +1,6 @@
 <?php
-$page_title = 'Schedule - Eventia Bootstrap Template';
-$body_class = 'schedule-page';
+$page_title = 'Schedule';
+$body_class = 'schedule-page declaration-interior legacy-page';
 $current_page = 'schedule';
 $base_url = '/'; include __DIR__ . '/../includes/header.php';
 ?>

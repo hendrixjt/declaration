@@ -1,15 +1,18 @@
 <?php
-$page_title = 'Terms - Eventia Bootstrap Template';
-$body_class = 'terms-page';
+$page_title = 'Terms of Use';
+$body_class = 'terms-page declaration-interior legal-page';
 $current_page = 'terms';
-$base_url = '/'; include __DIR__ . '/../includes/header.php';
+$base_url = '/';
+$meta_description = 'Website terms of use for Declaration Church.';
+$canonical_url = 'https://www.declaration.org/terms/';
+include __DIR__ . '/../includes/header.php';
 ?>
 
     <!-- Page Title -->
     <div class="page-title dark-background" style="background-image: url(assets/img/events/showcase-5.webp);">
       <div class="container position-relative">
         <h1>Terms</h1>
-        <p>Esse dolorum voluptatum ullam est sint nemo et est ipsa porro placeat quibusdam quia assumenda numquam molestias.</p>
+        <p>Terms governing use of the Declaration Church website.</p>
         <nav class="breadcrumbs">
           <ol>
             <li><a href="index.php">Home</a></li>
@@ -127,7 +130,7 @@ $base_url = '/'; include __DIR__ . '/../includes/header.php';
           <!-- Governing Law -->
           <div id="governing-law" class="content-section">
             <h3>9. Governing Law</h3>
-            <p>These Terms shall be governed by and construed in accordance with the laws of [Your Country], without regard to its conflict of law provisions.</p>
+            <p>These Terms shall be governed by and construed in accordance with the laws of the State of Texas, without regard to conflict-of-law provisions.</p>
           </div>
 
           <!-- Changes -->
@@ -150,7 +153,7 @@ $base_url = '/'; include __DIR__ . '/../includes/header.php';
             <div class="contact-content">
               <h4>Questions About Terms?</h4>
               <p>If you have any questions about these Terms, please contact us.</p>
-              <a href="#" class="contact-link">Contact Support</a>
+              <a href="mailto:hello@declaration.org" class="contact-link">hello@declaration.org</a>
             </div>
           </div>
         </div>

@@ -1,6 +1,6 @@
 <?php
-$page_title = 'Venue - Eventia Bootstrap Template';
-$body_class = 'venue-page';
+$page_title = 'Location';
+$body_class = 'venue-page declaration-interior legacy-page';
 $current_page = 'venue';
 $base_url = '/'; include __DIR__ . '/../includes/header.php';
 ?>

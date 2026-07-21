@@ -1,15 +1,18 @@
 <?php
-$page_title = 'Privacy - Eventia Bootstrap Template';
-$body_class = 'privacy-page';
+$page_title = 'Privacy Policy';
+$body_class = 'privacy-page declaration-interior legal-page';
 $current_page = 'privacy';
-$base_url = '/'; include __DIR__ . '/../includes/header.php';
+$base_url = '/';
+$meta_description = 'Privacy policy for Declaration Church.';
+$canonical_url = 'https://www.declaration.org/privacy/';
+include __DIR__ . '/../includes/header.php';
 ?>
 
     <!-- Page Title -->
     <div class="page-title dark-background" style="background-image: url(assets/img/events/showcase-5.webp);">
       <div class="container position-relative">
         <h1>Privacy</h1>
-        <p>Esse dolorum voluptatum ullam est sint nemo et est ipsa porro placeat quibusdam quia assumenda numquam molestias.</p>
+        <p>How Declaration Church handles information shared through this website.</p>
         <nav class="breadcrumbs">
           <ol>
             <li><a href="index.php">Home</a></li>
@@ -132,8 +135,8 @@ $base_url = '/'; include __DIR__ . '/../includes/header.php';
           <h2>Contact Us</h2>
           <p>If you have any questions about this Privacy Policy or our practices, please contact us:</p>
           <div class="contact-details">
-            <p><strong>Email:</strong> privacy@example.com</p>
-            <p><strong>Address:</strong> 123 Privacy Street, Security City, 12345</p>
+            <p><strong>Email:</strong> hello@declaration.org</p>
+            <p><strong>Mail:</strong> 330 Rayford Road, Ste 369, Spring, TX 77386</p>
           </div>
         </div>
 

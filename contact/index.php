@@ -1,116 +1,63 @@
 <?php
-$page_title = 'Contact - Eventia Bootstrap Template';
-$body_class = 'contact-page';
+$page_title = 'Contact';
+$body_class = 'contact-page declaration-interior';
 $current_page = 'contact';
-$base_url = '/'; include __DIR__ . '/../includes/header.php';
+$base_url = '/';
+$meta_description = 'Contact Declaration Church, get directions, or ask a question before your Sunday visit.';
+$canonical_url = 'https://www.declaration.org/contact/';
+include __DIR__ . '/../includes/header.php';
 ?>
 
-    <!-- Page Title -->
-    <div class="page-title dark-background" style="background-image: url(assets/img/events/showcase-5.webp);">
-      <div class="container position-relative">
-        <h1>Contact</h1>
-        <p>Esse dolorum voluptatum ullam est sint nemo et est ipsa porro placeat quibusdam quia assumenda numquam molestias.</p>
-        <nav class="breadcrumbs">
-          <ol>
-            <li><a href="index.php">Home</a></li>
-            <li class="current">Contact</li>
-          </ol>
-        </nav>
+    <section class="interior-hero interior-hero--contact">
+      <div class="interior-hero__media">
+        <img src="assets/img/events/gallery-6.webp" alt="Declaration Church community gathering">
       </div>
-    </div><!-- End Page Title -->
+      <div class="interior-hero__veil"></div>
+      <div class="container-fluid declaration-shell interior-hero__content">
+        <p class="section-kicker section-kicker--light">Let’s connect</p>
+        <h1>We would love<br>to hear from you.</h1>
+        <p>Ask a question, tell us how we can pray, or let us help make your first Sunday simple.</p>
+      </div>
+    </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact section">
-
-      <div class="container">
-        <div class="contact-main-wrapper">
-          <div class="map-wrapper">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d48389.78314118045!2d-74.006138!3d40.710059!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a22a3bda30d%3A0xb89d1fe6bc499443!2sDowntown%20Conference%20Center!5e0!3m2!1sen!2sus!4v1676961268712!5m2!1sen!2sus" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-          </div>
-
-          <div class="contact-content">
-            <div class="contact-cards-container">
-              <div class="contact-card">
-                <div class="icon-box">
-                  <i class="bi bi-geo-alt"></i>
-                </div>
-                <div class="contact-text">
-                  <h4>Location</h4>
-                  <p>8721 Broadway Avenue, New York, NY 10023</p>
-                </div>
-              </div>
-
-              <div class="contact-card">
-                <div class="icon-box">
-                  <i class="bi bi-envelope"></i>
-                </div>
-                <div class="contact-text">
-                  <h4>Email</h4>
-                  <p>info@examplecompany.com</p>
-                </div>
-              </div>
-
-              <div class="contact-card">
-                <div class="icon-box">
-                  <i class="bi bi-telephone"></i>
-                </div>
-                <div class="contact-text">
-                  <h4>Call</h4>
-                  <p>+1 (212) 555-7890</p>
-                </div>
-              </div>
-
-              <div class="contact-card">
-                <div class="icon-box">
-                  <i class="bi bi-clock"></i>
-                </div>
-                <div class="contact-text">
-                  <h4>Open Hours</h4>
-                  <p>Monday-Friday: 9AM - 6PM</p>
-                </div>
-              </div>
+    <section id="contact" class="contact-editorial interior-section">
+      <div class="container-fluid declaration-shell">
+        <div class="contact-editorial__grid">
+          <aside class="contact-editorial__details">
+            <p class="section-kicker">Start here</p>
+            <h2>Reach out anytime.</h2>
+            <div class="contact-detail-list">
+              <div><span>Email</span><a href="mailto:hello@declaration.org">hello@declaration.org</a></div>
+              <div><span>Phone</span><a href="tel:+12816614279">(281) 661-4279</a></div>
+              <div><span>Sunday location</span><p>Snyder Elementary<br>28601 Birnham Woods Drive<br>Spring, TX 77386</p></div>
+              <div><span>Mailing address</span><p>330 Rayford Road, Ste 369<br>Spring, TX 77386</p></div>
             </div>
+          </aside>
 
-            <div class="contact-form-container">
-              <h3>Get in Touch</h3>
-              <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua consectetur adipiscing.</p>
-
-              <form action="forms/contact.php" method="post" class="php-email-form">
-                <div class="row">
-                  <div class="col-md-6 form-group">
-                    <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required="">
-                  </div>
-                  <div class="col-md-6 form-group mt-3 mt-md-0">
-                    <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required="">
-                  </div>
-                </div>
-                <div class="form-group mt-3">
-                  <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required="">
-                </div>
-                <div class="form-group mt-3">
-                  <textarea class="form-control" name="message" rows="5" placeholder="Message" required=""></textarea>
-                </div>
-
-                <div class="my-3">
-                  <div class="loading">Loading</div>
-                  <div class="error-message"></div>
-                  <div class="sent-message">Your message has been sent. Thank you!</div>
-                </div>
-
-                <div class="form-submit">
-                  <button type="submit">Send Message</button>
-                  <div class="social-links">
-                    <a href="#"><i class="bi bi-twitter"></i></a>
-                    <a href="#"><i class="bi bi-facebook"></i></a>
-                    <a href="#"><i class="bi bi-instagram"></i></a>
-                    <a href="#"><i class="bi bi-linkedin"></i></a>
-                  </div>
-                </div>
-              </form>
-            </div>
+          <div class="contact-editorial__form">
+            <p class="section-kicker">Send a message</p>
+            <h2>How can we help?</h2>
+            <form action="forms/contact.php" method="post" class="php-email-form editorial-form">
+              <div class="editorial-form__row">
+                <label for="name">Name<input type="text" name="name" id="name" autocomplete="name" required></label>
+                <label for="email">Email<input type="email" name="email" id="email" autocomplete="email" required></label>
+              </div>
+              <label for="subject">Subject<input type="text" name="subject" id="subject" required></label>
+              <label for="message">Message<textarea name="message" id="message" rows="6" required></textarea></label>
+              <div class="form-status">
+                <div class="loading">Sending</div>
+                <div class="error-message"></div>
+                <div class="sent-message">Your message has been sent. Thank you!</div>
+              </div>
+              <button type="submit" class="button button--black">Send message</button>
+            </form>
           </div>
         </div>
       </div>
-    </section><!-- /Contact Section -->
+    </section>
+
+    <section class="contact-map" aria-label="Map to Snyder Elementary">
+      <iframe src="https://www.google.com/maps?q=28601+Birnham+Woods+Drive,+Spring,+TX+77386&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </section>
 
 <?php include __DIR__ . '/../includes/footer.php'; ?>
