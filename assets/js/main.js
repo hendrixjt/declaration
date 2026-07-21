@@ -167,6 +167,32 @@
   window.addEventListener('load', aosInit);
 
   /**
+   * Editorial image reveals
+   */
+  const revealImages = document.querySelectorAll('[data-image-reveal]');
+
+  if (revealImages.length) {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (prefersReducedMotion || typeof IntersectionObserver === 'undefined') {
+      revealImages.forEach((image) => image.classList.add('is-revealed'));
+    } else {
+      const imageRevealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-revealed');
+          observer.unobserve(entry.target);
+        });
+      }, {
+        threshold: 0.18,
+        rootMargin: '0px 0px -8% 0px'
+      });
+
+      revealImages.forEach((image) => imageRevealObserver.observe(image));
+    }
+  }
+
+  /**
    * Countdown timer
    */
   function updateCountDown(countDownItem) {
