@@ -69,7 +69,7 @@ include __DIR__ . '/includes/header.php';
         <h1>For Jesus.<br>For People.</h1>
         <div class="declaration-hero__footer">
           <p>Helping people encounter and follow Jesus.</p>
-          <a class="arrow-link arrow-link--light" href="#visit">Plan your visit <span aria-hidden="true">&#8599;</span></a>
+          <a class="arrow-link arrow-link--light" href="#visit">Plan your visit <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a>
         </div>
       </div>
       <div class="declaration-hero__service">
@@ -129,7 +129,7 @@ include __DIR__ . '/includes/header.php';
               <strong><?= htmlspecialchars($step['title']) ?></strong>
               <span><?= htmlspecialchars($step['copy']) ?></span>
             </span>
-            <span class="pathway-card__arrow" aria-hidden="true">&#8599;</span>
+            <span class="pathway-card__arrow" aria-hidden="true"><i class="bi bi-arrow-up-right"></i></span>
           </a>
 <?php endforeach; ?>
         </div>
@@ -169,7 +169,7 @@ include __DIR__ . '/includes/header.php';
               </div>
               <p><?= htmlspecialchars(pc_date_range($event['starts_at'], $event['ends_at'])) ?></p>
               <h3><?= htmlspecialchars($event['name']) ?></h3>
-              <span>Details &#8599;</span>
+              <span>Details <i class="bi bi-arrow-up-right" aria-hidden="true"></i></span>
             </a>
           </article>
   <?php endforeach; ?>
@@ -182,7 +182,7 @@ include __DIR__ . '/includes/header.php';
               </div>
               <p><?= htmlspecialchars($event['date_label']) ?></p>
               <h3><?= htmlspecialchars($event['name']) ?></h3>
-              <span><?= htmlspecialchars($event['cta_label']) ?> &#8599;</span>
+              <span><?= htmlspecialchars($event['cta_label']) ?> <i class="bi bi-arrow-up-right" aria-hidden="true"></i></span>
             </a>
           </article>
   <?php endforeach; ?>

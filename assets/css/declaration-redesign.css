@@ -95,12 +95,13 @@ a:hover {
   text-transform: uppercase;
 }
 
-.arrow-link span {
+.arrow-link :is(span, i) {
   font-size: 20px;
+  font-style: normal;
   transition: transform 180ms ease;
 }
 
-.arrow-link:hover span {
+.arrow-link:hover :is(span, i) {
   transform: translate(4px, -2px);
 }
 
@@ -217,10 +218,10 @@ a:hover {
   text-transform: uppercase;
 }
 
-.header .header-cta::after {
-  content: "\2197";
+.header .header-cta i {
   margin-left: 12px;
   font-size: 17px;
+  font-style: normal;
 }
 
 .header .header-cta:hover {
@@ -667,6 +668,12 @@ a:hover {
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+}
+
+.event-editorial-card a > span i,
+.archive-event__meta > span i {
+  margin-left: 5px;
+  font-size: 0.95em;
 }
 
 /* Communion */

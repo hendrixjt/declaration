@@ -50,7 +50,7 @@ include __DIR__ . '/../includes/header.php';
           <div><span>04</span><h3>Remembrance</h3><p>&amp; Redemption</p></div>
           <div><span>05</span><h3>Generosity</h3><p>&amp; Grace</p></div>
         </div>
-        <a class="arrow-link arrow-link--light" href="https://www.declaration.org/what-we-believe" target="_blank" rel="noopener">Read what we believe <span aria-hidden="true">&#8599;</span></a>
+        <a class="arrow-link arrow-link--light" href="https://www.declaration.org/what-we-believe" target="_blank" rel="noopener">Read what we believe <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a>
       </div>
     </section>
 

@@ -135,6 +135,7 @@ $design_css_version = is_file($design_css_path) ? (string) filemtime($design_css
         <a href="index.php#visit" class="header-cta">
           <span class="cta-label-desktop">This Sunday</span>
           <span class="cta-label-mobile">Sunday</span>
+          <i class="bi bi-arrow-up-right" aria-hidden="true"></i>
         </a>
       </div>
 

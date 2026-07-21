@@ -70,7 +70,7 @@ include __DIR__ . '/../includes/header.php';
               <div class="archive-event__meta">
                 <p><?= htmlspecialchars(pc_date_range($event['starts_at'] ?? '', $event['ends_at'] ?? '')) ?></p>
                 <h3><?= htmlspecialchars($event['name'] ?? '') ?></h3>
-                <span>Event details &#8599;</span>
+                <span>Event details <i class="bi bi-arrow-up-right" aria-hidden="true"></i></span>
               </div>
             </a>
           </article>
@@ -83,7 +83,7 @@ include __DIR__ . '/../includes/header.php';
               <div class="archive-event__meta">
                 <p><?= htmlspecialchars($event['date_label']) ?></p>
                 <h3><?= htmlspecialchars($event['name']) ?></h3>
-                <span><?= htmlspecialchars($event['cta_label']) ?> &#8599;</span>
+                <span><?= htmlspecialchars($event['cta_label']) ?> <i class="bi bi-arrow-up-right" aria-hidden="true"></i></span>
               </div>
             </a>
           </article>
