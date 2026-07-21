@@ -628,7 +628,7 @@ a:hover {
 }
 
 .event-editorial-card__image {
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 16 / 9;
   margin-bottom: 26px;
   overflow: hidden;
   background: #e5e5df;
@@ -1559,7 +1559,7 @@ body.declaration-interior {
 }
 
 .archive-event__image {
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 16 / 9;
   margin-bottom: 25px;
   overflow: hidden;
   background: #171717;
