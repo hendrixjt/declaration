@@ -1,6 +1,6 @@
 <?php
-$page_title = 'Speakers - Eventia Bootstrap Template';
-$body_class = 'speakers-page';
+$page_title = 'Team';
+$body_class = 'speakers-page declaration-interior legacy-page';
 $current_page = 'speakers';
 $base_url = '/'; include __DIR__ . '/../includes/header.php';
 ?>

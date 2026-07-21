@@ -1,6 +1,6 @@
 <?php
-$page_title = 'Sponsors - Eventia Bootstrap Template';
-$body_class = 'sponsors-page';
+$page_title = 'Partners';
+$body_class = 'sponsors-page declaration-interior legacy-page';
 $current_page = 'sponsors';
 $base_url = '/'; include __DIR__ . '/../includes/header.php';
 ?>

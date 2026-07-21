@@ -35,6 +35,8 @@ Codex, Cursor, Claude, and future collaborators should use this file before maki
 - Keep font families centralized in CSS custom properties so licensed brand fonts can replace the stand-ins later without restructuring pages.
 - Avoid colorful UI decoration, excessive rounded cards, floating glass panels, and generic event-template styling.
 - Use motion sparingly and purposefully, with reduced-motion support.
+- Interior pages should use the same editorial hero scale, square-cornered components, restrained metadata, strong image crops, and black/white section rhythm as the homepage.
+- About, Events, Contact, Gallery, legal pages, and utility states are the reference implementations for the shared interior-page system.
 
 ## Content rules
 

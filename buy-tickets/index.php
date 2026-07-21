@@ -1,6 +1,6 @@
 <?php
-$page_title = 'Buy Tickets - Eventia Bootstrap Template';
-$body_class = 'buy-tickets-page';
+$page_title = 'Registration';
+$body_class = 'buy-tickets-page declaration-interior legacy-page';
 $current_page = 'buy-tickets';
 $base_url = '/'; include __DIR__ . '/../includes/header.php';
 ?>

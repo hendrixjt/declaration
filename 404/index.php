@@ -1,42 +1,24 @@
 <?php
-$page_title = '404 - Eventia Bootstrap Template';
-$body_class = 'page-404';
+$page_title = 'Page Not Found';
+$body_class = 'page-404 declaration-interior';
 $current_page = '404';
 $base_url = '/';
+$meta_description = 'The page you requested could not be found.';
 include __DIR__ . '/../includes/header.php';
 ?>
 
-    <!-- Page Title -->
-    <div class="page-title dark-background" style="background-image: url(assets/img/events/showcase-5.webp);">
-      <div class="container position-relative">
-        <h1>404</h1>
-        <p>Esse dolorum voluptatum ullam est sint nemo et est ipsa porro placeat quibusdam quia assumenda numquam molestias.</p>
-        <nav class="breadcrumbs">
-          <ol>
-            <li><a href="index.php">Home</a></li>
-            <li class="current">404</li>
-          </ol>
-        </nav>
-      </div>
-    </div><!-- End Page Title -->
-
-    <!-- Error 404 Section -->
-    <section id="error-404" class="error-404 section">
-
-      <div class="container">
-
-        <div class="error-404-content text-center">
-          <h1 class="display-1 fw-bold">404</h1>
-          <h2>Oops! Page Not Found</h2>
-          <p class="lead">The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.</p>
-          <div class="d-flex justify-content-center mt-4">
-            <a href="index.php" class="btn btn-primary me-3">Go to Homepage</a>
-            <a href="contact/" class="btn btn-outline-primary">Contact Support</a>
+    <section class="not-found-editorial section-black">
+      <div class="container-fluid declaration-shell">
+        <p class="section-kicker section-kicker--light">Page not found</p>
+        <div class="not-found-editorial__number">404</div>
+        <div class="not-found-editorial__content">
+          <h1>Looks like this path ends here.</h1>
+          <p>The page may have moved, but there is still a clear next step.</p>
+          <div>
+            <a class="button button--white" href="index.php">Go home</a>
+            <a class="arrow-link arrow-link--light" href="contact/">Contact us <span aria-hidden="true">&#8594;</span></a>
           </div>
         </div>
-
       </div>
-
-    </section><!-- /Error 404 Section -->
-
+    </section>
 <?php include __DIR__ . '/../includes/footer.php'; ?>

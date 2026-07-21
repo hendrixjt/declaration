@@ -124,7 +124,7 @@ $base_url = $base_url ?? '/';
           <li><a href="index.php#next-steps">Next Steps</a></li>
           <li><a href="events/"<?php if (($current_page ?? '') === 'events') echo ' class="active"'; ?>>Events</a></li>
           <li><a href="about/"<?php if (($current_page ?? '') === 'about') echo ' class="active"'; ?>>About</a></li>
-          <li><a href="index.php#contact">Connect</a></li>
+          <li><a href="contact/"<?php if (($current_page ?? '') === 'contact') echo ' class="active"'; ?>>Connect</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>

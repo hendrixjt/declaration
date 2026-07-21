@@ -1,115 +1,50 @@
 <?php
-$page_title = 'Gallery - Eventia Bootstrap Template';
-$body_class = 'gallery-page';
+$page_title = 'Gallery';
+$body_class = 'gallery-page declaration-interior';
 $current_page = 'gallery';
-$base_url = '/'; include __DIR__ . '/../includes/header.php';
+$base_url = '/';
+$meta_description = 'A glimpse of worship, community, and life together at Declaration Church.';
+$canonical_url = 'https://www.declaration.org/gallery/';
+$gallery_images = [
+    ['file' => 'gallery-1.webp', 'alt' => 'Declaration church community'],
+    ['file' => 'gallery-2.webp', 'alt' => 'Life together at Declaration'],
+    ['file' => 'gallery-3.webp', 'alt' => 'People gathering at church'],
+    ['file' => 'gallery-4.webp', 'alt' => 'Worship and prayer gathering'],
+    ['file' => 'gallery-5.webp', 'alt' => 'Declaration church family'],
+    ['file' => 'gallery-6.webp', 'alt' => 'People connecting at Declaration'],
+    ['file' => 'gallery-7.webp', 'alt' => 'Community at Declaration Church'],
+    ['file' => 'gallery-8.webp', 'alt' => 'A Declaration gathering'],
+];
+include __DIR__ . '/../includes/header.php';
 ?>
 
-    <!-- Page Title -->
-    <div class="page-title dark-background" style="background-image: url(assets/img/events/showcase-5.webp);">
-      <div class="container position-relative">
-        <h1>Gallery</h1>
-        <p>Esse dolorum voluptatum ullam est sint nemo et est ipsa porro placeat quibusdam quia assumenda numquam molestias.</p>
-        <nav class="breadcrumbs">
-          <ol>
-            <li><a href="index.php">Home</a></li>
-            <li class="current">Gallery</li>
-          </ol>
-        </nav>
+    <section class="interior-hero interior-hero--gallery">
+      <div class="interior-hero__media">
+        <img src="assets/img/events/gallery-1.webp" alt="Declaration Church gathering">
       </div>
-    </div><!-- End Page Title -->
+      <div class="interior-hero__veil"></div>
+      <div class="container-fluid declaration-shell interior-hero__content">
+        <p class="section-kicker section-kicker--light">A glimpse inside</p>
+        <h1>Life at<br>Declaration.</h1>
+        <p>Worship, prayer, friendship, joy, and the ordinary moments that become church family.</p>
+      </div>
+    </section>
 
-    <!-- Gallery 2 Section -->
-    <section id="gallery-2" class="gallery-2 section">
-
-      <div class="container-fluid">
-
-        <div class="row gy-4 justify-content-center">
-
-          <div class="col-xl-3 col-lg-4 col-md-6">
-            <div class="gallery-item h-100">
-              <img src="assets/img/events/gallery-1.webp" class="img-fluid" alt="">
-              <div class="gallery-links d-flex align-items-center justify-content-center">
-                <a href="assets/img/events/gallery-1.webp" title="Gallery 1" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
-                <a href="gallery/" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div>
-          </div><!-- End Gallery Item -->
-
-          <div class="col-xl-3 col-lg-4 col-md-6">
-            <div class="gallery-item h-100">
-              <img src="assets/img/events/gallery-2.webp" class="img-fluid" alt="">
-              <div class="gallery-links d-flex align-items-center justify-content-center">
-                <a href="assets/img/events/gallery-2.webp" title="Gallery 2" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
-                <a href="gallery/" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div>
-          </div><!-- End Gallery Item -->
-
-          <div class="col-xl-3 col-lg-4 col-md-6">
-            <div class="gallery-item h-100">
-              <img src="assets/img/events/gallery-3.webp" class="img-fluid" alt="">
-              <div class="gallery-links d-flex align-items-center justify-content-center">
-                <a href="assets/img/events/gallery-3.webp" title="Gallery 3" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
-                <a href="gallery/" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div>
-          </div><!-- End Gallery Item -->
-
-          <div class="col-xl-3 col-lg-4 col-md-6">
-            <div class="gallery-item h-100">
-              <img src="assets/img/events/gallery-4.webp" class="img-fluid" alt="">
-              <div class="gallery-links d-flex align-items-center justify-content-center">
-                <a href="assets/img/events/gallery-4.webp" title="Gallery 4" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
-                <a href="gallery/" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div>
-          </div><!-- End Gallery Item -->
-
-          <div class="col-xl-3 col-lg-4 col-md-6">
-            <div class="gallery-item h-100">
-              <img src="assets/img/events/gallery-5.webp" class="img-fluid" alt="">
-              <div class="gallery-links d-flex align-items-center justify-content-center">
-                <a href="assets/img/events/gallery-5.webp" title="Gallery 5" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
-                <a href="gallery/" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div>
-          </div><!-- End Gallery Item -->
-
-          <div class="col-xl-3 col-lg-4 col-md-6">
-            <div class="gallery-item h-100">
-              <img src="assets/img/events/gallery-6.webp" class="img-fluid" alt="">
-              <div class="gallery-links d-flex align-items-center justify-content-center">
-                <a href="assets/img/events/gallery-6.webp" title="Gallery 6" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
-                <a href="gallery/" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div>
-          </div><!-- End Gallery Item -->
-
-          <div class="col-xl-3 col-lg-4 col-md-6">
-            <div class="gallery-item h-100">
-              <img src="assets/img/events/gallery-7.webp" class="img-fluid" alt="">
-              <div class="gallery-links d-flex align-items-center justify-content-center">
-                <a href="assets/img/events/gallery-7.webp" title="Gallery 7" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
-                <a href="gallery/" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div>
-          </div><!-- End Gallery Item -->
-
-          <div class="col-xl-3 col-lg-4 col-md-6">
-            <div class="gallery-item h-100">
-              <img src="assets/img/events/gallery-8.webp" class="img-fluid" alt="">
-              <div class="gallery-links d-flex align-items-center justify-content-center">
-                <a href="assets/img/events/gallery-8.webp" title="Gallery 8" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
-                <a href="gallery/" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div>
-          </div><!-- End Gallery Item -->
-
+    <section class="gallery-editorial interior-section section-white">
+      <div class="container-fluid declaration-shell">
+        <div class="gallery-editorial__intro">
+          <p class="section-kicker">Together is better</p>
+          <h2>More than a place we go. A people we belong to.</h2>
         </div>
-
+        <div class="gallery-editorial__grid">
+<?php foreach ($gallery_images as $index => $image): ?>
+          <a href="assets/img/events/<?= htmlspecialchars($image['file']) ?>" class="gallery-editorial__item glightbox" title="Life at Declaration">
+            <img src="assets/img/events/<?= htmlspecialchars($image['file']) ?>" alt="<?= htmlspecialchars($image['alt']) ?>" loading="lazy">
+            <span><?= str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT) ?> <i class="bi bi-arrows-angle-expand"></i></span>
+          </a>
+<?php endforeach; ?>
+        </div>
       </div>
-
-    </section><!-- /Gallery 2 Section -->
+    </section>
 
 <?php include __DIR__ . '/../includes/footer.php'; ?>

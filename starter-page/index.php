@@ -1,6 +1,6 @@
 <?php
-$page_title = 'Starter Page - Eventia Bootstrap Template';
-$body_class = 'starter-page-page';
+$page_title = 'Declaration';
+$body_class = 'starter-page-page declaration-interior legacy-page';
 $current_page = 'starter-page';
 $base_url = '/'; include __DIR__ . '/../includes/header.php';
 ?>
