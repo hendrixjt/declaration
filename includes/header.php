@@ -53,7 +53,7 @@ $base_url = $base_url ?? '/';
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Barlow+Condensed:wght@500;600;700&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -64,6 +64,7 @@ $base_url = $base_url ?? '/';
 
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
+  <link href="assets/css/declaration-redesign.css" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: Eventia
@@ -112,27 +113,26 @@ $base_url = $base_url ?? '/';
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-      <a href="index.php" class="logo d-flex align-items-center me-auto me-xl-0">
+      <a href="index.php" class="logo d-flex align-items-center me-auto me-xl-0" aria-label="Declaration Church home">
         <img src="assets/img/declaration/Declaration-Expanded-White.png" alt="Declaration Church Logo">
         <span class="sitename visually-hidden">Declaration Church</span>
       </a>
 
       <nav id="navmenu" class="navmenu" aria-label="Main navigation">
         <ul>
-          <li><a href="index.php"<?php if (($current_page ?? '') === 'index') echo ' class="active"'; ?>>Home</a></li>
           <li><a href="index.php#visit">Visit</a></li>
-          <li><a href="events/"<?php if (($current_page ?? '') === 'events') echo ' class="active"'; ?>>Events</a></li>
-          <li><a href="index.php#rhythms">Life at Declaration</a></li>
           <li><a href="index.php#next-steps">Next Steps</a></li>
-          <li><a href="index.php#contact">Contact</a></li>
+          <li><a href="events/"<?php if (($current_page ?? '') === 'events') echo ' class="active"'; ?>>Events</a></li>
+          <li><a href="about/"<?php if (($current_page ?? '') === 'about') echo ' class="active"'; ?>>About</a></li>
+          <li><a href="index.php#contact">Connect</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
 
       <div class="header-actions">
         <a href="index.php#visit" class="header-cta">
-          <span class="cta-label-desktop">Plan Your Visit</span>
-          <span class="cta-label-mobile">Plan Visit</span>
+          <span class="cta-label-desktop">This Sunday</span>
+          <span class="cta-label-mobile">Sunday</span>
         </a>
       </div>
 

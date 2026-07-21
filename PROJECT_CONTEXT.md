@@ -27,6 +27,15 @@ Codex, Cursor, Claude, and future collaborators should use this file before maki
 - Preserve responsive behavior when reusing template sections.
 - Keep the visual quality high. Avoid replacing strong template patterns with generic, flatter, or more boilerplate sections.
 
+## Current visual direction
+
+- The site is moving toward a primarily black-and-white editorial system; photography should provide most of the color.
+- Favor bold grotesk display typography, Helvetica-like supporting typography, strong contrast, oversized headlines, and image-led layouts.
+- Current open/web-safe stand-ins are Archivo for primary display, Barlow Condensed for taller display moments, and Inter Tight with Helvetica fallbacks for body copy.
+- Keep font families centralized in CSS custom properties so licensed brand fonts can replace the stand-ins later without restructuring pages.
+- Avoid colorful UI decoration, excessive rounded cards, floating glass panels, and generic event-template styling.
+- Use motion sparingly and purposefully, with reduced-motion support.
+
 ## Content rules
 
 - Use the live Declaration site as the primary source for factual ministry content, contact info, ministries, staff names, service times, and church language.
