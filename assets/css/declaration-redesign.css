@@ -628,21 +628,22 @@ a:hover {
 }
 
 .event-editorial-card__image {
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 16 / 10;
   margin-bottom: 26px;
   overflow: hidden;
-  background: #ddd;
+  background: #e5e5df;
 }
 
 .event-editorial-card__image img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center;
   transition: transform 500ms ease;
 }
 
 .event-editorial-card a:hover img {
-  transform: scale(1.035);
+  transform: none;
 }
 
 .event-editorial-card p {
@@ -1558,22 +1559,23 @@ body.declaration-interior {
 }
 
 .archive-event__image {
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 16 / 10;
   margin-bottom: 25px;
   overflow: hidden;
-  background: #272727;
+  background: #171717;
 }
 
 .archive-event__image img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center;
   filter: saturate(0.86);
   transition: transform 500ms ease, filter 300ms ease;
 }
 
 .archive-event a:hover img {
-  transform: scale(1.035);
+  transform: none;
   filter: saturate(1.15);
 }
 
