@@ -2122,3 +2122,135 @@ body.declaration-interior {
     margin-top: 28px;
   }
 }
+/* Declaration CMS event detail */
+.event-detail-hero {
+  position: relative;
+  min-height: min(78vh, 760px);
+  display: flex;
+  align-items: end;
+  overflow: hidden;
+  background: #111;
+  color: #fff;
+}
+
+.event-detail-hero__media,
+.event-detail-hero__veil {
+  position: absolute;
+  inset: 0;
+}
+
+.event-detail-hero__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.event-detail-hero__veil {
+  background: linear-gradient(180deg, rgba(0, 0, 0, .08) 22%, rgba(0, 0, 0, .85) 100%);
+}
+
+.event-detail-hero__content {
+  position: relative;
+  z-index: 1;
+  padding-top: 180px;
+  padding-bottom: clamp(54px, 8vw, 100px);
+}
+
+.event-detail-back {
+  display: inline-block;
+  margin-bottom: clamp(48px, 8vw, 100px);
+  color: rgba(255, 255, 255, .76);
+  font-size: 14px;
+}
+
+.event-detail-hero h1 {
+  max-width: 1050px;
+  margin: 14px 0 0;
+  color: #fff;
+  font-family: var(--display-font);
+  font-size: clamp(56px, 10vw, 142px);
+  font-weight: 800;
+  line-height: .86;
+  letter-spacing: -.065em;
+}
+
+.event-detail-content {
+  padding-block: clamp(70px, 10vw, 140px);
+}
+
+.event-detail-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(260px, .65fr);
+  gap: clamp(50px, 9vw, 140px);
+  align-items: start;
+}
+
+.event-detail-lead {
+  max-width: 850px;
+  margin: 0 0 38px;
+  font-family: var(--display-font);
+  font-size: clamp(28px, 4vw, 50px);
+  font-weight: 600;
+  line-height: 1.06;
+  letter-spacing: -.04em;
+}
+
+.event-detail-body {
+  max-width: 760px;
+  color: #464542;
+  font-size: clamp(17px, 1.5vw, 20px);
+  line-height: 1.75;
+}
+
+.event-detail-meta {
+  display: grid;
+  gap: 1px;
+  background: #d8d7d2;
+  border: 1px solid #d8d7d2;
+}
+
+.event-detail-meta > div {
+  padding: 26px;
+  background: #f4f3ef;
+}
+
+.event-detail-meta span,
+.event-detail-meta strong,
+.event-detail-meta p {
+  display: block;
+}
+
+.event-detail-meta > div > span {
+  margin-bottom: 10px;
+  color: #74736e;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+
+.event-detail-meta strong {
+  font-family: var(--display-font);
+  font-size: 19px;
+}
+
+.event-detail-meta p {
+  margin: 6px 0 0;
+  color: #5f5e5a;
+}
+
+.event-detail-register {
+  justify-content: space-between;
+  min-height: 58px;
+  padding-inline: 22px;
+}
+
+@media (max-width: 760px) {
+  .event-detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .event-detail-hero {
+    min-height: 650px;
+  }
+}

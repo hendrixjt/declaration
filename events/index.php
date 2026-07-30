@@ -11,7 +11,14 @@ $church_phone = '+1-281-661-4279';
 $church_address = ['street' => '28601 Birnham Woods Drive', 'city' => 'Spring', 'state' => 'TX', 'zip' => '77386', 'country' => 'US'];
 
 require_once __DIR__ . '/../includes/planning-center.php';
-$upcoming_events = pc_get_upcoming_events(12);
+$cms_is_calendar_source = false;
+try {
+    require_once __DIR__ . '/../includes/cms.php';
+    $cms_is_calendar_source = cms_has_published_events();
+} catch (Throwable $exception) {
+    $cms_is_calendar_source = false;
+}
+$upcoming_events = $cms_is_calendar_source ? cms_get_published_events(12) : pc_get_upcoming_events(12);
 $has_live_events = !empty($upcoming_events);
 
 $fallback_events = [
@@ -45,7 +52,7 @@ include __DIR__ . '/../includes/header.php';
           <div>
             <h2>Make room for what God is doing.</h2>
             <div class="events-intro__meta">
-              <div><span>Upcoming</span><strong><?= htmlspecialchars((string) $event_count) ?></strong><p><?= $has_live_events ? 'Live registrations' : 'Featured rhythms' ?></p></div>
+              <div><span>Upcoming</span><strong><?= htmlspecialchars((string) $event_count) ?></strong><p><?= $has_live_events ? ($cms_is_calendar_source ? 'Declaration calendar' : 'Live registrations') : 'Featured rhythms' ?></p></div>
               <div><span>Next up</span><strong><?= htmlspecialchars($has_live_events && $next_event ? pc_format_date($next_event['starts_at'] ?? '') : 'Sunday') ?></strong><p><?= htmlspecialchars($has_live_events && $next_event ? ($next_event['name'] ?? '') : '9:00 + 11:00am') ?></p></div>
             </div>
           </div>
@@ -63,7 +70,7 @@ include __DIR__ . '/../includes/header.php';
 <?php if ($has_live_events): ?>
   <?php foreach ($upcoming_events as $index => $event): ?>
           <article class="archive-event<?= $index >= 6 ? ' event-item-hidden' : '' ?>"<?= $index >= 6 ? ' data-event-hidden="true"' : '' ?>>
-            <a href="<?= htmlspecialchars(($event['public_url'] ?? '') ?: (($event['registration_url'] ?? '') ?: 'events/')) ?>" target="_blank" rel="noopener">
+            <a href="<?= htmlspecialchars(($event['public_url'] ?? '') ?: (($event['registration_url'] ?? '') ?: 'events/')) ?>"<?= $cms_is_calendar_source ? '' : ' target="_blank" rel="noopener"' ?>>
               <div class="archive-event__image">
                 <img src="<?= htmlspecialchars(($event['logo_url'] ?? '') ?: 'assets/img/events/gallery-6.webp') ?>" alt="<?= htmlspecialchars($event['name'] ?? 'Declaration event') ?>" loading="lazy">
               </div>

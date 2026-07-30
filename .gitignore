@@ -5,6 +5,8 @@ _archive/
 
 # Runtime/generated files
 cache/*.json
+storage/*.sqlite
+storage/*.sqlite-*
 
 # Local secrets
 includes/config.php

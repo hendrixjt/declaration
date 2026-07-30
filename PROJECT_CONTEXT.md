@@ -73,3 +73,17 @@ The homepage should eventually include most of these ideas:
 - Use feature branches for larger redesigns.
 - Document important content and design decisions in markdown so they are reusable across AI tools.
 - When adding a new reusable rule, add it here instead of burying it in chat history.
+
+## CMS prototype
+
+- The lightweight PHP CMS lives at `/cms/` and currently manages events only.
+- It intentionally uses one locally managed admin login for the prototype.
+- The default database is the protected, Git-ignored SQLite file at
+  `storage/declaration-cms.sqlite`; MySQL can be configured later through
+  `CMS_DSN`, `CMS_DB_USER`, and `CMS_DB_PASSWORD`.
+- Planning Center remains the public event source until at least one local CMS
+  event is published. Once local publishing begins, the CMS becomes the
+  authoritative public event calendar.
+- Planning Center imports create drafts. Local edits are preserved on later
+  imports, and event registration may continue linking to Church Center.
+- Do not commit the database file, credentials, or generated event cache.

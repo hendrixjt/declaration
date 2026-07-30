@@ -17,7 +17,14 @@ $church_address = [
 ];
 
 require_once __DIR__ . '/includes/planning-center.php';
-$upcoming_events = pc_get_upcoming_events(3);
+$cms_is_calendar_source = false;
+try {
+    require_once __DIR__ . '/includes/cms.php';
+    $cms_is_calendar_source = cms_has_published_events();
+} catch (Throwable $exception) {
+    $cms_is_calendar_source = false;
+}
+$upcoming_events = $cms_is_calendar_source ? cms_get_published_events(3) : pc_get_upcoming_events(3);
 $has_live_events = !empty($upcoming_events);
 
 $fallback_events = [
@@ -163,7 +170,7 @@ include __DIR__ . '/includes/header.php';
 <?php if ($has_live_events): ?>
   <?php foreach ($upcoming_events as $index => $event): ?>
           <article class="event-editorial-card" data-aos="fade-up" data-aos-delay="<?= $index * 80 ?>">
-            <a href="<?= htmlspecialchars(($event['public_url'] ?? '') ?: ($event['registration_url'] ?: 'https://www.declaration.org/')) ?>" target="_blank" rel="noopener">
+            <a href="<?= htmlspecialchars(($event['public_url'] ?? '') ?: ($event['registration_url'] ?: 'https://www.declaration.org/')) ?>"<?= $cms_is_calendar_source ? '' : ' target="_blank" rel="noopener"' ?>>
               <div class="event-editorial-card__image">
                 <img src="<?= htmlspecialchars($event['logo_url'] ?: 'assets/img/events/gallery-' . (4 + $index) . '.webp') ?>" alt="<?= htmlspecialchars($event['name']) ?>" loading="lazy">
               </div>
