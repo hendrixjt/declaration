@@ -6,6 +6,7 @@
 
 $databasePath = sys_get_temp_dir() . '/declaration-public-events-test-' . bin2hex(random_bytes(6)) . '.sqlite';
 define('CMS_DSN', 'sqlite:' . $databasePath);
+define('CMS_DISABLE_AUTO_SYNC', true);
 require_once __DIR__ . '/../includes/cms.php';
 
 $passed = 0;

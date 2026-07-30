@@ -131,6 +131,8 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .cms-check input { width: 18px; height: 18px; accent-color: var(--cms-accent); }
 .cms-danger { padding: 16px; border: 1px solid #e1b7b4; background: #fff8f7; }
 .cms-danger button { border: 0; padding: 0; background: none; color: var(--cms-danger); cursor: pointer; text-decoration: underline; }
+.cms-danger--neutral { border-color: var(--cms-line); background: var(--cms-white); }
+.cms-danger--neutral button { color: var(--cms-muted); }
 
 .cms-auth { min-height: 100vh; display: grid; place-items: center; padding: 24px; background: var(--cms-ink); }
 .cms-auth__card { width: min(440px, 100%); padding: 38px; background: var(--cms-white); }

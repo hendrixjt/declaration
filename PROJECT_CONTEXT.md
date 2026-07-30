@@ -81,9 +81,11 @@ The homepage should eventually include most of these ideas:
 - The default database is the protected, Git-ignored SQLite file at
   `storage/declaration-cms.sqlite`; MySQL can be configured later through
   `CMS_DSN`, `CMS_DB_USER`, and `CMS_DB_PASSWORD`.
-- Planning Center remains the public event source until at least one local CMS
-  event is published. Once local publishing begins, the CMS becomes the
-  authoritative public event calendar.
-- Planning Center imports create drafts. Local edits are preserved on later
-  imports, and event registration may continue linking to Church Center.
+- Planning Center remains the operational source for imported events. The site
+  synchronizes upcoming events automatically and shows them by default.
+- The CMS is a website presentation and exception layer: administrators can
+  hide, feature, or customize an event without entering it twice.
+- Only fields changed in the CMS are preserved as overrides; unchanged fields
+  continue synchronizing from Planning Center. Event registration may continue
+  linking to Church Center.
 - Do not commit the database file, credentials, or generated event cache.

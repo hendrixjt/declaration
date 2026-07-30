@@ -18,6 +18,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header('Location: /cms/?notice=deleted');
         exit;
     }
+    if ($action === 'reset' && $id) {
+        cms_reset_planning_center_overrides($id);
+        header('Location: /cms/event.php?id=' . $id . '&notice=reset');
+        exit;
+    }
 
     try {
         $payload = $_POST;
@@ -63,7 +68,8 @@ include __DIR__ . '/_header.php';
   <?php endif; ?>
 </header>
 
-<?php if (($_GET['notice'] ?? '') === 'saved'): ?><div class="cms-alert cms-alert--success">Event saved.</div><?php endif; ?>
+<?php if (($_GET['notice'] ?? '') === 'saved'): ?><div class="cms-alert cms-alert--success">Event saved. Your website changes will be preserved when Planning Center syncs.</div><?php endif; ?>
+<?php if (($_GET['notice'] ?? '') === 'reset'): ?><div class="cms-alert cms-alert--success">Planning Center content restored. This event is visible on the website.</div><?php endif; ?>
 <?php if ($error): ?><div class="cms-alert cms-alert--error"><?= cms_escape($error) ?></div><?php endif; ?>
 
 <form method="post" class="cms-editor">
@@ -150,11 +156,11 @@ include __DIR__ . '/_header.php';
 
   <aside class="cms-editor__sidebar">
     <div class="cms-panel cms-publish-box">
-      <p class="cms-eyebrow">Publish</p>
+      <p class="cms-eyebrow">Website</p>
       <label>Status
         <select name="status">
-          <option value="draft"<?= $event['status'] === 'draft' ? ' selected' : '' ?>>Draft</option>
-          <option value="published"<?= $event['status'] === 'published' ? ' selected' : '' ?>>Published</option>
+          <option value="published"<?= $event['status'] === 'published' ? ' selected' : '' ?>>Visible on website</option>
+          <option value="draft"<?= $event['status'] === 'draft' ? ' selected' : '' ?>><?= $event['planning_center_id'] ? 'Hidden from website' : 'Draft' ?></option>
         </select>
       </label>
       <label class="cms-check">
@@ -162,9 +168,13 @@ include __DIR__ . '/_header.php';
         <span>Feature this event</span>
       </label>
       <button class="cms-button cms-button--primary cms-button--block" type="submit" name="action" value="save">Save event</button>
-      <?php if ($event['planning_center_id']): ?><small>Imported from Planning Center. Your edits are preserved on future imports.</small><?php endif; ?>
+      <?php if ($event['planning_center_id']): ?><small>Planning Center remains the source. Only fields changed here become website overrides; all other details keep syncing.</small><?php endif; ?>
     </div>
-    <?php if ($id): ?>
+    <?php if ($id && $event['planning_center_id']): ?>
+      <div class="cms-danger cms-danger--neutral">
+        <button type="submit" name="action" value="reset" onclick="return confirm('Restore the latest Planning Center content and make this event visible?')">Restore Planning Center version</button>
+      </div>
+    <?php elseif ($id): ?>
       <div class="cms-danger">
         <button type="submit" name="action" value="delete" onclick="return confirm('Delete this event? This cannot be undone.')">Delete event</button>
       </div>

@@ -44,19 +44,18 @@ try {
             'public_url' => 'https://example.com/register',
         ],
     ]);
-    cms_test_assert($import['inserted'] === 1, 'Planning Center event imports as a draft');
+    cms_test_assert($import['inserted'] === 1, 'Planning Center event imports as visible');
 
     $events = cms_get_events_for_admin();
-    cms_test_assert(count($events) === 1 && $events[0]['status'] === 'draft', 'Imported event is available to edit');
-    cms_test_assert(!cms_has_published_events(), 'Draft does not replace the public calendar');
+    cms_test_assert(count($events) === 1 && $events[0]['status'] === 'published', 'Imported event appears automatically');
 
     $id = (int) $events[0]['id'];
     cms_save_event([
-        'title' => 'Declaration Test Gathering',
+        'title' => 'Declaration Website Gathering',
         'slug' => 'declaration-test-gathering',
         'summary' => 'A local event summary.',
         'body' => 'Full local event details.',
-        'starts_at' => '2030-08-05T18:30:00-05:00',
+        'starts_at' => '2030-08-05T19:00:00-05:00',
         'ends_at' => '2030-08-05T20:00:00-05:00',
         'location_name' => 'Snyder Elementary',
         'location_address' => '28601 Birnham Woods Drive',
@@ -67,7 +66,6 @@ try {
         'is_featured' => '1',
     ], $id);
 
-    cms_test_assert(cms_has_published_events(), 'Published event activates the local calendar');
     $publicEvents = cms_get_published_events(3);
     cms_test_assert(count($publicEvents) === 1, 'Published event appears in public query');
     cms_test_assert($publicEvents[0]['public_url'] === '/events/declaration-test-gathering/', 'Public event uses local detail URL');
@@ -82,8 +80,40 @@ try {
         ],
     ]);
     $preserved = cms_get_event($id);
-    cms_test_assert($secondImport['skipped'] === 1, 'Re-import preserves locally edited event');
-    cms_test_assert($preserved['title'] === 'Declaration Test Gathering', 'Local title remains authoritative');
+    cms_test_assert($secondImport['updated'] === 1, 'Re-import updates fields that still belong to Planning Center');
+    cms_test_assert($preserved['title'] === 'Declaration Website Gathering', 'Local title remains authoritative');
+    cms_test_assert($preserved['body'] === cms_sanitize_rich_text('Full local event details.'), 'Local description remains authoritative');
+
+    cms_save_event([
+        'title' => $preserved['title'],
+        'slug' => $preserved['slug'],
+        'summary' => $preserved['summary'],
+        'body' => $preserved['body'],
+        'starts_at' => $preserved['starts_at'],
+        'ends_at' => $preserved['ends_at'],
+        'location_name' => $preserved['location_name'],
+        'location_address' => $preserved['location_address'],
+        'image_url' => $preserved['image_url'],
+        'registration_url' => $preserved['registration_url'],
+        'registration_label' => $preserved['registration_label'],
+        'status' => 'draft',
+        'is_featured' => '1',
+    ], $id);
+    cms_import_planning_center_events([[
+        'id' => 'pc-101',
+        'name' => 'Planning Center Changed Again',
+        'description' => 'Changed remotely again',
+        'starts_at' => '2030-08-06T18:30:00-05:00',
+        'ends_at' => '2030-08-06T20:00:00-05:00',
+    ]]);
+    $hidden = cms_get_event($id);
+    cms_test_assert($hidden['status'] === 'draft', 'Hidden Planning Center event stays hidden after sync');
+    cms_test_assert($hidden['starts_at'] === '2030-08-05T19:00:00-05:00', 'Locally changed date stays overridden');
+
+    cms_reset_planning_center_overrides($id);
+    $reset = cms_get_event($id);
+    cms_test_assert($reset['status'] === 'published', 'Reset makes a Planning Center event visible');
+    cms_test_assert($reset['title'] === 'Planning Center Changed Again', 'Reset restores Planning Center content');
 
     $safeBody = cms_sanitize_rich_text(
         '<p><strong>Formatted</strong> description.</p><script>alert(1)</script>'

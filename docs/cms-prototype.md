@@ -6,7 +6,8 @@ The prototype is intentionally small:
 
 - one admin login;
 - Planning Center event import;
-- event create, edit, publish, unpublish, feature, and delete;
+- automatic Planning Center synchronization;
+- event create, edit, show, hide, feature, and delete;
 - public event detail pages;
 - optional external registration links.
 
@@ -20,20 +21,24 @@ content types.
 2. Confirm PHP can write to the `storage/` directory.
 3. Visit `/cms/`.
 4. Create the single admin username and password.
-5. Import upcoming Planning Center events.
-6. Review imported drafts and publish the events that should appear publicly.
+5. Open the Events dashboard to synchronize upcoming Planning Center events.
+6. Edit only the events that need a website-specific change.
 
 The setup screen stops accepting new accounts after the first admin is created.
 
-## Calendar cutover behavior
+## Calendar synchronization behavior
 
-Planning Center remains the public source while every CMS event is a draft.
-Publishing the first CMS event makes the local database authoritative for the
-homepage and `/events/`.
+Planning Center remains the operational source for imported events. Upcoming
+Planning Center events are synchronized automatically when the public calendar
+or CMS dashboard loads, using the existing Planning Center cache interval.
+Newly imported events are visible on the website by default, so staff does not
+need to enter or publish the same event twice.
 
-Imported records keep their Planning Center identifiers for synchronization.
-After an imported event is edited locally, later imports preserve the local
-version instead of overwriting it.
+The CMS is an optional website control layer. An administrator can hide or
+feature an event, or change selected fields for the website. Only fields that
+differ from the latest Planning Center source are preserved as overrides; all
+other fields continue synchronizing. Choosing “Restore Planning Center version”
+clears content and visibility overrides.
 
 Registration links can continue pointing to Church Center during the
 prototype. The event description and public detail page belong to Declaration.

@@ -14,11 +14,12 @@ require_once __DIR__ . '/../includes/planning-center.php';
 $cms_is_calendar_source = false;
 try {
     require_once __DIR__ . '/../includes/cms.php';
-    $cms_is_calendar_source = cms_has_published_events();
+    $upcoming_events = cms_get_website_events(12);
+    $cms_is_calendar_source = true;
 } catch (Throwable $exception) {
     $cms_is_calendar_source = false;
+    $upcoming_events = pc_get_upcoming_events(12);
 }
-$upcoming_events = $cms_is_calendar_source ? cms_get_published_events(12) : pc_get_upcoming_events(12);
 $has_live_events = !empty($upcoming_events);
 
 $fallback_events = [

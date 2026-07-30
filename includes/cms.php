@@ -106,6 +106,8 @@ function cms_migrate(PDO $pdo): void
             status VARCHAR(20) NOT NULL DEFAULT 'draft',
             is_featured {$boolean} NOT NULL DEFAULT 0,
             local_override {$boolean} NOT NULL DEFAULT 0,
+            source_data {$text} NULL,
+            override_fields TEXT NULL,
             imported_at VARCHAR(40) NULL,
             updated_at VARCHAR(40) NOT NULL,
             created_at VARCHAR(40) NOT NULL
@@ -116,6 +118,33 @@ function cms_migrate(PDO $pdo): void
     if ($driver === 'sqlite') {
         $pdo->exec('CREATE INDEX IF NOT EXISTS cms_events_status_start_idx ON cms_events (status, starts_at)');
     }
+
+    cms_add_column_if_missing($pdo, 'cms_events', 'source_data', "{$text} NULL");
+    cms_add_column_if_missing($pdo, 'cms_events', 'override_fields', 'TEXT NULL');
+}
+
+function cms_add_column_if_missing(PDO $pdo, string $table, string $column, string $definition): void
+{
+    $driver = $pdo->getAttribute(PDO::ATTR_DRIVER_NAME);
+    if ($driver === 'sqlite') {
+        $columns = $pdo->query("PRAGMA table_info({$table})")->fetchAll();
+        foreach ($columns as $existing) {
+            if (($existing['name'] ?? '') === $column) {
+                return;
+            }
+        }
+    } else {
+        $statement = $pdo->prepare(
+            'SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS
+             WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = :table AND COLUMN_NAME = :column'
+        );
+        $statement->execute([':table' => $table, ':column' => $column]);
+        if ($statement->fetch()) {
+            return;
+        }
+    }
+
+    $pdo->exec("ALTER TABLE {$table} ADD COLUMN {$column} {$definition}");
 }
 
 function cms_has_admin(): bool
@@ -248,23 +277,20 @@ function cms_import_planning_center_events(array $events): array
     $skipped = 0;
     $now = gmdate(DATE_ATOM);
 
-    $lookup = $pdo->prepare('SELECT id, local_override FROM cms_events WHERE planning_center_id = :planning_center_id LIMIT 1');
+    $lookup = $pdo->prepare(
+        'SELECT id, local_override, override_fields FROM cms_events
+         WHERE planning_center_id = :planning_center_id LIMIT 1'
+    );
     $insert = $pdo->prepare(
         "INSERT INTO cms_events (
             planning_center_id, title, slug, summary, body, starts_at, ends_at,
             image_url, registration_url, registration_label, status, is_featured,
-            local_override, imported_at, updated_at, created_at
+            local_override, source_data, override_fields, imported_at, updated_at, created_at
         ) VALUES (
             :planning_center_id, :title, :slug, :summary, :body, :starts_at, :ends_at,
-            :image_url, :registration_url, 'Register', 'draft', 0, 0,
-            :imported_at, :updated_at, :created_at
+            :image_url, :registration_url, 'Register', 'published', 0, 0,
+            :source_data, '[]', :imported_at, :updated_at, :created_at
         )"
-    );
-    $update = $pdo->prepare(
-        'UPDATE cms_events SET title = :title, summary = :summary, body = :body,
-            starts_at = :starts_at, ends_at = :ends_at, image_url = :image_url,
-            registration_url = :registration_url, imported_at = :imported_at,
-            updated_at = :updated_at WHERE id = :id'
     );
 
     foreach ($events as $event) {
@@ -279,26 +305,64 @@ function cms_import_planning_center_events(array $events): array
         $lookup->execute([':planning_center_id' => $externalId]);
         $existing = $lookup->fetch();
         $description = trim((string) ($event['description'] ?? ''));
+        $source = [
+            'title' => $title,
+            'summary' => cms_plain_summary($description),
+            'body' => cms_sanitize_rich_text($description),
+            'starts_at' => $startsAt,
+            'ends_at' => trim((string) ($event['ends_at'] ?? '')) ?: null,
+            'image_url' => trim((string) ($event['logo_url'] ?? '')) ?: null,
+            'registration_url' => trim((string) (($event['public_url'] ?? '') ?: ($event['registration_url'] ?? ''))) ?: null,
+        ];
         $values = [
-            ':title' => $title,
-            ':summary' => cms_plain_summary($description),
-            ':body' => cms_sanitize_rich_text($description),
-            ':starts_at' => $startsAt,
-            ':ends_at' => trim((string) ($event['ends_at'] ?? '')) ?: null,
-            ':image_url' => trim((string) ($event['logo_url'] ?? '')) ?: null,
-            ':registration_url' => trim((string) (($event['public_url'] ?? '') ?: ($event['registration_url'] ?? ''))) ?: null,
+            ':title' => $source['title'],
+            ':summary' => $source['summary'],
+            ':body' => $source['body'],
+            ':starts_at' => $source['starts_at'],
+            ':ends_at' => $source['ends_at'],
+            ':image_url' => $source['image_url'],
+            ':registration_url' => $source['registration_url'],
+            ':source_data' => json_encode($source, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
             ':imported_at' => $now,
             ':updated_at' => $now,
         ];
 
         if ($existing) {
-            if ((int) $existing['local_override'] === 1) {
-                $touch = $pdo->prepare('UPDATE cms_events SET imported_at = :imported_at WHERE id = :id');
-                $touch->execute([':imported_at' => $now, ':id' => (int) $existing['id']]);
-                $skipped++;
-                continue;
+            $overrideFields = cms_decode_override_fields($existing['override_fields'] ?? null);
+            if (!$overrideFields && (int) $existing['local_override'] === 1) {
+                $overrideFields = array_merge(array_keys($source), ['status']);
             }
-            $update->execute($values + [':id' => (int) $existing['id']]);
+
+            $assignments = [
+                'source_data = :source_data',
+                'override_fields = :override_fields',
+                'local_override = :local_override',
+                'imported_at = :imported_at',
+                'updated_at = :updated_at',
+            ];
+            $updateValues = [
+                ':source_data' => $values[':source_data'],
+                ':override_fields' => json_encode(array_values($overrideFields)),
+                ':local_override' => $overrideFields ? 1 : 0,
+                ':imported_at' => $now,
+                ':updated_at' => $now,
+                ':id' => (int) $existing['id'],
+            ];
+
+            foreach ($source as $field => $value) {
+                if (!in_array($field, $overrideFields, true)) {
+                    $assignments[] = "{$field} = :{$field}";
+                    $updateValues[":{$field}"] = $value;
+                }
+            }
+            if (!in_array('status', $overrideFields, true)) {
+                $assignments[] = "status = 'published'";
+            }
+
+            $update = $pdo->prepare(
+                'UPDATE cms_events SET ' . implode(', ', $assignments) . ' WHERE id = :id'
+            );
+            $update->execute($updateValues);
             $updated++;
             continue;
         }
@@ -312,6 +376,39 @@ function cms_import_planning_center_events(array $events): array
     }
 
     return ['inserted' => $inserted, 'updated' => $updated, 'skipped' => $skipped];
+}
+
+function cms_decode_override_fields(?string $json): array
+{
+    $fields = json_decode((string) $json, true);
+    if (!is_array($fields)) {
+        return [];
+    }
+    return array_values(array_unique(array_filter($fields, 'is_string')));
+}
+
+function cms_sync_planning_center_events(bool $force = false): array
+{
+    if ((defined('CMS_DISABLE_AUTO_SYNC') && CMS_DISABLE_AUTO_SYNC) || !function_exists('pc_get_upcoming_events')) {
+        return ['inserted' => 0, 'updated' => 0, 'skipped' => 0];
+    }
+
+    if (!$force) {
+        $lastImportedAt = cms_pdo()->query(
+            'SELECT MAX(imported_at) FROM cms_events WHERE planning_center_id IS NOT NULL'
+        )->fetchColumn();
+        $syncTtl = defined('PC_CACHE_TTL') ? max(60, (int) PC_CACHE_TTL) : 1800;
+        if ($lastImportedAt && strtotime((string) $lastImportedAt) >= time() - $syncTtl) {
+            return ['inserted' => 0, 'updated' => 0, 'skipped' => 0];
+        }
+    }
+
+    $events = pc_get_upcoming_events(100);
+    if (!$events) {
+        return ['inserted' => 0, 'updated' => 0, 'skipped' => 0];
+    }
+
+    return cms_import_planning_center_events($events);
 }
 
 function cms_plain_summary(string $html, int $limit = 220): string
@@ -362,11 +459,10 @@ function cms_get_published_events(int $limit = 12): array
     return array_map('cms_public_event_shape', $statement->fetchAll());
 }
 
-function cms_has_published_events(): bool
+function cms_get_website_events(int $limit = 12): array
 {
-    $statement = cms_pdo()->prepare("SELECT COUNT(*) FROM cms_events WHERE status = 'published'");
-    $statement->execute();
-    return (int) $statement->fetchColumn() > 0;
+    cms_sync_planning_center_events();
+    return cms_get_published_events($limit);
 }
 
 function cms_public_event_shape(array $event): array
@@ -419,13 +515,41 @@ function cms_save_event(array $input, ?int $id = null): int
 
     $pdo = cms_pdo();
     if ($id !== null) {
+        $existing = cms_get_event($id);
+        if (!$existing) {
+            throw new RuntimeException('Event not found.');
+        }
+
+        $overrideFields = [];
+        if (!empty($existing['planning_center_id'])) {
+            $source = json_decode((string) ($existing['source_data'] ?? ''), true);
+            if (is_array($source)) {
+                foreach (array_keys($source) as $field) {
+                    $postedValue = $values[":{$field}"] ?? null;
+                    $sourceValue = $source[$field] ?? null;
+                    if (!cms_event_values_match($field, $postedValue, $sourceValue)) {
+                        $overrideFields[] = $field;
+                    }
+                }
+            } elseif ((int) ($existing['local_override'] ?? 0) === 1) {
+                $overrideFields = ['title', 'summary', 'body', 'starts_at', 'ends_at', 'image_url', 'registration_url'];
+            }
+            if ($status !== 'published') {
+                $overrideFields[] = 'status';
+            }
+        }
+
+        $overrideFields = array_values(array_unique($overrideFields));
+        $values[':override_fields'] = json_encode($overrideFields);
+        $values[':local_override'] = $overrideFields ? 1 : 0;
         $statement = $pdo->prepare(
             'UPDATE cms_events SET title = :title, slug = :slug, summary = :summary,
              body = :body, starts_at = :starts_at, ends_at = :ends_at,
              location_name = :location_name, location_address = :location_address,
              image_url = :image_url, registration_url = :registration_url,
              registration_label = :registration_label, status = :status,
-             is_featured = :is_featured, local_override = 1, updated_at = :updated_at
+             is_featured = :is_featured, local_override = :local_override,
+             override_fields = :override_fields, updated_at = :updated_at
              WHERE id = :id'
         );
         $statement->execute($values + [':id' => $id]);
@@ -447,10 +571,58 @@ function cms_save_event(array $input, ?int $id = null): int
     return (int) $pdo->lastInsertId();
 }
 
+function cms_event_values_match(string $field, $first, $second): bool
+{
+    if (in_array($field, ['starts_at', 'ends_at'], true)) {
+        if (($first === null || $first === '') && ($second === null || $second === '')) {
+            return true;
+        }
+        $firstTime = strtotime((string) $first);
+        $secondTime = strtotime((string) $second);
+        return $firstTime !== false && $secondTime !== false && $firstTime === $secondTime;
+    }
+
+    return (string) ($first ?? '') === (string) ($second ?? '');
+}
+
 function cms_delete_event(int $id): void
 {
     $statement = cms_pdo()->prepare('DELETE FROM cms_events WHERE id = :id');
     $statement->execute([':id' => $id]);
+}
+
+function cms_reset_planning_center_overrides(int $id): void
+{
+    $event = cms_get_event($id);
+    if (!$event || empty($event['planning_center_id'])) {
+        throw new InvalidArgumentException('Only Planning Center events can be reset.');
+    }
+
+    $source = json_decode((string) ($event['source_data'] ?? ''), true);
+    if (!is_array($source) || !$source) {
+        throw new RuntimeException('Sync this event with Planning Center before resetting it.');
+    }
+
+    $assignments = [];
+    $values = [
+        ':id' => $id,
+        ':updated_at' => gmdate(DATE_ATOM),
+    ];
+    foreach ($source as $field => $value) {
+        if (!in_array($field, ['title', 'summary', 'body', 'starts_at', 'ends_at', 'image_url', 'registration_url'], true)) {
+            continue;
+        }
+        $assignments[] = "{$field} = :{$field}";
+        $values[":{$field}"] = $value;
+    }
+
+    $assignments[] = "status = 'published'";
+    $assignments[] = 'local_override = 0';
+    $assignments[] = "override_fields = '[]'";
+    $assignments[] = 'updated_at = :updated_at';
+    cms_pdo()->prepare(
+        'UPDATE cms_events SET ' . implode(', ', $assignments) . ' WHERE id = :id'
+    )->execute($values);
 }
 
 function cms_datetime_local_value(?string $value): string
