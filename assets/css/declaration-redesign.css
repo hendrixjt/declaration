@@ -163,8 +163,8 @@ a:hover {
 }
 
 .header .logo img {
-  width: 158px;
-  max-height: 48px;
+  width: 188px;
+  max-height: 52px;
   object-fit: contain;
 }
 
@@ -944,8 +944,8 @@ body:not(.declaration-home) .page-title {
   }
 
   .header .logo img {
-    width: 138px;
-    max-height: 42px;
+    width: 154px;
+    max-height: 46px;
   }
 
   .header .header-actions {
@@ -1044,8 +1044,8 @@ body:not(.declaration-home) .page-title {
   }
 
   .header .logo img {
-    width: 112px;
-    max-height: 34px;
+    width: 128px;
+    max-height: 38px;
   }
 
   .header .header-actions {
