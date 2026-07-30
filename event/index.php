@@ -39,7 +39,7 @@ include __DIR__ . '/../includes/header.php';
       <div class="container-fluid declaration-shell event-detail-grid">
         <article>
           <?php if ($event['summary']): ?><p class="event-detail-lead"><?= cms_escape($event['summary']) ?></p><?php endif; ?>
-          <?php if ($event['body']): ?><div class="event-detail-body"><?= nl2br(cms_escape(strip_tags($event['body']))) ?></div><?php endif; ?>
+          <?php if ($event['body']): ?><div class="event-detail-body"><?= cms_sanitize_rich_text((string) $event['body']) ?></div><?php endif; ?>
         </article>
         <aside class="event-detail-meta">
           <div>

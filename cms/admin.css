@@ -91,6 +91,8 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .cms-section-title p { margin: 7px 0 0; color: var(--cms-muted); font-size: 13px; }
 .cms-form, .cms-fields, .cms-publish-box { display: grid; gap: 18px; }
 .cms-form label, .cms-fields label, .cms-publish-box label { display: grid; gap: 8px; color: #3c3b38; font-size: 13px; font-weight: 600; }
+.cms-field { display: grid; gap: 8px; color: #3c3b38; font-size: 13px; }
+.cms-field__label { font-weight: 600; }
 .cms-form input, .cms-fields input, .cms-fields textarea, .cms-publish-box select {
   width: 100%; border: 1px solid #c9c7c0; border-radius: 0; background: white; color: var(--cms-ink); padding: 12px 13px; outline: none;
 }
@@ -101,6 +103,29 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .cms-input-prefix { display: flex; align-items: stretch; }
 .cms-input-prefix span { display: flex; align-items: center; padding: 0 10px; border: 1px solid #c9c7c0; border-right: 0; background: var(--cms-soft); color: var(--cms-muted); font-weight: 400; }
 .cms-image-preview { width: min(100%, 440px); max-height: 260px; object-fit: cover; border: 1px solid var(--cms-line); }
+.cms-rich-editor { border: 1px solid #c9c7c0; background: var(--cms-white); }
+.cms-rich-editor:focus-within { border-color: var(--cms-accent); box-shadow: 0 0 0 2px rgba(215,85,39,.13); }
+.cms-rich-editor__toolbar {
+  display: flex; flex-wrap: wrap; gap: 3px; align-items: center; padding: 7px;
+  border-bottom: 1px solid var(--cms-line); background: var(--cms-soft);
+}
+.cms-rich-editor__toolbar > span { width: 1px; height: 24px; margin: 0 4px; background: var(--cms-line); }
+.cms-rich-editor__toolbar button {
+  min-width: 34px; min-height: 34px; padding: 5px 9px; border: 1px solid transparent;
+  background: transparent; color: var(--cms-ink); cursor: pointer; font-size: 12px;
+}
+.cms-rich-editor__toolbar button:hover,
+.cms-rich-editor__toolbar button:focus-visible { border-color: #b8b6af; background: var(--cms-white); outline: none; }
+.cms-rich-editor__input {
+  min-height: 270px; max-height: 560px; overflow-y: auto; padding: 15px;
+  color: var(--cms-ink); font-size: 15px; font-weight: 400; line-height: 1.6; outline: none;
+}
+.cms-rich-editor__input:empty::before { color: #888680; content: "Write the full event description…"; pointer-events: none; }
+.cms-rich-editor__input :first-child { margin-top: 0; }
+.cms-rich-editor__input :last-child { margin-bottom: 0; }
+.cms-rich-editor__input p { margin: 0 0 1em; }
+.cms-rich-editor__input ul,
+.cms-rich-editor__input ol { margin: 0 0 1em; padding-left: 24px; }
 .cms-publish-box { padding: 22px; }
 .cms-check { display: flex !important; grid-template-columns: auto 1fr; align-items: center; }
 .cms-check input { width: 18px; height: 18px; accent-color: var(--cms-accent); }

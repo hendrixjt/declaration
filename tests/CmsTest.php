@@ -85,6 +85,17 @@ try {
     cms_test_assert($secondImport['skipped'] === 1, 'Re-import preserves locally edited event');
     cms_test_assert($preserved['title'] === 'Declaration Test Gathering', 'Local title remains authoritative');
 
+    $safeBody = cms_sanitize_rich_text(
+        '<p><strong>Formatted</strong> description.</p><script>alert(1)</script>'
+        . '<p><a href="javascript:alert(1)" onclick="alert(1)">Unsafe link</a></p>'
+        . '<ul><li>Useful list</li></ul>'
+    );
+    cms_test_assert(str_contains($safeBody, '<strong>Formatted</strong>'), 'Rich text formatting is preserved');
+    cms_test_assert(str_contains($safeBody, '<ul><li>Useful list</li></ul>'), 'Rich text lists are preserved');
+    cms_test_assert(!str_contains($safeBody, '<script'), 'Unsafe rich text elements are removed');
+    cms_test_assert(!str_contains($safeBody, 'javascript:'), 'Unsafe rich text links are removed');
+    cms_test_assert(!str_contains($safeBody, 'onclick'), 'Rich text event attributes are removed');
+
     cms_delete_event($id);
     cms_test_assert(count(cms_get_events_for_admin()) === 0, 'Event can be deleted');
 } finally {

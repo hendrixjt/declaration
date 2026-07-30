@@ -81,9 +81,32 @@ include __DIR__ . '/_header.php';
         <textarea name="summary" rows="3" maxlength="500"><?= cms_escape($event['summary']) ?></textarea>
         <small>Used on event cards and search previews.</small>
       </label>
-      <label>Full description
-        <textarea name="body" rows="12"><?= cms_escape($event['body']) ?></textarea>
-      </label>
+      <div class="cms-field">
+        <span class="cms-field__label">Full description</span>
+        <div class="cms-rich-editor" data-rich-editor>
+          <div class="cms-rich-editor__toolbar" role="toolbar" aria-label="Description formatting">
+            <button type="button" data-rich-command="bold" aria-label="Bold"><strong>B</strong></button>
+            <button type="button" data-rich-command="italic" aria-label="Italic"><em>I</em></button>
+            <span aria-hidden="true"></span>
+            <button type="button" data-rich-command="insertUnorderedList" aria-label="Bulleted list">• List</button>
+            <button type="button" data-rich-command="insertOrderedList" aria-label="Numbered list">1. List</button>
+            <span aria-hidden="true"></span>
+            <button type="button" data-rich-link aria-label="Add link">Link</button>
+            <button type="button" data-rich-command="unlink" aria-label="Remove link">Unlink</button>
+            <button type="button" data-rich-command="removeFormat" aria-label="Clear formatting">Clear</button>
+          </div>
+          <div
+            class="cms-rich-editor__input"
+            contenteditable="true"
+            role="textbox"
+            aria-multiline="true"
+            aria-label="Full description"
+            data-rich-input
+          ><?= cms_sanitize_rich_text((string) $event['body']) ?></div>
+          <textarea name="body" data-rich-output hidden><?= cms_escape($event['body']) ?></textarea>
+        </div>
+        <small>Format the description visually—no HTML knowledge needed.</small>
+      </div>
     </div>
 
     <div class="cms-panel cms-fields">

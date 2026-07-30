@@ -2202,6 +2202,27 @@ body.declaration-interior {
   line-height: 1.75;
 }
 
+.event-detail-body p,
+.event-detail-body ul,
+.event-detail-body ol,
+.event-detail-body blockquote {
+  margin: 0 0 1.25em;
+}
+
+.event-detail-body ul,
+.event-detail-body ol {
+  padding-left: 1.35em;
+}
+
+.event-detail-body h2,
+.event-detail-body h3 {
+  margin: 1.5em 0 .55em;
+}
+
+.event-detail-body a {
+  border-bottom: 1px solid currentColor;
+}
+
 .event-detail-meta {
   display: grid;
   gap: 1px;

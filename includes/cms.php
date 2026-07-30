@@ -282,7 +282,7 @@ function cms_import_planning_center_events(array $events): array
         $values = [
             ':title' => $title,
             ':summary' => cms_plain_summary($description),
-            ':body' => $description,
+            ':body' => cms_sanitize_rich_text($description),
             ':starts_at' => $startsAt,
             ':ends_at' => trim((string) ($event['ends_at'] ?? '')) ?: null,
             ':image_url' => trim((string) ($event['logo_url'] ?? '')) ?: null,
@@ -404,7 +404,7 @@ function cms_save_event(array $input, ?int $id = null): int
         ':title' => $title,
         ':slug' => $slug,
         ':summary' => trim((string) ($input['summary'] ?? '')) ?: null,
-        ':body' => trim((string) ($input['body'] ?? '')) ?: null,
+        ':body' => cms_sanitize_rich_text((string) ($input['body'] ?? '')) ?: null,
         ':starts_at' => $startsAt,
         ':ends_at' => trim((string) ($input['ends_at'] ?? '')) ?: null,
         ':location_name' => trim((string) ($input['location_name'] ?? '')) ?: null,
@@ -495,4 +495,81 @@ function cms_safe_url(?string $value, string $fallback = ''): string
     }
     $scheme = strtolower((string) parse_url($value, PHP_URL_SCHEME));
     return in_array($scheme, ['http', 'https'], true) ? $value : $fallback;
+}
+
+function cms_sanitize_rich_text(string $html): string
+{
+    $html = trim($html);
+    if ($html === '') {
+        return '';
+    }
+
+    if ($html === strip_tags($html)) {
+        return nl2br(cms_escape($html));
+    }
+
+    $html = preg_replace('#<(script|style|iframe|object|embed)\b[^>]*>.*?</\1>#is', '', $html) ?? '';
+    if (!class_exists('DOMDocument')) {
+        return strip_tags($html, '<p><br><strong><b><em><i><ul><ol><li><a><h2><h3><blockquote><div>');
+    }
+
+    $document = new DOMDocument('1.0', 'UTF-8');
+    $previousErrors = libxml_use_internal_errors(true);
+    $document->loadHTML(
+        '<?xml encoding="UTF-8"><div id="cms-rich-root">' . $html . '</div>',
+        LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD
+    );
+    libxml_clear_errors();
+    libxml_use_internal_errors($previousErrors);
+
+    $root = $document->getElementById('cms-rich-root');
+    if (!$root) {
+        return '';
+    }
+
+    $allowedTags = ['p', 'br', 'strong', 'b', 'em', 'i', 'ul', 'ol', 'li', 'a', 'h2', 'h3', 'blockquote', 'div'];
+    $cleanNode = function (DOMNode $node) use (&$cleanNode, $allowedTags): void {
+        foreach (iterator_to_array($node->childNodes) as $child) {
+            $cleanNode($child);
+        }
+
+        if (!$node instanceof DOMElement || $node->getAttribute('id') === 'cms-rich-root') {
+            return;
+        }
+
+        $tag = strtolower($node->tagName);
+        if (!in_array($tag, $allowedTags, true)) {
+            $parent = $node->parentNode;
+            if ($parent) {
+                while ($node->firstChild) {
+                    $parent->insertBefore($node->firstChild, $node);
+                }
+                $parent->removeChild($node);
+            }
+            return;
+        }
+
+        $href = $tag === 'a' ? $node->getAttribute('href') : '';
+        while ($node->attributes->length > 0) {
+            $node->removeAttributeNode($node->attributes->item(0));
+        }
+
+        if ($tag === 'a') {
+            $safeHref = cms_safe_url($href);
+            if ($safeHref !== '') {
+                $node->setAttribute('href', $safeHref);
+                if (!str_starts_with($safeHref, '/')) {
+                    $node->setAttribute('target', '_blank');
+                    $node->setAttribute('rel', 'noopener');
+                }
+            }
+        }
+    };
+    $cleanNode($root);
+
+    $result = '';
+    foreach ($root->childNodes as $child) {
+        $result .= $document->saveHTML($child);
+    }
+    return trim($result);
 }
