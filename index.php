@@ -42,7 +42,7 @@ $fallback_events = [
         'date_label' => 'Your next step',
         'description' => 'Learn the heart and vision of Declaration, discover purpose, and find your place.',
         'image' => 'assets/img/events/showcase-5.webp',
-        'url' => 'https://www.declaration.org/dna',
+        'url' => 'dna/',
         'cta_label' => 'Explore DNA',
     ],
     [
@@ -58,7 +58,7 @@ $fallback_events = [
 $next_steps = [
     ['number' => '01', 'title' => 'Plan a Visit', 'copy' => 'Service times, directions, kids check-in, and what to expect.', 'url' => 'https://www.declaration.org/new-here', 'image' => 'assets/img/events/gallery-2.webp'],
     ['number' => '02', 'title' => 'Find Your People', 'copy' => 'Groups for real community, freedom, and growth in every season.', 'url' => 'https://www.declaration.org/groups', 'image' => 'assets/img/events/gallery-7.webp'],
-    ['number' => '03', 'title' => 'Discover DNA', 'copy' => 'Know our heart, understand our culture, and discover your purpose.', 'url' => 'https://www.declaration.org/dna', 'image' => 'assets/img/events/gallery-5.webp'],
+    ['number' => '03', 'title' => 'Discover DNA', 'copy' => 'Know our heart, understand our culture, and discover your purpose.', 'url' => 'dna/', 'image' => 'assets/img/events/gallery-5.webp'],
     ['number' => '04', 'title' => 'Make a Difference', 'copy' => 'Use your gifts through serve teams, missions, and life together.', 'url' => 'https://www.declaration.org/teams', 'image' => 'assets/img/events/gallery-9.webp'],
 ];
 

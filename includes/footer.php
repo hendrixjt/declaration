@@ -17,6 +17,7 @@
           <a href="index.php#next-steps">Next Steps</a>
           <a href="events/">Events</a>
           <a href="about/">About</a>
+          <a href="dna/">DNA</a>
           <a href="contact/">Contact</a>
           <a href="https://www.declaration.org/groups" target="_blank" rel="noopener">Groups</a>
           <a href="https://www.declaration.org/give" target="_blank" rel="noopener">Give</a>

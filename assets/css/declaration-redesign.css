@@ -1437,6 +1437,294 @@ body.declaration-interior {
   gap: 42px;
 }
 
+/* DNA */
+.dna-page {
+  --dna-gold: #c8a94e;
+}
+
+.interior-hero--dna .interior-hero__media img {
+  object-position: center 46%;
+}
+
+.interior-hero--dna .interior-hero__veil {
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.14) 10%, rgba(0, 0, 0, 0.18) 46%, rgba(0, 0, 0, 0.94) 100%),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.62), transparent 78%);
+}
+
+.section-kicker--gold {
+  color: var(--dna-gold);
+}
+
+.dna-about,
+.dna-details,
+.dna-faq {
+  background: #151515;
+  color: var(--white);
+}
+
+.dna-about {
+  padding: clamp(100px, 12vw, 190px) 0 0;
+}
+
+.dna-about__intro {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.7fr) minmax(0, 1.3fr);
+  gap: clamp(52px, 9vw, 150px);
+  margin: clamp(48px, 7vw, 86px) 0 clamp(70px, 9vw, 125px);
+}
+
+.dna-about__intro h2,
+.dna-details h2,
+.dna-faq h2,
+.dna-register h2 {
+  margin: 0;
+  color: inherit;
+  font-size: clamp(3.4rem, 7vw, 7.6rem);
+  font-weight: 900;
+  line-height: 0.88;
+  text-transform: uppercase;
+}
+
+.dna-about__copy {
+  max-width: 830px;
+}
+
+.dna-about__copy p {
+  margin: 0 0 26px;
+  color: rgba(255, 255, 255, 0.64);
+  font-size: clamp(1.08rem, 1.5vw, 1.32rem);
+  font-weight: 300;
+  line-height: 1.65;
+}
+
+.dna-about__copy strong {
+  color: var(--white);
+  font-weight: 600;
+}
+
+.dna-path {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.dna-path article {
+  min-height: 330px;
+  padding: clamp(34px, 4vw, 60px);
+  border-right: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.dna-path article:first-child {
+  border-left: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.dna-path span {
+  display: block;
+  margin-bottom: 28px;
+  color: rgba(255, 255, 255, 0.08);
+  font-family: var(--tall-font);
+  font-size: clamp(4rem, 6vw, 6.5rem);
+  font-weight: 700;
+  line-height: 0.8;
+}
+
+.dna-path h3 {
+  margin: 0 0 16px;
+  color: var(--dna-gold);
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.dna-path p {
+  max-width: 320px;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.48);
+  font-weight: 300;
+}
+
+.dna-details {
+  padding: clamp(100px, 12vw, 180px) 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.dna-details h2,
+.dna-faq h2 {
+  margin-top: clamp(48px, 6vw, 72px);
+}
+
+.dna-class-card {
+  margin-top: clamp(60px, 8vw, 100px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.dna-class-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+  padding: 25px clamp(24px, 3vw, 48px);
+  background: var(--dna-gold);
+  color: var(--ink);
+}
+
+.dna-class-card__header h3 {
+  margin: 0;
+  font-size: clamp(1.35rem, 2.2vw, 2rem);
+  font-weight: 900;
+  letter-spacing: 0.035em;
+  text-transform: uppercase;
+}
+
+.dna-class-card__header span {
+  flex: 0 0 auto;
+  padding: 8px 13px;
+  background: var(--ink);
+  color: var(--dna-gold);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.dna-class-card__facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0;
+}
+
+.dna-class-card__facts > div {
+  padding: clamp(28px, 4vw, 52px);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dna-class-card__facts > div:nth-child(2n) {
+  border-right: 0;
+}
+
+.dna-class-card dt {
+  margin-bottom: 9px;
+  color: var(--dna-gold);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.dna-class-card dd {
+  margin: 0;
+  color: var(--white);
+  font-family: var(--display-font);
+  font-size: clamp(1.35rem, 2.5vw, 2.25rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+
+.dna-class-card small {
+  color: rgba(255, 255, 255, 0.42);
+}
+
+.dna-class-card__note {
+  margin: 0;
+  padding: 30px clamp(24px, 3vw, 48px) 30px clamp(45px, 5vw, 80px);
+  border-left: 3px solid var(--dna-gold);
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.dna-class-card__note strong {
+  color: var(--white);
+}
+
+.dna-faq {
+  padding: clamp(100px, 12vw, 180px) 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.dna-faq__list {
+  margin: clamp(60px, 8vw, 100px) 0 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.dna-faq__list > div {
+  display: grid;
+  grid-template-columns: minmax(240px, 0.55fr) minmax(0, 1.45fr);
+  gap: clamp(35px, 7vw, 110px);
+  padding: clamp(30px, 4vw, 48px) 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.dna-faq dt {
+  color: var(--white);
+  font-family: var(--display-font);
+  font-size: clamp(1.1rem, 1.8vw, 1.55rem);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  text-transform: uppercase;
+}
+
+.dna-faq dd {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 300;
+}
+
+.dna-register {
+  padding: clamp(100px, 12vw, 175px) 0;
+  background: var(--dna-gold);
+  text-align: center;
+}
+
+.dna-register .section-kicker::before {
+  display: none;
+}
+
+.dna-register h2 {
+  max-width: 1200px;
+  margin: 42px auto 30px;
+}
+
+.dna-register > div > p:not(.section-kicker) {
+  max-width: 610px;
+  margin: 0 auto 44px;
+  color: rgba(10, 10, 10, 0.58);
+  font-size: 1.12rem;
+}
+
+@media (max-width: 900px) {
+  .dna-about__intro {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .dna-path,
+  .dna-class-card__facts,
+  .dna-faq__list > div {
+    grid-template-columns: 1fr;
+  }
+
+  .dna-path article {
+    min-height: 0;
+    border-left: 1px solid rgba(255, 255, 255, 0.12);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .dna-class-card__header {
+    align-items: flex-start;
+  }
+
+  .dna-class-card__facts > div {
+    border-right: 0;
+  }
+
+  .dna-faq__list > div {
+    gap: 14px;
+  }
+}
+
 /* Contact */
 .contact-editorial__grid {
   display: grid;
