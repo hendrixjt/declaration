@@ -245,6 +245,25 @@ Source:
 
 - https://www.declaration.org/give
 
+### Serve Team Conference
+
+Reference direction supplied by the user on 2026-07-31:
+
+- The prior conference page used oversized black typography, near-black content sections, bright circular badge graphics, and candid gathering photography.
+- The event was framed as a day to refresh and encourage people who serve, not simply another training day.
+- Scroll-linked rotation of selected circular badges is part of the requested experience for the new test-site page.
+- Dates, speakers, venue, and registration destination from the older reference are not current enough to publish as facts.
+
+New test-site usage:
+
+- Keep `/serve-team-conference/` evergreen until current event details are confirmed.
+- Use “With You” as the relational theme and direct the temporary call to action to the existing contact flow.
+- Maintain the site’s editorial black-and-white system, using lime, purple, teal, magenta, and orange only in the conference badge motif.
+
+Source:
+
+- User-provided page screenshots, reviewed 2026-07-31
+
 ## Proposed homepage content stack
 
 This is the current recommended direction for a fuller new homepage:

@@ -193,6 +193,35 @@
   }
 
   /**
+   * Scroll-linked decorative discs
+   */
+  const scrollSpinItems = document.querySelectorAll('[data-scroll-spin]');
+
+  if (scrollSpinItems.length && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    let spinFrameRequested = false;
+
+    function updateScrollSpin() {
+      const scrollPosition = window.scrollY;
+
+      scrollSpinItems.forEach((item) => {
+        const speed = parseFloat(item.getAttribute('data-spin-speed') || '0.12');
+        item.style.setProperty('--spin-rotation', `${scrollPosition * speed}deg`);
+      });
+
+      spinFrameRequested = false;
+    }
+
+    function requestScrollSpin() {
+      if (spinFrameRequested) return;
+      window.requestAnimationFrame(updateScrollSpin);
+      spinFrameRequested = true;
+    }
+
+    document.addEventListener('scroll', requestScrollSpin, { passive: true });
+    window.addEventListener('load', updateScrollSpin);
+  }
+
+  /**
    * Countdown timer
    */
   function updateCountDown(countDownItem) {

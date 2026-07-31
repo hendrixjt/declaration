@@ -23,6 +23,7 @@ try {
 $has_live_events = !empty($upcoming_events);
 
 $fallback_events = [
+    ['name' => 'Serve Team Conference', 'date_label' => 'Details coming soon', 'description' => 'A day to refresh, encourage, and connect the people who faithfully serve at Declaration.', 'image' => 'assets/img/events/gallery-1.webp', 'url' => 'serve-team-conference/', 'cta_label' => 'Explore the conference'],
     ['name' => 'First Tuesday Prayer & Worship', 'date_label' => 'Monthly at 7:00pm', 'description' => 'A night to seek the Lord together through prayer, worship, and His presence.', 'image' => 'assets/img/events/gallery-4.webp', 'url' => 'https://www.declaration.org/', 'cta_label' => 'Learn More'],
     ['name' => 'DNA', 'date_label' => 'Your next step', 'description' => 'Learn the heart and vision of Declaration, discover purpose, and find your place.', 'image' => 'assets/img/events/showcase-5.webp', 'url' => 'dna/', 'cta_label' => 'Explore DNA'],
     ['name' => 'Groups', 'date_label' => 'Community all year', 'description' => 'Find freedom, grow in faith, and build meaningful relationships in every season.', 'image' => 'assets/img/events/gallery-8.webp', 'url' => 'https://www.declaration.org/groups', 'cta_label' => 'Find a Group'],
