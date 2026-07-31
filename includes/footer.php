@@ -46,6 +46,10 @@
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
   <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
   <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-  <script src="assets/js/main.js"></script>
+  <?php
+  $main_js_path = __DIR__ . '/../assets/js/main.js';
+  $main_js_version = is_file($main_js_path) ? (string) filemtime($main_js_path) : '1';
+  ?>
+  <script src="assets/js/main.js?v=<?php echo htmlspecialchars($main_js_version); ?>"></script>
 </body>
 </html>

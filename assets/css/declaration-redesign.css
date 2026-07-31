@@ -2135,6 +2135,33 @@ body.declaration-interior {
   width: clamp(55px, 7vw, 105px);
 }
 
+@supports (animation-timeline: scroll()) {
+  .stc-disc[data-scroll-spin] {
+    --stc-scroll-turns: 1.5turn;
+    animation: stc-scroll-spin linear both;
+    animation-timeline: scroll(root block);
+    animation-range: 0% 100%;
+  }
+
+  .stc-disc[data-spin-speed^="-"] {
+    --stc-scroll-turns: -1.75turn;
+  }
+
+  .stc-disc[data-spin-speed="0.28"],
+  .stc-disc[data-spin-speed="0.22"] {
+    --stc-scroll-turns: 2.25turn;
+  }
+
+  .stc-disc[data-spin-speed="-0.3"] {
+    --stc-scroll-turns: -2.5turn;
+  }
+
+  @keyframes stc-scroll-spin {
+    from { rotate: 0turn; }
+    to { rotate: var(--stc-scroll-turns); }
+  }
+}
+
 @media (max-width: 900px) {
   .stc-intro__grid,
   .stc-day__heading {
@@ -2219,6 +2246,8 @@ body.declaration-interior {
 
 @media (prefers-reduced-motion: reduce) {
   .stc-disc {
+    animation: none !important;
+    rotate: none !important;
     transform: none !important;
     will-change: auto;
   }

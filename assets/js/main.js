@@ -197,7 +197,9 @@
    */
   const scrollSpinItems = document.querySelectorAll('[data-scroll-spin]');
 
-  if (scrollSpinItems.length && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const hasNativeScrollTimeline = typeof CSS !== 'undefined' && CSS.supports('animation-timeline: scroll()');
+
+  if (scrollSpinItems.length && !hasNativeScrollTimeline && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     let spinFrameRequested = false;
 
     function updateScrollSpin() {
