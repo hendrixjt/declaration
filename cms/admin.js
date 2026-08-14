@@ -45,3 +45,18 @@ document.querySelectorAll('[data-rich-editor]').forEach((editor) => {
   });
   form.addEventListener('submit', syncValue);
 });
+
+document.querySelectorAll('[data-copy-value]').forEach((button) => {
+  button.addEventListener('click', async () => {
+    const value = button.dataset.copyValue ?? '';
+    if (!value) return;
+    try {
+      await navigator.clipboard.writeText(value);
+      const original = button.textContent;
+      button.textContent = 'Copied';
+      window.setTimeout(() => { button.textContent = original; }, 1400);
+    } catch (error) {
+      window.prompt('Copy this URL:', value);
+    }
+  });
+});

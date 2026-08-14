@@ -39,6 +39,12 @@ If this becomes the main `declaration.org` site later, the code can stay the sam
   `storage/declaration-cms.sqlite`. The file is ignored by Git.
 - See `docs/cms-prototype.md` for setup, behavior, and optional MySQL settings.
 
+## Media library
+
+- Open `/cms/media.php` to upload, optimize, tag, search, and archive website images.
+- Generated image files live in `/uploads/media/` and must be included in hosting backups.
+- Google Drive can be connected as an optional read-only import source; imported images are copied into website storage.
+
 Run the CMS checks with:
 
 ```sh

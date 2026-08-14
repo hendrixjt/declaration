@@ -121,6 +121,10 @@ function cms_migrate(PDO $pdo): void
 
     cms_add_column_if_missing($pdo, 'cms_events', 'source_data', "{$text} NULL");
     cms_add_column_if_missing($pdo, 'cms_events', 'override_fields', 'TEXT NULL');
+
+    if (function_exists('cms_media_migrate')) {
+        cms_media_migrate($pdo);
+    }
 }
 
 function cms_add_column_if_missing(PDO $pdo, string $table, string $column, string $definition): void
@@ -745,3 +749,5 @@ function cms_sanitize_rich_text(string $html): string
     }
     return trim($result);
 }
+
+require_once __DIR__ . '/cms-media.php';

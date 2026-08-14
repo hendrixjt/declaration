@@ -15,7 +15,7 @@ $cmsCurrent = $cmsCurrent ?? 'events';
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/cms/admin.css?v=<?= cms_escape((string) @filemtime(__DIR__ . '/admin.css')) ?>">
 </head>
-<body class="cms-body">
+<body class="cms-body<?= !empty($cmsBodyClass) ? ' ' . cms_escape($cmsBodyClass) : '' ?>">
   <div class="cms-shell">
     <aside class="cms-sidebar">
       <a class="cms-brand" href="/cms/">
@@ -25,6 +25,9 @@ $cmsCurrent = $cmsCurrent ?? 'events';
       <nav class="cms-nav" aria-label="CMS navigation">
         <a href="/cms/"<?= $cmsCurrent === 'events' ? ' class="is-active"' : '' ?>>
           <span>Events</span><span aria-hidden="true">›</span>
+        </a>
+        <a href="/cms/media.php"<?= $cmsCurrent === 'media' ? ' class="is-active"' : '' ?>>
+          <span>Media</span><span aria-hidden="true">›</span>
         </a>
         <a href="/" target="_blank" rel="noopener">
           <span>View website</span><span aria-hidden="true">↗</span>

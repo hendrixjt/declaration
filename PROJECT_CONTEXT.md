@@ -85,6 +85,13 @@ The homepage should eventually include most of these ideas:
   synchronizes upcoming events automatically and shows them by default.
 - The CMS is a website presentation and exception layer: administrators can
   hide, feature, or customize an event without entering it twice.
+- The CMS media library accepts JPEG, PNG, and WebP uploads; generates responsive
+  WebP variants; and manages titles, alt text, captions, credits, ministry tags,
+  search, filters, and archiving.
+- Google Drive can be configured as a read-only source folder. Selected Drive
+  images are imported into website-owned media storage rather than served from
+  Drive URLs. The integration uses a service account and remains hidden until
+  credentials are configured.
 - Only fields changed in the CMS are preserved as overrides; unchanged fields
   continue synchronizing from Planning Center. Event registration may continue
   linking to Church Center.

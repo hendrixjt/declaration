@@ -12,8 +12,13 @@ The prototype is intentionally small:
 - optional external registration links.
 
 It does not yet include multiple users, password recovery, native
-registrations, payments, image uploads, recurring-event rules, or other site
-content types.
+registrations, payments, recurring-event rules, or general page editing.
+
+The media library is the first additional content tool. It supports local
+image uploads, responsive WebP variants, title and alt text, captions, credits,
+controlled tags, search, filters, archiving, and an optional read-only Google
+Drive source. Multi-user administration and password recovery remain future
+work.
 
 ## First-time setup
 
@@ -74,3 +79,41 @@ The schema is created automatically on the first CMS request.
 
 For a production launch, move to MySQL, add login throttling and password
 recovery, and confirm backup and restore procedures.
+
+## Media library
+
+Open `/cms/media.php` to upload and organize website images. JPEG, PNG, and
+WebP inputs are validated and converted to responsive WebP variants. Generated
+files live in `uploads/media/`, are intentionally excluded from Git, and must
+be included in production backups.
+
+Editors can maintain:
+
+- a plain-language title;
+- accessible alt text;
+- an optional caption and photographer/source credit;
+- comma-separated ministry tags;
+- active or archived status.
+
+Search includes filenames, titles, alt text, captions, credits, and tags.
+Default tag suggestions include Missions, Kids, Youth, Worship, Staff, Events,
+Serve, Baptism, Sunday, Community, Groups, and Prayer.
+
+### Optional Google Drive source
+
+The Drive view is intentionally read-only. It lists images from one configured
+folder and imports a selected image into the website's own media storage. This
+prevents public pages from depending on Drive URLs or sharing permissions.
+
+To connect it:
+
+1. Create a service account in a Declaration-owned Google Cloud project.
+2. Enable the Google Drive API.
+3. Share the source folder with the service-account email as a viewer.
+4. Add `GOOGLE_DRIVE_SERVICE_ACCOUNT_EMAIL`, `GOOGLE_DRIVE_PRIVATE_KEY`, and
+   `GOOGLE_DRIVE_FOLDER_ID` to the untracked `includes/config.php`.
+5. Add `GOOGLE_DRIVE_SHARED_DRIVE_ID` only when the folder belongs to a Shared
+   Drive and the listing requires a drive corpus.
+
+Drive imports preserve the source file ID and revision for future comparison,
+but do not automatically change the website copy when the Drive file changes.

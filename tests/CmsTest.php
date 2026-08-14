@@ -5,7 +5,10 @@
  */
 
 $databasePath = sys_get_temp_dir() . '/declaration-cms-test-' . bin2hex(random_bytes(6)) . '.sqlite';
+$mediaPath = sys_get_temp_dir() . '/declaration-media-test-' . bin2hex(random_bytes(6));
 define('CMS_DSN', 'sqlite:' . $databasePath);
+define('CMS_MEDIA_STORAGE_PATH', $mediaPath);
+define('CMS_MEDIA_PUBLIC_BASE', '/test-media');
 require_once __DIR__ . '/../includes/cms.php';
 cms_start_session();
 
@@ -126,11 +129,62 @@ try {
     cms_test_assert(!str_contains($safeBody, 'javascript:'), 'Unsafe rich text links are removed');
     cms_test_assert(!str_contains($safeBody, 'onclick'), 'Rich text event attributes are removed');
 
+    $imagePath = sys_get_temp_dir() . '/declaration-media-fixture-' . bin2hex(random_bytes(6)) . '.png';
+    $fixture = imagecreatetruecolor(1200, 800);
+    $background = imagecolorallocate($fixture, 24, 28, 32);
+    imagefill($fixture, 0, 0, $background);
+    imagepng($fixture, $imagePath);
+    $fixture = null;
+    $mediaId = cms_media_store_upload([
+        'name' => 'Missions Team Photo.png',
+        'tmp_name' => $imagePath,
+        'error' => UPLOAD_ERR_OK,
+        'size' => filesize($imagePath),
+    ], [
+        'alt_text' => 'Declaration volunteers serving on a mission trip.',
+        'caption' => 'A ministry team serving together.',
+        'tags' => 'Missions, Serve',
+    ]);
+    $media = cms_media_get_asset($mediaId);
+    cms_test_assert($media !== null && $media['orientation'] === 'landscape', 'Media upload is processed and classified');
+    cms_test_assert(str_ends_with($media['public_url'], '.webp') && count($media['variants']) === 3, 'Responsive WebP variants are generated');
+    cms_test_assert(count($media['tags']) === 2, 'Media tags are stored');
+    cms_test_assert(count(cms_media_search(['q' => 'mission trip'])) === 1, 'Media metadata is searchable');
+    cms_test_assert(count(cms_media_search(['tag' => 'missions'])) === 1, 'Media can be filtered by tag');
+
+    cms_media_update_asset($mediaId, [
+        'title' => 'Declaration Missions Team',
+        'alt_text' => 'A Declaration missions team serving together.',
+        'caption' => 'Serving our ministry partners.',
+        'credit' => 'Declaration Church',
+        'tags' => 'Missions, Community',
+        'status' => 'archived',
+    ]);
+    $archivedMedia = cms_media_get_asset($mediaId);
+    cms_test_assert($archivedMedia['status'] === 'archived' && $archivedMedia['credit'] === 'Declaration Church', 'Media details and status can be updated');
+    cms_test_assert(count(cms_media_search(['status' => 'active'])) === 0, 'Archived media is hidden from the active library');
+    $invalidMediaRejected = false;
+    try {
+        cms_media_store_binary('not-an-image', 'unsafe.php');
+    } catch (InvalidArgumentException $exception) {
+        $invalidMediaRejected = true;
+    }
+    cms_test_assert($invalidMediaRejected, 'Non-image media uploads are rejected');
+    @unlink($imagePath);
+
     cms_delete_event($id);
     cms_test_assert(count(cms_get_events_for_admin()) === 0, 'Event can be deleted');
 } finally {
     if (is_file($databasePath)) {
         unlink($databasePath);
+    }
+    if (is_dir($mediaPath)) {
+        foreach (glob($mediaPath . '/*') ?: [] as $mediaFile) {
+            if (is_file($mediaFile)) {
+                unlink($mediaFile);
+            }
+        }
+        rmdir($mediaPath);
     }
 }
 

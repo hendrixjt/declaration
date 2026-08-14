@@ -7,6 +7,10 @@ _archive/
 cache/*.json
 storage/*.sqlite
 storage/*.sqlite-*
+uploads/media/*
+!uploads/media/.gitkeep
+!uploads/media/.htaccess
+cache/drive-thumbnails/
 
 # Local secrets
 includes/config.php
