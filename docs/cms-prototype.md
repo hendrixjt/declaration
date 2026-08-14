@@ -99,6 +99,12 @@ Search includes filenames, titles, alt text, captions, credits, and tags.
 Default tag suggestions include Missions, Kids, Youth, Worship, Staff, Events,
 Serve, Baptism, Sunday, Community, Groups, and Prayer.
 
+The library also computes website usage from deployable PHP, HTML, CSS,
+JavaScript, and JSON source files. Used images receive an **In use** badge and
+placement count, the inspector names the referring page and source file, and
+the usage filter can show used or unused assets. Generated uploads, CMS files,
+tests, caches, documentation, and archived source are excluded from the scan.
+
 ### Optional Google Drive source
 
 The Drive view is intentionally read-only. It lists images from one configured

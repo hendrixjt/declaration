@@ -8,9 +8,15 @@ $query = trim((string) ($_GET['q'] ?? ''));
 $orientation = (string) ($_GET['orientation'] ?? '');
 $tagSlug = (string) ($_GET['tag'] ?? '');
 $status = (string) ($_GET['status'] ?? 'active');
+$usageFilter = in_array(($_GET['usage'] ?? ''), ['used', 'unused'], true) ? (string) $_GET['usage'] : '';
 $notice = (string) ($_GET['notice'] ?? '');
 $counts = cms_media_counts();
 $tags = cms_media_all_tags();
+$allMediaAssets = cms_media_search(['status' => 'all']);
+$usageMap = cms_media_usage_map($allMediaAssets);
+$counts['used'] = count(array_filter($allMediaAssets, static fn(array $asset): bool =>
+    ($asset['status'] ?? '') === 'active' && !empty($usageMap[(int) $asset['id']])
+));
 $assets = [];
 $selectedAsset = null;
 $driveFiles = [];
@@ -26,9 +32,21 @@ if ($source === 'library') {
         'tag' => $tagSlug,
         'status' => $status,
     ]);
+    foreach ($assets as &$asset) {
+        $asset['placements'] = $usageMap[(int) $asset['id']] ?? [];
+    }
+    unset($asset);
+    if ($usageFilter !== '') {
+        $assets = array_values(array_filter($assets, static fn(array $asset): bool =>
+            $usageFilter === 'used' ? !empty($asset['placements']) : empty($asset['placements'])
+        ));
+    }
     $selectedId = (int) ($_GET['id'] ?? 0);
     if ($selectedId) {
         $selectedAsset = cms_media_get_asset($selectedId);
+        if ($selectedAsset) {
+            $selectedAsset['placements'] = $usageMap[(int) $selectedAsset['id']] ?? [];
+        }
     }
     if (!$selectedAsset && $assets) {
         $selectedAsset = $assets[0];
@@ -79,6 +97,7 @@ include __DIR__ . '/_header.php';
     <div><dt>Landscape</dt><dd><?= $counts['landscape'] ?></dd></div>
     <div><dt>Portrait</dt><dd><?= $counts['portrait'] ?></dd></div>
     <div><dt>Square</dt><dd><?= $counts['square'] ?></dd></div>
+    <div><dt>In use</dt><dd><?= $counts['used'] ?></dd></div>
   </dl>
 </header>
 
@@ -121,13 +140,18 @@ include __DIR__ . '/_header.php';
       <option value="archived"<?= $status === 'archived' ? ' selected' : '' ?>>Archived</option>
       <option value="all"<?= $status === 'all' ? ' selected' : '' ?>>All statuses</option>
     </select>
+    <select name="usage" aria-label="Website usage">
+      <option value=""<?= $usageFilter === '' ? ' selected' : '' ?>>Any usage</option>
+      <option value="used"<?= $usageFilter === 'used' ? ' selected' : '' ?>>In use</option>
+      <option value="unused"<?= $usageFilter === 'unused' ? ' selected' : '' ?>>Unused</option>
+    </select>
     <button class="cms-button cms-button--secondary" type="submit">Search</button>
   </form>
 
   <div class="cms-media-tags" aria-label="Filter by tag">
-    <a href="?<?= http_build_query(array_filter(['q' => $query, 'orientation' => $orientation, 'status' => $status])) ?>"<?= $tagSlug === '' ? ' class="is-active"' : '' ?>>All tags</a>
+    <a href="?<?= http_build_query(array_filter(['q' => $query, 'orientation' => $orientation, 'status' => $status, 'usage' => $usageFilter])) ?>"<?= $tagSlug === '' ? ' class="is-active"' : '' ?>>All tags</a>
     <?php foreach ($tags as $tag): ?>
-      <a href="?<?= http_build_query(array_filter(['q' => $query, 'orientation' => $orientation, 'status' => $status, 'tag' => $tag['slug']])) ?>"<?= $tagSlug === $tag['slug'] ? ' class="is-active"' : '' ?>><?= cms_escape($tag['name']) ?><?php if ((int) $tag['asset_count'] > 0): ?> <span><?= (int) $tag['asset_count'] ?></span><?php endif; ?></a>
+      <a href="?<?= http_build_query(array_filter(['q' => $query, 'orientation' => $orientation, 'status' => $status, 'usage' => $usageFilter, 'tag' => $tag['slug']])) ?>"<?= $tagSlug === $tag['slug'] ? ' class="is-active"' : '' ?>><?= cms_escape($tag['name']) ?><?php if ((int) $tag['asset_count'] > 0): ?> <span><?= (int) $tag['asset_count'] ?></span><?php endif; ?></a>
     <?php endforeach; ?>
   </div>
 
@@ -139,9 +163,10 @@ include __DIR__ . '/_header.php';
         </div>
       <?php endif; ?>
       <?php foreach ($assets as $asset): ?>
-        <?php $cardQuery = array_filter(['q' => $query, 'orientation' => $orientation, 'status' => $status, 'tag' => $tagSlug, 'id' => $asset['id']]); ?>
+        <?php $cardQuery = array_filter(['q' => $query, 'orientation' => $orientation, 'status' => $status, 'usage' => $usageFilter, 'tag' => $tagSlug, 'id' => $asset['id']]); ?>
         <a class="cms-media-card<?= $selectedAsset && (int) $selectedAsset['id'] === (int) $asset['id'] ? ' is-selected' : '' ?>" href="?<?= http_build_query($cardQuery) ?>">
           <span class="cms-media-card__image"><img src="<?= cms_escape($asset['public_url']) ?>" srcset="<?= cms_escape(cms_media_srcset($asset)) ?>" sizes="(max-width: 700px) 50vw, 280px" alt=""></span>
+          <?php if (!empty($asset['placements'])): ?><span class="cms-media-card__badge">In use · <?= count($asset['placements']) ?></span><?php endif; ?>
           <strong><?= cms_escape($asset['title']) ?></strong>
           <small><?= cms_escape(ucfirst($asset['orientation'])) ?> · <?= cms_escape($asset['source_type'] === 'drive' ? 'Google Drive' : 'Upload') ?></small>
         </a>
@@ -159,7 +184,19 @@ include __DIR__ . '/_header.php';
           <span>Selected asset</span>
           <h2><?= cms_escape($selectedAsset['title']) ?></h2>
           <p><?= cms_escape($selectedAsset['original_name']) ?></p>
-          <dl><div><dt>Orientation</dt><dd><?= cms_escape($selectedAsset['orientation']) ?></dd></div><div><dt>Size</dt><dd><?= (int) $selectedAsset['width'] ?> × <?= (int) $selectedAsset['height'] ?></dd></div></dl>
+          <dl><div><dt>Orientation</dt><dd><?= cms_escape($selectedAsset['orientation']) ?></dd></div><div><dt>Size</dt><dd><?= (int) $selectedAsset['width'] ?> × <?= (int) $selectedAsset['height'] ?></dd></div><div><dt>Placements</dt><dd><?= count($selectedAsset['placements'] ?? []) ?></dd></div></dl>
+        </div>
+        <div class="cms-media-placements">
+          <h3><?= !empty($selectedAsset['placements']) ? 'Used on the website' : 'Not currently in use' ?></h3>
+          <?php if (!empty($selectedAsset['placements'])): ?>
+            <ul>
+              <?php foreach ($selectedAsset['placements'] as $placement): ?>
+                <li><strong><?= cms_escape($placement['label']) ?></strong><span><?= cms_escape($placement['path']) ?></span></li>
+              <?php endforeach; ?>
+            </ul>
+          <?php else: ?>
+            <p>This image is available in the library but is not referenced by a website page.</p>
+          <?php endif; ?>
         </div>
         <form class="cms-media-inspector__form" method="post" action="/cms/media-action.php">
           <input type="hidden" name="csrf_token" value="<?= cms_escape(cms_csrf_token()) ?>">

@@ -6,9 +6,12 @@
 
 $databasePath = sys_get_temp_dir() . '/declaration-cms-test-' . bin2hex(random_bytes(6)) . '.sqlite';
 $mediaPath = sys_get_temp_dir() . '/declaration-media-test-' . bin2hex(random_bytes(6));
+$sitePath = sys_get_temp_dir() . '/declaration-site-test-' . bin2hex(random_bytes(6));
+mkdir($sitePath, 0755, true);
 define('CMS_DSN', 'sqlite:' . $databasePath);
 define('CMS_MEDIA_STORAGE_PATH', $mediaPath);
 define('CMS_MEDIA_PUBLIC_BASE', '/test-media');
+define('CMS_MEDIA_SITE_ROOT', $sitePath);
 require_once __DIR__ . '/../includes/cms.php';
 cms_start_session();
 
@@ -151,6 +154,10 @@ try {
     cms_test_assert(count($media['tags']) === 2, 'Media tags are stored');
     cms_test_assert(count(cms_media_search(['q' => 'mission trip'])) === 1, 'Media metadata is searchable');
     cms_test_assert(count(cms_media_search(['tag' => 'missions'])) === 1, 'Media can be filtered by tag');
+    file_put_contents($sitePath . '/index.php', '<img src="' . $media['public_url'] . '" alt="Test">');
+    $usageMap = cms_media_usage_map([$media]);
+    cms_test_assert(count($usageMap[$mediaId] ?? []) === 1, 'Website media usage is detected automatically');
+    cms_test_assert(($usageMap[$mediaId][0]['label'] ?? '') === 'Homepage', 'Media usage identifies the referring page');
 
     cms_media_update_asset($mediaId, [
         'title' => 'Declaration Missions Team',
@@ -185,6 +192,14 @@ try {
             }
         }
         rmdir($mediaPath);
+    }
+    if (is_dir($sitePath)) {
+        foreach (glob($sitePath . '/*') ?: [] as $siteFile) {
+            if (is_file($siteFile)) {
+                unlink($siteFile);
+            }
+        }
+        rmdir($sitePath);
     }
 }
 

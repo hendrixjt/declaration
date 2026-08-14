@@ -87,6 +87,131 @@ function cms_media_public_base(): string
         : '/uploads/media';
 }
 
+function cms_media_site_root(): string
+{
+    return defined('CMS_MEDIA_SITE_ROOT')
+        ? rtrim((string) CMS_MEDIA_SITE_ROOT, DIRECTORY_SEPARATOR)
+        : dirname(__DIR__);
+}
+
+function cms_media_usage_source_files(): array
+{
+    $root = cms_media_site_root();
+    if (!is_dir($root)) {
+        return [];
+    }
+
+    $excludedDirectories = [
+        '.git', '_archive', 'cache', 'cms', 'docs', 'node_modules', 'output',
+        'storage', 'tests', 'tmp', 'uploads', 'vendor',
+    ];
+    $allowedExtensions = ['css', 'html', 'htm', 'js', 'json', 'php'];
+    $files = [];
+    $directories = [$root];
+
+    while ($directories) {
+        $directory = array_pop($directories);
+        foreach (scandir($directory) ?: [] as $name) {
+            if ($name === '.' || $name === '..') {
+                continue;
+            }
+            $path = $directory . DIRECTORY_SEPARATOR . $name;
+            if (is_link($path)) {
+                continue;
+            }
+            if (is_dir($path)) {
+                if (!in_array($name, $excludedDirectories, true)) {
+                    $directories[] = $path;
+                }
+                continue;
+            }
+            if (!is_file($path) || filesize($path) > 2 * 1024 * 1024) {
+                continue;
+            }
+            if (in_array(mb_strtolower(pathinfo($name, PATHINFO_EXTENSION)), $allowedExtensions, true)) {
+                $files[] = $path;
+            }
+        }
+    }
+
+    sort($files);
+    return $files;
+}
+
+function cms_media_usage_label(string $relativePath): string
+{
+    $relativePath = str_replace('\\', '/', ltrim($relativePath, '/'));
+    if ($relativePath === 'index.php' || $relativePath === 'index.html') {
+        return 'Homepage';
+    }
+    if (preg_match('#^([^/]+)/index\.(?:php|html?)$#i', $relativePath, $matches)) {
+        return mb_convert_case(str_replace(['-', '_'], ' ', $matches[1]), MB_CASE_TITLE, 'UTF-8');
+    }
+
+    $name = pathinfo(basename($relativePath), PATHINFO_FILENAME);
+    return mb_convert_case(str_replace(['-', '_'], ' ', $name), MB_CASE_TITLE, 'UTF-8');
+}
+
+/**
+ * Find deployable site files that reference each media variant.
+ *
+ * Usage is intentionally computed from source files instead of stored as a
+ * manual tag, so removing an image from a page removes its In use status too.
+ */
+function cms_media_usage_map(array $assets): array
+{
+    $usage = [];
+    $needles = [];
+    foreach ($assets as $asset) {
+        $assetId = (int) ($asset['id'] ?? 0);
+        if ($assetId < 1) {
+            continue;
+        }
+        $usage[$assetId] = [];
+        $urls = [(string) ($asset['public_url'] ?? '')];
+        $variants = $asset['variants'] ?? json_decode((string) ($asset['variants_json'] ?? ''), true);
+        if (is_array($variants)) {
+            foreach ($variants as $variant) {
+                $urls[] = (string) ($variant['url'] ?? '');
+            }
+        }
+        foreach (array_unique(array_filter($urls)) as $url) {
+            $needles[$url][$assetId] = true;
+            $needles[ltrim($url, '/')][$assetId] = true;
+        }
+    }
+
+    if (!$needles) {
+        return $usage;
+    }
+
+    $root = cms_media_site_root();
+    foreach (cms_media_usage_source_files() as $path) {
+        $contents = file_get_contents($path);
+        if ($contents === false || $contents === '') {
+            continue;
+        }
+        $relativePath = ltrim(substr($path, strlen($root)), DIRECTORY_SEPARATOR);
+        $matchedAssets = [];
+        foreach ($needles as $needle => $assetIds) {
+            if ($needle === '' || !str_contains($contents, $needle)) {
+                continue;
+            }
+            foreach ($assetIds as $assetId => $_) {
+                $matchedAssets[$assetId] = true;
+            }
+        }
+        foreach ($matchedAssets as $assetId => $_) {
+            $usage[$assetId][] = [
+                'label' => cms_media_usage_label($relativePath),
+                'path' => str_replace('\\', '/', $relativePath),
+            ];
+        }
+    }
+
+    return $usage;
+}
+
 function cms_media_max_upload_bytes(): int
 {
     return defined('CMS_MEDIA_MAX_BYTES') ? max(1024, (int) CMS_MEDIA_MAX_BYTES) : 20 * 1024 * 1024;

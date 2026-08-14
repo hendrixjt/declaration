@@ -87,7 +87,8 @@ The homepage should eventually include most of these ideas:
   hide, feature, or customize an event without entering it twice.
 - The CMS media library accepts JPEG, PNG, and WebP uploads; generates responsive
   WebP variants; and manages titles, alt text, captions, credits, ministry tags,
-  search, filters, and archiving.
+  search, filters, and archiving. It automatically scans deployable site source
+  files to show whether an image is in use and which page references it.
 - Google Drive can be configured as a read-only source folder. Selected Drive
   images are imported into website-owned media storage rather than served from
   Drive URLs. The integration uses a service account and remains hidden until
