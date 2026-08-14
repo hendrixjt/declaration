@@ -102,7 +102,7 @@ include __DIR__ . '/includes/header.php';
 
     <section id="visit" class="visit-editorial section-black">
       <div class="visit-editorial__image" data-image-reveal>
-        <img src="assets/img/events/showcase-8.webp" alt="A church family gathered in worship" loading="lazy">
+        <img src="/uploads/media/20260814-90faa7525f6158be-1917w.webp" alt="A church family gathered in worship" loading="lazy">
         <span class="image-caption">Come as you are. There is room for you.</span>
       </div>
       <div class="visit-editorial__content" data-aos="fade-up">
