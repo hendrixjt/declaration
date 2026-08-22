@@ -24,6 +24,11 @@ body {
   line-height: 1.55;
 }
 
+body.declaration-home {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 h1,
 h2,
 h3,
@@ -1035,27 +1040,49 @@ body:not(.declaration-home) .page-title {
 
   .header .header-container {
     min-height: 64px;
+    min-width: 0;
   }
 
   .header .logo {
+    flex: 0 1 auto;
+    min-width: 0;
     height: 64px;
     padding-right: 14px;
     border: 0;
   }
 
   .header .logo img {
-    width: 128px;
+    width: min(128px, 32vw);
     max-height: 38px;
   }
 
   .header .header-actions {
+    flex: 0 0 auto;
     height: 64px;
-    margin-right: 14px;
-    padding-left: 14px;
+    margin-right: 8px;
+    padding-left: 10px;
   }
 
   .header .header-cta {
     font-size: 10px;
+  }
+
+  .header .header-cta i {
+    margin-left: 8px;
+  }
+
+  .header .navmenu {
+    flex: 0 0 auto;
+  }
+
+  .header .mobile-nav-toggle {
+    margin-right: 0;
+  }
+
+  .declaration-home .main,
+  .declaration-home .main > section {
+    width: 100%;
+    max-width: 100%;
   }
 
   .declaration-hero {
