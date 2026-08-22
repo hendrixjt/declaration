@@ -18,8 +18,9 @@ try {
     $cms_is_calendar_source = true;
 } catch (Throwable $exception) {
     $cms_is_calendar_source = false;
-    $upcoming_events = pc_get_upcoming_events(12);
+    $upcoming_events = [];
 }
+$enable_background_event_sync = true;
 $has_live_events = !empty($upcoming_events);
 
 $fallback_events = [

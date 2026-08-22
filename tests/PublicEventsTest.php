@@ -49,6 +49,9 @@ try {
     $homepage = ob_get_clean();
     public_event_assert(str_contains($homepage, 'CMS Preview Night'), 'Homepage reads the published CMS event');
     public_event_assert(str_contains($homepage, '/events/cms-preview-night/'), 'Homepage links to the local event detail page');
+    public_event_assert(str_contains($homepage, 'data-event-sync-endpoint="/api/event-sync.php"'), 'Homepage schedules event synchronization after rendering');
+    public_event_assert(str_contains($homepage, 'data-deferred-video'), 'Homepage defers the decorative hero video');
+    public_event_assert(!str_contains($homepage, 'id="preloader"'), 'Homepage does not hide content behind a full-screen preloader');
 
     $_GET['slug'] = 'cms-preview-night';
     $_SERVER['REQUEST_URI'] = '/events/cms-preview-night/';

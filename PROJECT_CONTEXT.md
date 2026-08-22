@@ -83,6 +83,9 @@ The homepage should eventually include most of these ideas:
   `CMS_DSN`, `CMS_DB_USER`, and `CMS_DB_PASSWORD`.
 - Planning Center remains the operational source for imported events. The site
   synchronizes upcoming events automatically and shows them by default.
+- Public pages must render saved CMS events immediately and must never wait for
+  Planning Center. Refreshes run after page load and use a non-blocking lock so
+  only one synchronization can run at a time.
 - The CMS is a website presentation and exception layer: administrators can
   hide, feature, or customize an event without entering it twice.
 - The CMS media library accepts JPEG, PNG, and WebP uploads; generates responsive
