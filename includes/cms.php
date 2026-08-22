@@ -397,22 +397,42 @@ function cms_sync_planning_center_events(bool $force = false): array
         return ['inserted' => 0, 'updated' => 0, 'skipped' => 0];
     }
 
-    if (!$force) {
-        $lastImportedAt = cms_pdo()->query(
-            'SELECT MAX(imported_at) FROM cms_events WHERE planning_center_id IS NOT NULL'
-        )->fetchColumn();
-        $syncTtl = defined('PC_CACHE_TTL') ? max(60, (int) PC_CACHE_TTL) : 1800;
-        if ($lastImportedAt && strtotime((string) $lastImportedAt) >= time() - $syncTtl) {
-            return ['inserted' => 0, 'updated' => 0, 'skipped' => 0];
-        }
+    $cacheDirectory = __DIR__ . '/../cache';
+    if (!is_dir($cacheDirectory)) {
+        @mkdir($cacheDirectory, 0755, true);
     }
 
-    $events = pc_get_upcoming_events(100);
-    if (!$events) {
+    $lockHandle = @fopen($cacheDirectory . '/planning-center-sync.lock', 'c');
+    if ($lockHandle === false || !flock($lockHandle, LOCK_EX | LOCK_NB)) {
+        if (is_resource($lockHandle)) {
+            fclose($lockHandle);
+        }
         return ['inserted' => 0, 'updated' => 0, 'skipped' => 0];
     }
 
-    return cms_import_planning_center_events($events);
+    try {
+        // Recheck freshness after taking the lock so concurrent visitors cannot
+        // start duplicate Planning Center requests when the cache expires.
+        if (!$force) {
+            $lastImportedAt = cms_pdo()->query(
+                'SELECT MAX(imported_at) FROM cms_events WHERE planning_center_id IS NOT NULL'
+            )->fetchColumn();
+            $syncTtl = defined('PC_CACHE_TTL') ? max(60, (int) PC_CACHE_TTL) : 1800;
+            if ($lastImportedAt && strtotime((string) $lastImportedAt) >= time() - $syncTtl) {
+                return ['inserted' => 0, 'updated' => 0, 'skipped' => 0];
+            }
+        }
+
+        $events = pc_get_upcoming_events(100);
+        if (!$events) {
+            return ['inserted' => 0, 'updated' => 0, 'skipped' => 0];
+        }
+
+        return cms_import_planning_center_events($events);
+    } finally {
+        flock($lockHandle, LOCK_UN);
+        fclose($lockHandle);
+    }
 }
 
 function cms_plain_summary(string $html, int $limit = 220): string
@@ -465,7 +485,6 @@ function cms_get_published_events(int $limit = 12): array
 
 function cms_get_website_events(int $limit = 12): array
 {
-    cms_sync_planning_center_events();
     return cms_get_published_events($limit);
 }
 

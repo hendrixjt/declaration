@@ -36,7 +36,6 @@
   </footer>
 
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center" aria-label="Back to top"><i class="bi bi-arrow-up-short"></i></a>
-  <div id="preloader"></div>
 
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="assets/vendor/php-email-form/validate.js"></script>
@@ -46,6 +45,9 @@
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
   <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
   <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <?php if (!empty($enable_background_event_sync)): ?>
+  <span hidden data-event-sync-endpoint="/api/event-sync.php"></span>
+  <?php endif; ?>
   <?php
   $main_js_path = __DIR__ . '/../assets/js/main.js';
   $main_js_version = is_file($main_js_path) ? (string) filemtime($main_js_path) : '1';

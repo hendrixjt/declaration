@@ -95,16 +95,6 @@
   });
 
   /**
-   * Preloader
-   */
-  const preloader = document.querySelector('#preloader');
-  if (preloader) {
-    window.addEventListener('load', () => {
-      preloader.remove();
-    });
-  }
-
-  /**
    * Scroll top button
    */
   let scrollTop = document.querySelector('.scroll-top');
@@ -165,6 +155,63 @@
     });
   }
   window.addEventListener('load', aosInit);
+
+  /**
+   * Show the hero poster immediately, then load decorative video only after
+   * the document has finished its critical work.
+   */
+  const deferredVideos = document.querySelectorAll('[data-deferred-video]');
+  if (deferredVideos.length) {
+    const loadDeferredVideos = () => {
+      deferredVideos.forEach((video) => {
+        video.querySelectorAll('source[data-src]').forEach((source) => {
+          source.setAttribute('src', source.getAttribute('data-src'));
+          source.removeAttribute('data-src');
+        });
+        video.load();
+        video.play().catch(() => {});
+      });
+    };
+
+    window.addEventListener('load', () => {
+      if ('requestIdleCallback' in window) {
+        window.requestIdleCallback(loadDeferredVideos, { timeout: 2500 });
+      } else {
+        window.setTimeout(loadDeferredVideos, 750);
+      }
+    });
+  }
+
+  /**
+   * Refresh Planning Center after the page is fully usable. Public pages render
+   * saved CMS events immediately and never wait for this request.
+   */
+  const eventSyncMarker = document.querySelector('[data-event-sync-endpoint]');
+  if (eventSyncMarker) {
+    const refreshEvents = () => {
+      const endpoint = eventSyncMarker.getAttribute('data-event-sync-endpoint');
+      if (!endpoint) return;
+
+      if (navigator.sendBeacon) {
+        navigator.sendBeacon(endpoint, new Blob([], { type: 'text/plain' }));
+        return;
+      }
+
+      fetch(endpoint, {
+        method: 'POST',
+        credentials: 'same-origin',
+        keepalive: true
+      }).catch(() => {});
+    };
+
+    window.addEventListener('load', () => {
+      if ('requestIdleCallback' in window) {
+        window.requestIdleCallback(refreshEvents, { timeout: 5000 });
+      } else {
+        window.setTimeout(refreshEvents, 2500);
+      }
+    });
+  }
 
   /**
    * Editorial image reveals

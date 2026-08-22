@@ -24,8 +24,9 @@ try {
     $cms_is_calendar_source = true;
 } catch (Throwable $exception) {
     $cms_is_calendar_source = false;
-    $upcoming_events = pc_get_upcoming_events(3);
+    $upcoming_events = [];
 }
+$enable_background_event_sync = true;
 $has_live_events = !empty($upcoming_events);
 
 $fallback_events = [
@@ -67,8 +68,8 @@ include __DIR__ . '/includes/header.php';
 
     <section id="hero" class="declaration-hero">
       <div class="declaration-hero__media" aria-hidden="true">
-        <video autoplay muted loop playsinline poster="assets/img/events/showcase-8.webp">
-          <source src="assets/img/events/video-3.mp4" type="video/mp4">
+        <video autoplay muted loop playsinline preload="none" poster="assets/img/events/showcase-8.webp" data-deferred-video>
+          <source data-src="assets/img/events/video-3.mp4" type="video/mp4">
         </video>
       </div>
       <div class="declaration-hero__veil"></div>
