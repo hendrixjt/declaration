@@ -177,6 +177,19 @@ Source:
 
 ### Kids
 
+September 3, 2026 refresh for the custom PHP kids page:
+
+- Verified the current `/kids` page and expanded its parent FAQs in the browser.
+- Returning families use their registered phone number or Church Center QR code at a DKids check-in station. Child and adult receive matching, visit-specific tags; the adult shows their tag at classroom pickup.
+- First-time families receive help registering and finding their child's classroom from a DKids team member.
+- Age-appropriate rooms are encouraged; families can ask the team about attending with a friend or sibling.
+- Thrive offers buddy support from birth through young adulthood and individual classroom care with sensory items and a trained support team.
+- Thrive registration: https://declarationchurch.churchcenter.com/people/forms/736159
+- Thrive contact: Megan Kimbrough, `megan@declaration.org`. Kids contact: `kids@declaration.org`.
+- The parent-resources FAQ references a monthly theme, but no current downloadable resource is visible. The custom page directs parents to the team for current materials.
+- Reused three existing public Declaration images as optimized local JPEGs: classroom/serve (`aa9248_4a9ab1fec20349eda6fbfada33b347b8~mv2.jpg`), dedication (`aa9248_645bf45c727b4bc5a9e9f8364eed03ac~mv2.jpg`), and prayer (`aa9248_9914eea4571640dd816faf939fb30f20~mv2.jpg`). Original source prefix: `https://static.wixstatic.com/media/`.
+- Wake's homepage and kids page informed image scale, generous spacing, family emphasis, and ministry/parent sections. No Wake ministry facts or photography were reused. Declaration's established monochrome palette and font families remain in place.
+
 Key facts and themes:
 
 - Focus is helping kids build a genuine relationship with God on a biblical foundation

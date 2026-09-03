@@ -18,6 +18,7 @@
           <a href="events/">Events</a>
           <a href="about/">About</a>
           <a href="dna/">DNA</a>
+          <a href="kids/">Kids</a>
           <a href="contact/">Contact</a>
           <a href="https://www.declaration.org/groups" target="_blank" rel="noopener">Groups</a>
           <a href="https://www.declaration.org/give" target="_blank" rel="noopener">Give</a>

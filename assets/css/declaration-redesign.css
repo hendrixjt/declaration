@@ -12,6 +12,101 @@
   --shell: clamp(22px, 4vw, 72px);
 }
 
+/* Kids: the shared editorial system with a more open, family-focused rhythm. */
+.kids-page .button { gap: 24px; }
+.kids-page a:focus-visible, .kids-page summary:focus-visible { outline: 3px solid currentColor; outline-offset: 6px; }
+.kids-page section[id] { scroll-margin-top: 30px; }
+.kids-hero { padding: 140px 0 0; }
+.kids-hero__topline { display: flex; justify-content: space-between; align-items: center; margin-bottom: 48px; }
+.kids-hero__topline > span, .kids-hero__photo figcaption, .kids-index, .kids-age-label { font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; }
+.kids-hero__grid { display: grid; grid-template-columns: 1fr 1.08fr; align-items: center; gap: 32px; }
+.kids-hero h1 { position: relative; z-index: 1; margin: 0 -120px 30px 0; font-size: clamp(76px, 8.5vw, 160px); font-weight: 900; line-height: .9; letter-spacing: -.055em; }
+.kids-hero__copy > p { max-width: 370px; margin-bottom: 30px; font-size: clamp(18px, 1.7vw, 24px); line-height: 1.4; }
+.kids-hero__photo { margin: 0; }
+.kids-hero__photo img { display: block; width: 100%; height: clamp(380px, 36vw, 650px); object-fit: cover; object-position: 55% center; }
+.kids-hero__photo figcaption { margin-top: 14px; font-size: 10px; }
+.kids-hero__details { display: flex; justify-content: space-between; gap: 24px; padding: 28px 0; margin-top: 52px; border-top: 1px solid var(--line); font-size: 14px; }
+.kids-hero__details strong { margin-left: 15px; }
+.kids-hero__details a { font-weight: 600; }
+.kids-hero__details i { margin-left: 22px; }
+.kids-heart .interior-intro-grid h2 { font-size: clamp(48px, 6.4vw, 110px); margin-bottom: 40px; }
+.kids-heart .lead-copy { margin-bottom: 28px; max-width: 810px; }
+.kids-body-copy { max-width: 560px; color: #bdbdb8; margin: 0; }
+.kids-section-heading { display: grid; grid-template-columns: 1fr 2fr; gap: 50px; margin-bottom: 65px; }
+.kids-section-heading h2, .kids-visit h2, .kids-faq h2 { font-size: clamp(48px, 6vw, 100px); font-weight: 800; line-height: .98; margin: 0; }
+.kids-age-row { display: grid; grid-template-columns: .6fr 1fr 1fr; gap: 55px; padding: 46px 0; border-top: 1px solid var(--line); }
+.kids-age-row h3 { font-size: clamp(30px, 3vw, 50px); font-weight: 700; line-height: 1.04; margin: 0; }
+.kids-age-label { margin-bottom: 22px; }
+.kids-age-row p:last-child { margin: 0; max-width: 470px; }
+.kids-ages__note { border-top: 1px solid var(--line); padding-top: 24px; margin: 0; font-size: 15px; }
+.kids-ages__note a, .kids-faq details a { text-decoration: underline; text-underline-offset: 4px; }
+.kids-visit { padding: 0 0 clamp(90px, 10vw, 150px); }
+.kids-visit__grid, .kids-faq__grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px, 8vw, 130px); }
+.kids-visit h2, .kids-faq h2 { margin: 32px 0; }
+.kids-visit__grid > div > p:not(.section-kicker) { margin-bottom: 28px; }
+.kids-visit__steps { list-style: none; padding: 0; margin: 0; }
+.kids-visit__steps li { display: grid; grid-template-columns: 30px 1fr; gap: 24px; border-top: 1px solid var(--line); padding: 28px 0; }
+.kids-visit__steps li > span { font-size: 12px; padding-top: 6px; }
+.kids-visit__steps h3 { font-size: 28px; font-weight: 700; }
+.kids-visit__steps p { margin: 12px 0 0; }
+.kids-thrive__intro { display: grid; grid-template-columns: 1.4fr 1fr; align-items: end; gap: 70px; margin: 45px 0 65px; }
+.kids-thrive h2 { font-size: clamp(48px, 6.6vw, 110px); line-height: .95; font-weight: 800; margin: 0; }
+.kids-thrive__intro > p { max-width: 450px; margin: 0; font-size: 21px; color: #c6c6c0; }
+.kids-thrive__options { display: grid; grid-template-columns: 1fr 1fr; gap: 70px; }
+.kids-thrive__options article { padding-top: 25px; border-top: 1px solid #53534f; }
+.kids-thrive__options h3 { font-size: clamp(28px, 3vw, 46px); margin: 30px 0 18px; font-weight: 700; }
+.kids-thrive__options p { max-width: 490px; color: #c6c6c0; }
+.kids-thrive__actions { display: flex; align-items: center; gap: 40px; margin-top: 35px; }
+.kids-thrive__actions p { margin: 0; font-size: 14px; }
+.kids-thrive__actions p a { text-decoration: underline; text-underline-offset: 4px; }
+.kids-next__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+.kids-next__grid img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
+.kids-next__grid h3 { font-size: clamp(27px, 2.6vw, 44px); line-height: 1.05; font-weight: 700; margin: 27px 0 18px; }
+.kids-next__grid p { max-width: 380px; margin-bottom: 25px; }
+.kids-next__grid article { display: flex; flex-direction: column; align-items: flex-start; }
+.kids-next__grid .arrow-link { margin-top: auto; }
+.kids-faq { padding: 0 0 clamp(100px, 12vw, 180px); }
+.kids-faq details { border-top: 1px solid var(--line); }
+.kids-faq details:last-child { border-bottom: 1px solid var(--line); }
+.kids-faq summary { list-style: none; display: flex; justify-content: space-between; gap: 25px; padding: 26px 0; cursor: pointer; font-size: 20px; line-height: 1.35; font-weight: 600; }
+.kids-faq summary::-webkit-details-marker { display: none; }
+.kids-faq summary::after { content: '+'; font-size: 26px; line-height: 1; font-weight: 400; }
+.kids-faq details[open] summary::after { content: '−'; }
+.kids-faq details p { padding: 0 35px 26px 0; margin: 0; }
+.kids-closing { text-align: center; padding: clamp(90px, 10vw, 160px) 0; border-bottom: 1px solid #343434; }
+.kids-closing h2 { font-size: clamp(64px, 11vw, 180px); font-weight: 900; line-height: .88; margin: 40px 0; letter-spacing: -.055em; }
+@media (min-width: 1700px) { .kids-hero h1 { margin-right: -180px; } }
+@media (max-width: 991px) {
+  .kids-hero h1 { font-size: clamp(64px, 9.5vw, 94px); margin-right: -80px; }
+  .kids-hero__copy > p { max-width: 310px; }
+  .kids-age-row { gap: 30px; grid-template-columns: .5fr 1fr 1fr; }
+  .kids-thrive__intro { gap: 35px; }
+  .kids-thrive__intro > p { font-size: 18px; }
+}
+@media (max-width: 767px) {
+  .kids-page .declaration-footer__brand { font-size: clamp(30px, 9vw, 62px); }
+  .kids-hero { padding-top: 114px; }
+  .kids-hero__topline { margin-bottom: 38px; }
+  .kids-hero__topline > span { display: none; }
+  .kids-hero__grid, .kids-section-heading, .kids-age-row, .kids-visit__grid, .kids-thrive__intro, .kids-thrive__options, .kids-next__grid, .kids-faq__grid { grid-template-columns: 1fr; }
+  .kids-hero h1 { margin-right: 0; font-size: clamp(48px, 12.5vw, 94px); }
+  .kids-hero__copy > p { max-width: 420px; font-size: 20px; }
+  .kids-hero__photo img { height: auto; aspect-ratio: 4 / 3; }
+  .kids-hero__details { flex-direction: column; gap: 13px; margin-top: 30px; padding: 24px 0; }
+  .kids-hero__details strong { margin-left: 8px; }
+  .kids-section-heading { gap: 30px; margin-bottom: 40px; }
+  .kids-age-row { gap: 24px; padding: 32px 0; }
+  .kids-age-row h3 { font-size: 38px; }
+  .kids-age-label { margin-bottom: 14px; }
+  .kids-ages__note a { display: block; margin-top: 8px; }
+  .kids-thrive__intro { margin: 32px 0 40px; }
+  .kids-thrive__options { gap: 26px; }
+  .kids-thrive__actions { flex-direction: column; align-items: flex-start; gap: 25px; }
+  .kids-next__grid { gap: 50px; }
+  .kids-next__grid h3 { font-size: 34px; }
+  .kids-faq summary { font-size: 18px; }
+}
+
 html {
   scroll-padding-top: 92px;
 }
