@@ -1,0 +1,50 @@
+<?php
+$o2_steps = [
+  [
+    'number' => '01',
+    'label' => 'Know the heart',
+    'title' => 'Start with DNA.',
+    'copy' => 'Hear the story of Declaration, discover how God has uniquely wired you, and find your place in this church family.',
+    'detail' => 'DNA introduces Declaration’s vision, culture, leadership, Groups, and Serve Teams. It is the clearest starting point for anyone ready to move from attending to belonging.',
+    'url' => '/dna/',
+    'cta' => 'Explore DNA',
+    'image' => '/assets/img/declaration/next-dna.jpg',
+    'class' => 'o2-step--paper',
+  ],
+  [
+    'number' => '02',
+    'label' => 'Find your people',
+    'title' => 'Grow in community.',
+    'copy' => 'Groups are where people are known, faith becomes practical, and life is shared beyond a Sunday morning.',
+    'detail' => 'Groups gather around seasons of life, studies, shared interests, freedom, marriage, family, and friendship. There is room to find a community that feels natural to you.',
+    'url' => 'https://declarationchurch.churchcenter.com/groups/small-groups?enrollment=open_signup%2Crequest_to_join&filter=enrollment',
+    'cta' => 'Find a group',
+    'image' => '/assets/img/declaration/next-groups.jpg',
+    'class' => 'o2-step--blue',
+  ],
+  [
+    'number' => '03',
+    'label' => 'Make a difference',
+    'title' => 'Bring what you carry.',
+    'copy' => 'Serve Teams turn gifts into welcome, care, creativity, discipleship, and meaningful impact in our city.',
+    'detail' => 'From guest experience and generations to worship, production, operations, events, and missions, serving is one of the ways we put faith into action together.',
+    'url' => '/dna/',
+    'cta' => 'Start with DNA',
+    'image' => '/assets/img/declaration/next-teams.jpg',
+    'class' => 'o2-step--ink',
+  ],
+];
+
+$o2_staff = [
+  ['name' => 'Brita Jacobs', 'role' => 'Executive Assistant to Lead + Co-Pastor', 'image' => 'brita-jacobs.jpg'],
+  ['name' => 'Aaron Jacobs', 'role' => 'Campus Pastor of Discipleship', 'image' => 'aaron-jacobs.jpg'],
+  ['name' => 'Chelsea Sherburne', 'role' => 'Director of Operations', 'image' => 'chelsea-sherburne.jpg'],
+  ['name' => 'Caroline Roberts', 'role' => 'Experience Director', 'image' => 'caroline-roberts.jpg'],
+  ['name' => 'Rachael Santos', 'role' => 'Operations Assistant', 'image' => 'rachael-santos.jpg'],
+  ['name' => 'Halle Alfred', 'role' => 'Creative Director', 'image' => 'halle-alfred.jpg'],
+  ['name' => 'Lauren Mack', 'role' => 'Generations Girls Pastor', 'image' => 'lauren-mack.jpg'],
+  ['name' => 'Travis Shaheen', 'role' => 'YTH Pastor', 'image' => 'travis-shaheen.jpg'],
+  ['name' => 'Megan Kimbrough', 'role' => 'Kids Pastor', 'image' => 'megan-kimbrough.jpg'],
+  ['name' => 'David Rodezno', 'role' => 'AVL Technician', 'image' => 'david-rodezno.jpg'],
+  ['name' => 'Rick Eubanks', 'role' => 'Missionary in Residence', 'image' => 'rick-eubanks.jpg'],
+];
